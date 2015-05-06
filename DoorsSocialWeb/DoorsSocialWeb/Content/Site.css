@@ -1,6 +1,11 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-image: url(http://4walled.cc/src/c8/c8e7509bd16fa543dfeaa09e171f834d.jpg);
+    background-size: cover;
+    width: auto;
+	height: auto;
+    z-index: 0;
 }
 
 /* Set padding to keep content from hitting the edges */
