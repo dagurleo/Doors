@@ -10,7 +10,7 @@ namespace DoorsSocialWeb.Controllers
     {
         public ActionResult Index()
         {
-            return View("mamma");
+            return View();
         }
 
         public ActionResult About()
