@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using DoorsSocialWeb.Model_Classes;
+using DoorsSocialWeb.Models.EntityModels;
 
 namespace DoorsSocialWeb.Repositories
 {
