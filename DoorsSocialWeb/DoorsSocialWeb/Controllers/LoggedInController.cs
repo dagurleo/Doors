@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using DoorsSocialWeb.Models;
+using DoorsSocialWeb.Repositories;
 
 namespace DoorsSocialWeb.Controllers
 {   
@@ -21,10 +22,15 @@ namespace DoorsSocialWeb.Controllers
         // GET: /LoggedIn/
         public ActionResult Index()
         {
-            ApplicationDbContext db = new ApplicationDbContext();
-            string currentUserId = User.Identity.GetUserId();
-            ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
+            var userRepo = new UserRepository();
+            var currentUser = userRepo.getCurrentUser();
             return View(currentUser);
+        }
+
+        public ActionResult Logoff()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
         }
 	}
 }

@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using DoorsSocialWeb.Model_Classes;
+using System.Data.Entity;
+using DoorsSocialWeb.Models.EntityModels;
 
 namespace DoorsSocialWeb.Models
 {
@@ -13,6 +14,14 @@ namespace DoorsSocialWeb.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<ImagePost> Images { get; set; }
+        public DbSet<Like> Likes { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
+        public DbSet<Post> Posts { get; set; }  
+        public DbSet<Topic> Topics {get; set; }  
         public ApplicationDbContext()
             : base("DefaultConnection")
         {
