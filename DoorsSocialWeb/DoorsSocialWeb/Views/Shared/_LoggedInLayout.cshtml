@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<DoorsSocialWeb.Models.EntityModels.Group>
 
 @{
     Layout = null;
@@ -31,11 +31,10 @@
             <h4>Groups</h4>
         </div>
         <ul class="groupList">
-            <li>Marketplace</li>
-            <li>CS:GO</li>
-            <li>Cuddlebuddygroup</li>
-            <li></li>
-            <li></li>
+            @foreach(var m in Model)
+            { 
+                <li>@m.groupName</li>
+            }
         </ul>
         <div class="createGroup">
             <h4>Create a group</h4>
@@ -45,7 +44,7 @@
     <div class="rightPanel">
         <div class="profileSnippet">
             <img src="https://krazyride.com/images/Driver/188/Profile_201505040606090610.png" alt="Theodor">
-            <h3> </h3>
+            <h3> Teddzi </h3>
         </div>
         <div class="breaker"></div>
         <div class="friendHeader">

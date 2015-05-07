@@ -3,17 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using DoorsSocialWeb.Models.EntityModels;
+using DoorsSocialWeb.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DoorsSocialWeb.Repositories
 {
     public class GroupRepository
-    {
+    {        
         //TODO: implement more functions we might need and connect to db;
-        public List<Group> getGroupsByID(int groupID)
+        public IEnumerable<Group> getAccessibleGroups()
         {
             //TODO: Fill listOfGroup with groups that ID, not sure what the variable should be named
-            List<Group> listOfGroup = new List<Group>();
-            return listOfGroup;
+            ApplicationDbContext db = new ApplicationDbContext();
+            string currentUserID = HttpContext.Current.User.Identity.GetUserId();
+
+            IEnumerable<Group> accessibleGroups = from g in db.relGroups
+                                                  where g.memberID == currentUserID
+                                                  join gr in db.Groups
+                                                  on g.groupID equals gr.ID
+                                                  select gr;
+
+         
+            
+            return accessibleGroups;
         }
 
         public void addNewGroup(Group newGroup)

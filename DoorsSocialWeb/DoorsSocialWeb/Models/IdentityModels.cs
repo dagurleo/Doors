@@ -11,7 +11,6 @@ namespace DoorsSocialWeb.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
    
-
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Comment> Comments { get; set; }
@@ -21,7 +20,8 @@ namespace DoorsSocialWeb.Models
         public DbSet<Message> Messages { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Post> Posts { get; set; }  
-        public DbSet<Topic> Topics {get; set; }  
+        public DbSet<Topic> Topics {get; set; }
+        public DbSet<relGroup> relGroups { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection")
         {
