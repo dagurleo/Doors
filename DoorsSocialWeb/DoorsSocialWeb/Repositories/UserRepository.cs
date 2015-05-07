@@ -15,7 +15,7 @@ namespace DoorsSocialWeb.Repositories
             List<ApplicationUser> listOfUser = new List<ApplicationUser>();
             return listOfUser;
         }
-
+       
         public void addNewUser(ApplicationUser newUser)
         {
             //TODO: add a new user
