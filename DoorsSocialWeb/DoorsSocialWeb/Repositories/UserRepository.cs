@@ -2,26 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using DoorsSocialWeb.Model_Classes;
+using DoorsSocialWeb.Models;
 
 namespace DoorsSocialWeb.Repositories
 {
     public class UserRepository
     {
         //TODO: implement more functions we might need and connect to db;
-        public List<User> getUsersByID(int UserID)
+        public List<ApplicationUser> getUsersByID(int UserID)
         {
             //TODO: return a list<User> or a User by that ID? NOT SURE
-            List<User> listOfUser = new List<User>();
+            List<ApplicationUser> listOfUser = new List<ApplicationUser>();
             return listOfUser;
         }
 
-        public void addNewUser(User newUser)
+        public void addNewUser(ApplicationUser newUser)
         {
             //TODO: add a new user
         }
 
-        public void editUserProfile(User thisUser)
+        public void editUserProfile(ApplicationUser thisUser)
         {
             //TODO: edit thisUser profile
         }

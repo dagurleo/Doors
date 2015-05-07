@@ -49,7 +49,7 @@ namespace DoorsSocialWeb.Controllers
                 if (user != null)
                 {
                     await SignInAsync(user, model.RememberMe);
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Index", "LoggedIn");
                 }
                 else
                 {
@@ -83,7 +83,7 @@ namespace DoorsSocialWeb.Controllers
                 if (result.Succeeded)
                 {
                     await SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "LoggedIn");
                 }
                 else
                 {
