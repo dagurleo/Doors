@@ -7079,6 +7079,14 @@ body h3
 	color: white;
 }
 
+body h4
+{
+	font-family: 'Poiret One', cursive;
+    font-size: 22px;
+	margin-left: 10px;
+	color: white;
+}
+
 .leftPanel
 {
 	position: absolute;
@@ -7169,10 +7177,11 @@ body h3
 
 .profileSnippet
 {
-    height: 250px;
+    height: 270px;
     padding-top: 60px;
 
     text-align: center;
+    background: #2d3945;
 }
 
 .profileSnippet img
@@ -7190,3 +7199,71 @@ body h3
 
 /**/
 
+.breaker
+{
+    height: 3px;
+    background: #33414e;
+}
+
+
+/**/
+
+.friendHeader
+{
+	color: white;
+	height: 40px;
+    background: #2d3945;
+    margin-top: 3px;
+}
+
+.friendLabel
+{
+    float: left;
+}
+
+.friendCount
+{
+    padding-top: 6px;
+    float: right;
+}
+
+.friendCount h4
+{
+    font-size: 15px;
+}
+
+.friendHeader h4
+{
+    margin: 5px 0 0 0;
+    padding: 4px 10px 0 10px;
+}
+
+.friendList
+{
+	color: white;
+	list-style: none;
+	
+	margin: 5px 0 0 0;
+	padding: 0;
+}
+
+.friendList li
+{
+	margin-bottom: 2px;
+	height: 45px;
+	width: 100%;
+
+	background: #33414e;
+	text-indent: 15px;
+}
+
+.friendList li:hover
+{
+	background: #3d4f5d;
+}
+
+.friendList li img
+{
+	height: 45px;
+    width: 45px;
+}
