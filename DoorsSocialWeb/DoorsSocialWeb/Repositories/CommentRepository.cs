@@ -3,30 +3,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using DoorsSocialWeb.Models.EntityModels;
+using DoorsSocialWeb.Models;
 
 namespace DoorsSocialWeb.Repositories
 {
     public class CommentRepository
     {
-        //TODO: implement more functions we might need and connect to db;
-        public List<Comment> getCommentsByPostID(int postID)
+        private ApplicationDbContext db = new ApplicationDbContext();
+
+        /*
+         * Returns all comments on the post with the id postID
+         */
+        public IEnumerable<Comment> getCommentsByPostID(int postID)
         {
-            //TODO: return a List<Comment> with comments from that ID
-            List<Comment> listOfComments = new List<Comment>();
+            var listOfComments = (from comment in db.Comments where comment.ID == postID select comment);
             return listOfComments;
         }
 
-        public void addNewComment(Comment c)
+        /*
+         * Returns the like list on the comment with commentID
+         */
+        public IEnumerable<Like> getLikesByComment(int commentID)
+        {
+            var listOfLikes = (from like in db.Likes where like.commentID == commentID);
+            return listOfLikes;
+        }
+
+        /* 
+         * Need info on what variables i have to parse
+         */
+        public void addNewComment()
         {
             //TODO: create a new comment and save it
             return;
-        }
-
-        public List<Like> getLikesByComment(int commentID)
-        {
-            //TODO: return List<Like> filled with likes on that comment.
-            List<Like> listOfLikes = new List<Like>();
-            return listOfLikes;
         }
     }
 }

@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using DoorsSocialWeb.Models.EntityModels;
+using DoorsSocialWeb.Models;
 
 namespace DoorsSocialWeb.Repositories
 {
     public class GroupRepository
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         //TODO: implement more functions we might need and connect to db;
         public List<Group> getGroupsByID(int groupID)
         {

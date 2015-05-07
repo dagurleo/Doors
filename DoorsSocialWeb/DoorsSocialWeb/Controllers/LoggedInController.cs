@@ -22,8 +22,8 @@ namespace DoorsSocialWeb.Controllers
         // GET: /LoggedIn/
         public ActionResult Index()
         {
-            var userRepo = new UserRepository();
-            var currentUser = userRepo.getCurrentUser();
+            var userService = new UserService();
+            var currentUser = userService.getCurrentUser();
             return View(currentUser);
         }
 
