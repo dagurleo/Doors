@@ -50,6 +50,14 @@ namespace DoorsSocialWeb.Models
         public string UserName { get; set; }
 
         [Required]
+        [Display(Name = "Registration email")]
+        public string registerEmail { get; set; }
+
+        [Required]
+        [Display(Name = "Display Name")]
+        public string displayName { get; set; }
+
+        [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]

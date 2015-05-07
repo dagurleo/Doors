@@ -78,7 +78,7 @@ namespace DoorsSocialWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.UserName, registerEmail = model.registerEmail};
+                var user = new ApplicationUser() { UserName = model.UserName, registerEmail = model.registerEmail, displayName = model.displayName};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

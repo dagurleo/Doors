@@ -10,8 +10,7 @@ namespace DoorsSocialWeb.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
-    {
-       
+    {   
         public string registerEmail { get; set; }
         public string displayName { get; set; }
         public string displayImageUrl { get; set; }
@@ -20,10 +19,6 @@ namespace DoorsSocialWeb.Models
         public string displayPhoneNumber { get; set; }
         public bool userIsModerator { get; set; }
         public bool userIsAdministrator { get; set; }
-        public List<Message> messages { get; set; }
-        public List<Notification> notifications { get; set; }
-        public List<Group> groups { get; set; }
-        public List<Post> posts { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
