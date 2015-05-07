@@ -7,14 +7,39 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
     <title></title>
+    @Styles.Render("~/Content/css")
+
 </head>
 <body>
-    <div>
-        <h1>MAMAMAKRMAIKM</h1>
+    <div class="header">
+        <div class="loginLogo">
+            <img src="http://www.ads.menn.is/logo.png" height="35">
+        </div>
     </div>
-    <div>
-        @RenderBody();
+
+    <div class="leftPanel">
+        <div id="groupHeader">
+            <h3>Groups</h3>
+        </div>
+        <ul class="groupList">
+            <li>Marketplace</li>
+            <li>CS:GO</li>
+            <li>Cuddlebuddygroup</li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+    <div class="rightPanel">
+        <div class="profileSnippet">
+            <img src="https://krazyride.com/images/Driver/188/Profile_201505040606090610.png" alt="Theodor">
+            <h3>Karl Weiner</h3>
+        </div>
+    </div>
+    <div class="container">
+        @RenderBody()
     </div>
 </body>
 </html>
