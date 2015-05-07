@@ -3,21 +3,23 @@
 @{
     ViewBag.Title = "Home Page";
 }
-    <section>
-        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-        <div class="login">
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true)
 
-            @Html.TextBoxFor(m => m.UserName, new {placeholder="Username"})
-            @Html.ValidationMessageFor(m => m.UserName)
-            <br />
-            @Html.PasswordFor(m => m.Password, new {placeholder = "Password"})
-            <br />
-            @Html.CheckBoxFor(m => m.RememberMe)
-            @Html.LabelFor(m => m.RememberMe, new {@class = "labels"})
-            <input type="submit" value="Log in" class="loginBtn" />
-        </div>
+
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    @Html.TextBoxFor(m => m.UserName, new {placeholder="Username"})
+    @Html.ValidationMessageFor(m => m.UserName)
+    <br />
+    @Html.PasswordFor(m => m.Password, new {placeholder = "Password"})
+    <br />
+    <div class="rememberMe">
+        @Html.CheckBoxFor(m => m.RememberMe)
+        @Html.LabelFor(m => m.RememberMe, new { @class = "labels" })
+    </div>
+    <input type="submit" value="Log in" class="loginBtn" />
+        
 }
-    </section>

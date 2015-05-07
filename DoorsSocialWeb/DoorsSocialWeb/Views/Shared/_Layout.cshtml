@@ -9,22 +9,21 @@
 
 </head>
 <body>
-    <div class="grad">
-        <div class="container">
-            <div class="navbar-header">
-                @Html.ActionLink("Application name", "Index", "Home", null, new { @class = "logo" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
+    <div class="body"></div>
+    <div class="grad"></div>
+
+    <div>
+        <div class="static">
+            @Html.ActionLink("Application name", "Index", "Home", null, new { @class = "logo" })
+            <nav class="cl-effect-21" id="cl-effect-21">
+                @Html.ActionLink("Login", "Index", "Home")
+                @Html.ActionLink("About", "About", "Home")
+                @Html.ActionLink("Contact", "Contact", "Home")
+                @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+            </nav>  
         </div>
     </div>
-    <div class="container body-content">
+    <div class="login">
         @RenderBody()
     </div>
 

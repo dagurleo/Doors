@@ -6929,13 +6929,141 @@ td.visible-print {
    color: rgba(255,255,255,0.6);
 }
 
+.login{
+    color: white;
+    text-align:right;
+}
+
+.login a{
+    color: white;
+}
+
 .logo{
-    background-image: url(http://ads.menn.is/logo.png);
+    background: url(http://www.ads.menn.is/logo.png);
+    background-size: 260px;
+    background-repeat: no-repeat;
     display: block;
-    width: 260px;
     text-indent: -9999px;
+
+    width: 260px;
+    height: 65px;
 }
 
 .labels{
     color: white;
+}
+
+.static{
+	position: absolute;
+	top: calc(50% - 75px);
+	left: calc(50% - 320px);
+	height: 150px;
+	width: 350px;
+	padding: 10px;
+	z-index: 2;
+
+    color: white;
+    font-size: 18px;
+    font-weight: 200;
+}
+
+
+.static a{
+    color: white;
+        font-size: 12px;
+    font-weight: 200;
+    margin-right: 8px;
+    text-decoration: none;
+
+}
+
+
+nav a {
+	position: relative;
+	display: inline-block;
+	outline: none;
+	color: #fff;
+	text-decoration: none;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 400;
+	text-shadow: 0 0 1px rgba(255,255,255,0.3);
+	font-size: 1.35em;
+}
+nav a:hover,
+nav a:focus {
+	outline: none;
+}
+
+section {
+	margin: 0 auto;
+	text-align: center;
+}
+.color-7 {
+	background: #3fa46a;
+}
+
+/* Effect 21: borders slight translate */
+.cl-effect-21 a {
+	padding-top: 5px;
+    padding-bottom: 3px;
+	color: #fff;
+	font-weight: 200;
+	text-shadow: none;
+	-webkit-transition: color 0.3s;
+	-moz-transition: color 0.3s;
+	transition: color 0.3s;
+}
+
+.cl-effect-21 a::before,
+.cl-effect-21 a::after {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 2px;
+	background: #fff;
+	content: '';
+	opacity: 0;
+	-webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+	-moz-transition: opacity 0.3s, -moz-transform 0.3s;
+	transition: opacity 0.3s, transform 0.3s;
+	-webkit-transform: translateY(-10px);
+	-moz-transform: translateY(-10px);
+	transform: translateY(-10px);
+}
+
+.cl-effect-21 a::before {
+	top: 0;
+	-webkit-transform: translateY(-10px);
+	-moz-transform: translateY(-10px);
+	transform: translateY(-10px);
+}
+
+.cl-effect-21 a::after {
+	bottom: 0;
+	-webkit-transform: translateY(10px);
+	-moz-transform: translateY(10px);
+	transform: translateY(10px);
+}
+
+.cl-effect-21 a:hover,
+.cl-effect-21 a:focus {
+	color: #fff;
+}
+
+.cl-effect-21 a:hover::before,
+.cl-effect-21 a:focus::before,
+.cl-effect-21 a:hover::after,
+.cl-effect-21 a:focus::after {
+	opacity: 1;
+	-webkit-transform: translateY(0px);
+	-moz-transform: translateY(0px);
+	transform: translateY(0px);
+}
+
+.rememberMe
+{
+    text-align: left;
+    padding-top: 5px;
+    padding-left: 66px;
 }
