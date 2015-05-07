@@ -7076,6 +7076,7 @@ body h3
 {
 	font-family: 'Poiret One', cursive;
 	margin-left: 10px;
+    font-size: 18px;
 	color: white;
 }
 
@@ -7093,9 +7094,16 @@ body h4
 	left: 0;
 	margin-top: 50px;
 	width: 200px;
-	height: 100%;
+	top: 0;
+    bottom: 0;
 
 	background: #2d3945;
+}
+
+.leftPanel h4
+{
+    padding-top: 10px;
+    padding-bottom: 5px;
 }
 
 .rightPanel
@@ -7103,7 +7111,8 @@ body h4
 	position: absolute;
 	right: 0;
 	width: 200px;
-	height: 100%;
+	top: 0;
+    bottom: 0;
 
 	background: #2d3945;
 }
@@ -7116,6 +7125,15 @@ body h4
 	height: 60px;
 	width: 100%;
 	background: #33414e;
+}
+
+.logout
+{
+    position: absolute;
+    height: 40px;
+    width: 40px;
+
+    right: 10px;
 }
 
 .loginLogo
@@ -7173,6 +7191,15 @@ body h4
     padding-top: 100px;
 }
 
+.createGroup
+{
+    position: absolute;
+    width: 100%;
+    height: 60px;
+    bottom: 0px;
+    background: #33414e;
+}
+
 /*       Friendlist in right column           */
 
 .profileSnippet
@@ -7195,6 +7222,7 @@ body h4
 {
     margin: 0;
     padding: 15px 0 0 0;
+    
 }
 
 /**/

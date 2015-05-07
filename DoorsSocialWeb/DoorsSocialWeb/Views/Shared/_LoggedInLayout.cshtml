@@ -1,4 +1,4 @@
-﻿@model DoorsSocialWeb.Models.ApplicationUser
+﻿@model IEnumerable<DoorsSocialWeb.Models.EntityModels.Group>
 
 @{
     Layout = null;
@@ -19,25 +19,32 @@
         <div class="loginLogo">
             <img src="http://www.ads.menn.is/logo.png" height="35">
         </div>
+        <div class="logout">
+            <a href="http://www.w3schools.com">
+                <img border="0" alt="W3Schools" src="https://yemekhane.anadolu.edu.tr/resources/images/logout.png" width="30" height="30">
+            </a>
+        </div>
     </div>
 
     <div class="leftPanel">
         <div id="groupHeader">
-            <h3>Groups</h3>
+            <h4>Groups</h4>
         </div>
         <ul class="groupList">
-            <li>Marketplace</li>
-            <li>CS:GO</li>
-            <li>Cuddlebuddygroup</li>
-            <li></li>
-            <li></li>
+            @foreach(var m in Model)
+            { 
+                <li>@m.groupName</li>
+            }
         </ul>
+        <div class="createGroup">
+            <h4>Create a group</h4>
+        </div>
     </div>
 
     <div class="rightPanel">
         <div class="profileSnippet">
             <img src="https://krazyride.com/images/Driver/188/Profile_201505040606090610.png" alt="Theodor">
-            <h3> @Model.displayName </h3>
+            <h3> Teddzi </h3>
         </div>
         <div class="breaker"></div>
         <div class="friendHeader">
