@@ -13,7 +13,9 @@ namespace DoorsSocialWeb.Repositories
     {
         private ApplicationDbContext db = new ApplicationDbContext();        
 
-        //TODO: implement more functions we might need and connect to db;
+        /*
+         * fills a list of group, with all accessible groups for the currently logged in user
+         */
         public IEnumerable<Group> getAccessibleGroups()
         {
             //TODO: Fill listOfGroup with groups that ID, not sure what the variable should be named
@@ -26,8 +28,6 @@ namespace DoorsSocialWeb.Repositories
                                                   on g.groupID equals gr.ID
                                                   select gr;
 
-         
-            
             return accessibleGroups;
         }
 

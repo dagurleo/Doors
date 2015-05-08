@@ -42,6 +42,28 @@ namespace DoorsSocialWeb.Repositories
             return currentUser;
         }
 
+        public IEnumerable<ApplicationUser> getFriendsOfCurrentUser()
+        {
+            string currentUser = getCurrentUser().Id;
+            var leftFriends = from f in db.relUsers
+                              where f.friend2Id == currentUser
+                              select f.friend1Id;
+            
+            var rightFriends = from f in db.relUsers
+                               where f.friend1Id == currentUser
+                               select f.friend2Id;
+
+            var combined = rightFriends.Concat(leftFriends);
+
+            var allFriends = from u in db.Users
+                             join f in combined
+                             on u.Id equals f
+                             orderby u.displayName ascending
+                             select u;
+
+            return allFriends;
+        }
+
         public void editUserProfile(ApplicationUser thisUser)
         {
             //TODO: edit thisUser profile
