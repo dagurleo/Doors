@@ -6870,6 +6870,7 @@ td.visible-print {
 	font-size: 16px;
 	font-weight: 400;
 	padding: 4px;
+    margin-bottom: 10px;
 }
 
 .login input[type=password]{
@@ -6883,7 +6884,7 @@ td.visible-print {
 	font-size: 16px;
 	font-weight: 400;
 	padding: 4px;
-	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 .login input[type=submit]{ 
