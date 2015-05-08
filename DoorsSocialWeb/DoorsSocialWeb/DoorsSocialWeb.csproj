@@ -169,6 +169,7 @@
     <Compile Include="Models\EntityModels\Comment.cs" />
     <Compile Include="Models\EntityModels\Group.cs" />
     <Compile Include="Models\EntityModels\relGroup.cs" />
+    <Compile Include="Models\EntityModels\relUsers.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\EntityModels\ImagePost.cs" />
     <Compile Include="Models\EntityModels\Like.cs" />

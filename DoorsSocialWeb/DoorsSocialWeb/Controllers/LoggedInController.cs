@@ -20,6 +20,7 @@ namespace DoorsSocialWeb.Controllers
     [Authorize]
     public class LoggedInController : Controller
     {
+
         //
         // GET: /LoggedIn/
         public ActionResult Index()
@@ -29,8 +30,10 @@ namespace DoorsSocialWeb.Controllers
             //return View(currentUser);
 
             var groupRepo = new GroupRepository();
-            var groups = groupRepo.getAccessibleGroups();
-            return View(groups);
+            var shared = new LoggedInSharedLayoutViewModel();
+            shared.groups = groupRepo.getAccessibleGroups();
+
+            return View(shared);
         }
         public ActionResult GroupView()
         {

@@ -22,6 +22,7 @@ namespace DoorsSocialWeb.Models
         public DbSet<Post> Posts { get; set; }  
         public DbSet<Topic> Topics {get; set; }
         public DbSet<relGroup> relGroups { get; set; }
+        public DbSet<relUsers> relUsers { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection")
         {
