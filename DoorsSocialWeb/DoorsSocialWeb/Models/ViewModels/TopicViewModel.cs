@@ -11,6 +11,7 @@ namespace DoorsSocialWeb.Models.ViewModels
         public ApplicationUser currentUser { get; set; }
         public IEnumerable<Group> groups { get; set; }
         public IEnumerable<ApplicationUser> friends { get; set; }
+        public Group currentGroup { get; set; }
         public IEnumerable<Topic> topics { get; set; }
         public IEnumerable<Post> posts { get; set; }
 

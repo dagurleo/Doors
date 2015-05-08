@@ -51,14 +51,17 @@
         <div class="breaker"></div>
         <div class="friendHeader">
             <div class="friendLabel"><h4>Friends</h4></div>
-            <div class="friendCount"><h4>152</h4></div>
+            <div class="friendCount"><h4>@Model.friends.Count()</h4></div>
         </div>
         <ul class="friendList">
-            <li><img src="https://krazyride.com/images/Driver/188/Profile_201505040606090610.png" alt="Theodor"> </li>
-            <li>CS:GO</li>
-            <li>Cuddlebuddygroup</li>
-            <li></li>
-            <li></li>
+            @if (Model.friends.Count() == 0)
+            {
+                <p>You dont have any friends you cunt</p>
+            }
+            @foreach (var m in Model.friends)
+            {
+                <li>@m.displayName</li>
+            }
         </ul>
     </div>
     <div class="container">

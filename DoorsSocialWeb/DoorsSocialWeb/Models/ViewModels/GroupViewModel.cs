@@ -12,7 +12,7 @@ namespace DoorsSocialWeb.Models.ViewModels
         public IEnumerable<Group> groups { get; set; }
         public IEnumerable<ApplicationUser> friends { get; set; }
         public Group currentGroup { get; set; }
-        public IEnumerable<Post> groupposts { get; set; }
+        public IEnumerable<Post> groupPosts { get; set; }
         public IEnumerable<Topic> currentGroupTopics { get; set; }
 
 
