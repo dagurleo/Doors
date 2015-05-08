@@ -4,22 +4,15 @@ using System.Linq;
 using System.Web;
 using DoorsSocialWeb.Models.EntityModels;
 using DoorsSocialWeb.Models;
-<<<<<<< HEAD
-=======
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
->>>>>>> 91b9132c108b73ebdca615228c9a4d76a385b0ea
 
 namespace DoorsSocialWeb.Repositories
 {
     public class GroupRepository
-<<<<<<< HEAD
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db = new ApplicationDbContext();        
 
-=======
-    {        
->>>>>>> 91b9132c108b73ebdca615228c9a4d76a385b0ea
         //TODO: implement more functions we might need and connect to db;
         public IEnumerable<Group> getAccessibleGroups()
         {

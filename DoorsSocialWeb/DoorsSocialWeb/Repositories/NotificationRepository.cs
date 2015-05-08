@@ -23,7 +23,9 @@ namespace DoorsSocialWeb.Repositories
         public IEnumerable<Notification> getAllNewNotifications()
         {
             string currentUserID = HttpContext.Current.User.Identity.GetUserId();
-            var queryNewNotifications = (from notification in db.Notifications where notification.ID == currentUserID && notification.notificationIsSeen == false);
+            var queryNewNotifications = (from notification in db.Notifications 
+                                         where notification.userID == currentUserID && notification.notificationIsSeen == false
+                                         select notification);
             return queryNewNotifications;
         }
     }

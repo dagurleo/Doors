@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using DoorsSocialWeb.Models;
 using DoorsSocialWeb.Repositories;
+using DoorsSocialWeb.Services;
 
 namespace DoorsSocialWeb.Controllers
 {   
@@ -22,11 +23,6 @@ namespace DoorsSocialWeb.Controllers
         // GET: /LoggedIn/
         public ActionResult Index()
         {
-<<<<<<< HEAD
-            var userService = new UserService();
-            var currentUser = userService.getCurrentUser();
-            return View(currentUser);
-=======
             //var userRepo = new UserRepository();
             //var currentUser = userRepo.getCurrentUser();
             //return View(currentUser);
@@ -34,7 +30,6 @@ namespace DoorsSocialWeb.Controllers
             var groupRepo = new GroupRepository();
             var groups = groupRepo.getAccessibleGroups();
             return View(groups);
->>>>>>> 91b9132c108b73ebdca615228c9a4d76a385b0ea
         }
 
         public ActionResult Logoff()

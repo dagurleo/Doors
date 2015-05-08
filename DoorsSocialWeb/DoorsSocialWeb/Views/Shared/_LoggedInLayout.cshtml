@@ -19,11 +19,9 @@
         <div class="loginLogo">
             <img src="http://www.ads.menn.is/logo.png" height="35">
         </div>
-        <div class="logout">
-            <a href="http://www.w3schools.com">
-                <img border="0" alt="W3Schools" src="https://yemekhane.anadolu.edu.tr/resources/images/logout.png" width="30" height="30">
-            </a>
-        </div>
+
+            @Html.ActionLink("Sign Out","Logoff","LoggedIn",null,new { @class = "logout" } )
+
     </div>
 
     <div class="leftPanel">
@@ -31,6 +29,10 @@
             <h4>Groups</h4>
         </div>
         <ul class="groupList">
+            @if(Model.Count() == 0)
+            {
+                <p>You are not a member of any group!</p>
+            }
             @foreach(var m in Model)
             { 
                 <li>@m.groupName</li>

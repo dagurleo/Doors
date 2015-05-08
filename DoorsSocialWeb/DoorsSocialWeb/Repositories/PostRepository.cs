@@ -43,34 +43,36 @@ namespace DoorsSocialWeb.Repositories
         /*
          * Returns all text posts, for newsfeed filtering
          * same as above, or postisimage bool == false; problem if we want users to be able to add f.x. videos in the future.... what then ?
-         */ 
+         *
         public IEnumerable<Post> getAllTextPosts()
         {
             //var queryAllTextPosts = (from post in db.Posts where post.postistext == true);
+            IEnumerable<Post> bla;
+            return bla;
         }
         
-        /*
+        *
          * Returns all posts with that userID
-         */
+         *
         public IEnumerable<Post> getAllPostByID(string userID)
         {
             var queryAllPostsMadeByUser = (from post in db.Posts where post.authorID == userID select post);
             return queryAllPostsMadeByUser;
         }
 
-        /*
+        *
          * Return all image post with that userID
          * SAME AS ABOVE
-         */
+         *
         public IEnumerable<Post> getAllImagePostsByID(string userID)
         {
-
+            
         }
 
-        /*
+        *
          * Return all text posts with that userID
          * SAME AS ABOVE
-         */
+         *
         public IEnumerable<Post> getAllTextPostsByID(string userID)
         {
 

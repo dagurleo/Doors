@@ -7129,11 +7129,17 @@ body h4
 
 .logout
 {
+    background: url(https://yemekhane.anadolu.edu.tr/resources/images/logout.png);
+    background-size: 30px;
+    background-repeat: no-repeat;
     position: absolute;
     height: 40px;
     width: 40px;
 
+    margin-top: 12px;
+    text-indent: -9999px;
     right: 10px;
+
 }
 
 .loginLogo

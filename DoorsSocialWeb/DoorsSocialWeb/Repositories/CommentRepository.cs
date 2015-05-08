@@ -25,7 +25,9 @@ namespace DoorsSocialWeb.Repositories
          */
         public IEnumerable<Like> getLikesByComment(int commentID)
         {
-            var listOfLikes = (from like in db.Likes where like.commentID == commentID);
+            var listOfLikes = (from like in db.Likes 
+                               where like.commentID == commentID
+                               select like);
             return listOfLikes;
         }
 
