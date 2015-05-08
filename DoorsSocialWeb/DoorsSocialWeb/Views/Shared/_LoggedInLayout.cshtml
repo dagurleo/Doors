@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DoorsSocialWeb.Models.EntityModels.Group>
+﻿@model DoorsSocialWeb.Models.ViewModels.LoggedInSharedLayoutViewModel
 
 @{
     Layout = null;
@@ -29,16 +29,13 @@
             <h4>Groups</h4>
         </div>
         <ul class="groupList">
-            @if(Model != null)
+            @if(Model.groups.Count() == 0)
             {
-                if(Model.Count() == 0)
-                {
-                    <p>You are not a member of any group!</p>
-                }
-                foreach(var m in Model)
-                { 
-                    <li>m.groupName</li>
-                }
+                <p>You are not a member of any group!</p>
+            }
+            @foreach(var m in Model.groups)
+            { 
+                <li>@m.groupName</li>
             }
         </ul>
         <div class="createGroup">

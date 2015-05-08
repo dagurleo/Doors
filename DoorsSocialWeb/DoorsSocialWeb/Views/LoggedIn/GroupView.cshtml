@@ -1,6 +1,5 @@
-﻿@{
-    
-}
+﻿@model DoorsSocialWeb.Models.ViewModels.LoggedInSharedLayoutViewModel
+
 
 <!DOCTYPE html>
 
@@ -11,7 +10,7 @@
 </head>
 <body>
     <div>
-        <h1>MAMMA</h1>
+        <h1>@Model.currentUser.displayName</h1>
     </div>
 </body>
 </html>

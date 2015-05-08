@@ -50,7 +50,7 @@ namespace DoorsSocialWeb.Controllers
                 if (user != null)
                 {
                     await SignInAsync(user, model.RememberMe);
-                    return RedirectToAction("Index", "LoggedIn");
+                    return RedirectToAction("GroupView", "LoggedIn");
                 }
                 else
                 {

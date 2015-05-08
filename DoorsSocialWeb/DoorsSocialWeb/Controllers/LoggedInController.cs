@@ -13,6 +13,7 @@ using Microsoft.Owin.Security;
 using DoorsSocialWeb.Models;
 using DoorsSocialWeb.Repositories;
 using DoorsSocialWeb.Services;
+using DoorsSocialWeb.Models.ViewModels;
 
 namespace DoorsSocialWeb.Controllers
 {   
@@ -33,7 +34,13 @@ namespace DoorsSocialWeb.Controllers
         }
         public ActionResult GroupView()
         {
-            return View();
+            var groupRepo = new GroupRepository();
+            var shared = new LoggedInSharedLayoutViewModel();
+            var userRepo = new UserRepository();
+            shared.groups = groupRepo.getAccessibleGroups();
+            shared.currentUser = userRepo.getCurrentUser();
+
+            return View(shared);
         }
         public ActionResult Logoff()
         {

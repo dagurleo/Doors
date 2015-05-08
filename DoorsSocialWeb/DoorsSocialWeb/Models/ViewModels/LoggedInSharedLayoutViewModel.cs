@@ -10,7 +10,8 @@ namespace DoorsSocialWeb.Models.ViewModels
     public class LoggedInSharedLayoutViewModel
     {
         public ApplicationUser currentUser { get; set; }
-        public List<Group> groups {get; set; }
-        public List<ApplicationUser> friends { get; set; }
+        public IEnumerable<Group> groups {get; set; }
+        public IEnumerable<ApplicationUser> friends { get; set; }
+
     }
 }
