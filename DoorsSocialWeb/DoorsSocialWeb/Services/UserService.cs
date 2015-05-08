@@ -13,10 +13,16 @@ namespace DoorsSocialWeb.Services
         /*
          * Returns the current user by calling getCurrentUser from userrepo
          */
+        private UserRepository userRepo = new UserRepository();
+
         public ApplicationUser getCurrentUser()
         {
-            UserRepository userRepo = new UserRepository();
             return userRepo.getCurrentUser();
+        }
+
+        public IEnumerable<ApplicationUser> getFriendsOfCurrentUser()
+        {
+            return userRepo.getFriendsOfCurrentUser();
         }
 
     }
