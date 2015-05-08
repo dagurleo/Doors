@@ -31,7 +31,10 @@ namespace DoorsSocialWeb.Controllers
             var groups = groupRepo.getAccessibleGroups();
             return View(groups);
         }
-
+        public ActionResult GroupView()
+        {
+            return View();
+        }
         public ActionResult Logoff()
         {
             FormsAuthentication.SignOut();

@@ -29,13 +29,16 @@
             <h4>Groups</h4>
         </div>
         <ul class="groupList">
-            @if(Model.Count() == 0)
+            @if(Model != null)
             {
-                <p>You are not a member of any group!</p>
-            }
-            @foreach(var m in Model)
-            { 
-                <li>@m.groupName</li>
+                if(Model.Count() == 0)
+                {
+                    <p>You are not a member of any group!</p>
+                }
+                foreach(var m in Model)
+                { 
+                    <li>m.groupName</li>
+                }
             }
         </ul>
         <div class="createGroup">
