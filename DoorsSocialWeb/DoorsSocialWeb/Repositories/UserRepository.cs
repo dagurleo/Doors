@@ -26,11 +26,11 @@ namespace DoorsSocialWeb.Repositories
         /*
          * Return a List<ApplicationUser> who are friends with that userID
          */
-        public List<ApplicationUser> getUsersByID(int UserID)
+        public ApplicationUser getUserByID(string userID)
         {
-            //TODO: return a list<User> who are friends with that userID
-            List<ApplicationUser> listOfUser = new List<ApplicationUser>();
-            return listOfUser;
+            ApplicationUser friend = (from user in db.Users where user.Id == userID select user).Single();
+            
+            return friend;
         }
 
         public ApplicationUser getCurrentUser()

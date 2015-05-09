@@ -5,12 +5,10 @@ using System.Web;
 using DoorsSocialWeb.Models.EntityModels;
 namespace DoorsSocialWeb.Models.ViewModels
 {
-    public class ProfileViewModel
+    public class ProfileViewModel : LoggedInSharedLayoutViewModel
     {
-        public ApplicationUser currentUser { get; set; }
-        public IEnumerable<Group> groups { get; set; }
-        public IEnumerable<ApplicationUser> friends { get; set; }
         public IEnumerable<Post> posts { get; set; }
+        public ApplicationUser friend { get; set; }
 
     }
 }

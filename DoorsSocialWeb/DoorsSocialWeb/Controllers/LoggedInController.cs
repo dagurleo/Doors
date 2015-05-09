@@ -64,6 +64,18 @@ namespace DoorsSocialWeb.Controllers
             return View(shared);
         }
 
+        public ActionResult Profile(string id)
+        {
+            var groupRepo = new GroupRepository();
+            var shared = new ProfileViewModel();
+            var userRepo = new UserRepository();
+            shared.groups = groupRepo.getAccessibleGroups();
+            shared.currentUser = userRepo.getCurrentUser();
+            shared.friends = userRepo.getFriendsOfCurrentUser();
+            shared.friend = userRepo.getUserByID(id);
+            return View(shared);
+        }
+
         public ActionResult Logoff()
         {
             FormsAuthentication.SignOut();
