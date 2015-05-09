@@ -28,7 +28,9 @@ namespace DoorsSocialWeb.Repositories
          */
         public IEnumerable<Post> getAllPosts()
         {
-            var queryAllPosts = (from post in db.Posts select post);
+            var queryAllPosts = (from post in db.Posts
+                                 orderby post.dateCreated descending
+                                 select post);
             return queryAllPosts;
         }
 
