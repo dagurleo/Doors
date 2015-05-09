@@ -1,4 +1,4 @@
-﻿@model DoorsSocialWeb.Models.ViewModels.LoggedInSharedLayoutViewModel
+﻿@model DoorsSocialWeb.Models.ViewModels.IndexViewModel
 @{
     
 }
@@ -11,6 +11,24 @@
     <title></title>
 </head>
 <body>
+    
+    @using (Html.BeginForm("Post", "LoggedIn", FormMethod.Post, new { role = "form" }))
+    {   
+        <input type="hidden" name="userid" value="@Model.currentUser.Id" />
+        <input type="hidden" name="datetime" value="@Model.datetime" />
+        @Html.TextAreaFor(m => m.aPost.subject, new { placeholder = "Subject", name="subject" })
+        <input type="submit" value="Post" />
+    }
+    <div>
+        <img src="@Model.currentUser.displayImageUrl" alt="Profile pic" width="80px" height="80px" />
+        <h1>@Model.currentUser.displayName</h1>
+        <p>
+            Aubrey Drake Graham (born October 24, 1986),[1] who records under the mononym Drake, is a Canadian rapper, songwriter,
+            record producer, and actor. He was born in Toronto, Ontario.[2] He first garnered recognition for his role as Jimmy
+            Brooks on the television series Degrassi: The Next Generation.
+        </p>
+    </div>
+
     <p>Hér á að koma texti</p>
     <ul>
         @if (Model.posts != null)

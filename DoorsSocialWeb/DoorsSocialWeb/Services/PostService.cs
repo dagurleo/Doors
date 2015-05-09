@@ -70,9 +70,9 @@ namespace DoorsSocialWeb.Services
        
 
 
-        public void addNewPost()
+        public void addNewPost(Post post)
         {
-            postRepo.addNewPost();
+            postRepo.addNewPost(post);
         }
     }
 }

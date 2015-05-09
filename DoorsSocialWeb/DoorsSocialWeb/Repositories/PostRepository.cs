@@ -138,7 +138,7 @@ namespace DoorsSocialWeb.Repositories
         /*
          * Create a new post
          */
-        public void addNewPost()
+        public void addNewPost(Post post)
         {
             
         }

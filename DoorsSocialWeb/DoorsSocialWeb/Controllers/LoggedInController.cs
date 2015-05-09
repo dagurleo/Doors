@@ -13,6 +13,7 @@ using Microsoft.Owin.Security;
 using DoorsSocialWeb.Models;
 using DoorsSocialWeb.Repositories;
 using DoorsSocialWeb.Services;
+using DoorsSocialWeb.Models.EntityModels;
 using DoorsSocialWeb.Models.ViewModels;
 
 namespace DoorsSocialWeb.Controllers
@@ -29,7 +30,7 @@ namespace DoorsSocialWeb.Controllers
             //return View(currentUser);
 
             var groupRepo = new GroupRepository();
-            var shared = new LoggedInSharedLayoutViewModel();
+            var shared = new IndexViewModel();
             var userRepo = new UserRepository();
             shared.groups = groupRepo.getAccessibleGroups();
             shared.currentUser = userRepo.getCurrentUser();
@@ -78,15 +79,32 @@ namespace DoorsSocialWeb.Controllers
             shared.friends = userRepo.getFriendsOfCurrentUser();
             shared.friend = userRepo.getUserByID(id);
 
-            /*
+            
             var postRepo = new PostRepository();
-            shared.allUserPosts = postRepo.getAllPostByID(id);
-            shared.allUserTextPosts = postRepo.getAllTextPostsByID(id);
-            shared.allUserImagePosts = postRepo.getAllImagePostsByID(id);
-            */
+            shared.posts = postRepo.getAllPostByID(id);
+            //shared.allUserTextPosts = postRepo.getAllTextPostsByID(id);
+            //shared.allUserImagePosts = postRepo.getAllImagePostsByID(id);
+            
             return View(shared);
         }
 
+        public ActionResult Post()
+        {
+            return RedirectToAction("Index", "LoggedIn");
+        }
+        
+        [HttpPost]
+        public ActionResult Post(FormCollection collection)
+        {
+            string userid = collection["userid"];
+            string subject = collection["subject"];
+            string datetime = collection["datetime"];
+
+            Post post = new Post { authorID = userid, subject = subject, dateCreated = DateTime.Now };
+            PostRepository postrepo = new PostRepository();
+            postrepo.addNewPost(post);
+            return RedirectToAction("Index", "LoggedIn");
+        }
         public ActionResult Logoff()
         {
             FormsAuthentication.SignOut();
