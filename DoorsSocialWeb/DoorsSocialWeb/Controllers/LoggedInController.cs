@@ -34,6 +34,7 @@ namespace DoorsSocialWeb.Controllers
             shared.groups = groupRepo.getAccessibleGroups();
             shared.currentUser = userRepo.getCurrentUser();
             shared.friends = userRepo.getFriendsOfCurrentUser();
+            
 
             return View(shared);
         }
