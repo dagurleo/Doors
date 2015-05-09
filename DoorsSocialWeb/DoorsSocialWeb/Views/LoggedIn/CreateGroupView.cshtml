@@ -11,8 +11,12 @@
     <title></title>
 </head>
 <body>
-    <div>
-        <h1>SMEGMA GROUP CREATE YAY</h1>
-    </div>
+    @using (Html.BeginForm("CreateGroupView", "LoggedIn", FormMethod.Post, new {role = "form" }))
+    {
+        <input type="hidden" name="ownerid" value="@Model.currentUser.Id" />
+        <input type="text" name="groupname" />
+        <textarea name="groupdescription" ></textarea>
+        <input type="submit" value="Create Group" />      
+    }
 </body>
 </html>

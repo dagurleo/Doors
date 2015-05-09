@@ -68,6 +68,18 @@ namespace DoorsSocialWeb.Controllers
 
             return View(shared);
         }
+        [HttpPost]
+        public ActionResult CreateGroupView(FormCollection collection)
+        {
+            string groupOwnerId = collection["ownerid"];
+            string groupName = collection["groupname"];
+            string groupDescription = collection["groupdescription"];
+
+            Group group = new Group { groupOwnerID = groupOwnerId, groupName = groupName, groupDescription = groupDescription };
+            GroupRepository groupRepo = new GroupRepository();
+            groupRepo.addNewGroup(group);
+            return RedirectToAction("CreateGroupView", "LoggedIn", group.ID);
+        }
 
         public ActionResult Profile(string id)
         {

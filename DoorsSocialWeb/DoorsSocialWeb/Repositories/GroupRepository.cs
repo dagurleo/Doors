@@ -42,8 +42,9 @@ namespace DoorsSocialWeb.Repositories
 
         public void addNewGroup(Group newGroup)
         {
-            //TODO: Create a new group and save it
-            return;
+            db.Groups.Add(newGroup);
+            db.SaveChanges();
+            
         }
 
         public void editGroup(Group thisGroup)
