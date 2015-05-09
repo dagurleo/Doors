@@ -181,6 +181,7 @@
     <Compile Include="Models\ViewModels\GroupViewModel.cs" />
     <Compile Include="Models\ViewModels\IndexViewModel.cs" />
     <Compile Include="Models\ViewModels\LoggedInSharedLayoutViewModel.cs" />
+    <Compile Include="Models\ViewModels\PostViewModel.cs" />
     <Compile Include="Models\ViewModels\ProfileViewModel.cs" />
     <Compile Include="Models\ViewModels\TopicViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

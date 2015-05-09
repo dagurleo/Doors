@@ -84,6 +84,7 @@ namespace DoorsSocialWeb.Repositories
             return allFriends;
         }
 
+        
 
 
         public void editUserProfile(ApplicationUser thisUser)
