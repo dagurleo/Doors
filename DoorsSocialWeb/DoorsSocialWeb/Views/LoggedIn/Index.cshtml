@@ -32,8 +32,8 @@
             foreach (var m in Model.posts)
             {
                 <div>
-                    <img src="@Model.currentUser.displayImageUrl"alt="Profile pic" width="80px" height="80px" />
-                     <h1>@Model.currentUser.displayName</h1>
+                    <img src="@Model.getAuthor(m.authorID).displayImageUrl"alt="Profile pic" width="80px" height="80px" />
+                     <h1>@Model.getAuthor(m.authorID).displayName</h1>
                     <p>@m.dateCreated</p>
                     <p>@m.subject</p>
     </div>
