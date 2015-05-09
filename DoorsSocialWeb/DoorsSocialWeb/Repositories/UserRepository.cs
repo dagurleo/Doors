@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using DoorsSocialWeb.Models;
+using DoorsSocialWeb.Models.EntityModels;
 using DoorsSocialWeb.Repositories;
 
 
@@ -42,9 +43,22 @@ namespace DoorsSocialWeb.Repositories
             return currentUser;
         }
 
+        public IEnumerable<ApplicationUser> getMembersOfCurrentGroup(int groupID)
+        {
+            var userMembers = from uM in db.relGroups
+                              where uM.groupID == groupID
+                              join u in db.Users
+                              on uM.memberID equals u.Id
+                              orderby u.displayName ascending
+                              select u;
+
+            return userMembers;
+        }
+
         public IEnumerable<ApplicationUser> getFriendsOfCurrentUser()
         {
             string currentUser = getCurrentUser().Id;
+
             var leftFriends = from f in db.relUsers
                               where f.friend2Id == currentUser
                               select f.friend1Id;
@@ -63,6 +77,8 @@ namespace DoorsSocialWeb.Repositories
 
             return allFriends;
         }
+
+
 
         public void editUserProfile(ApplicationUser thisUser)
         {

@@ -22,12 +22,12 @@ namespace DoorsSocialWeb.Repositories
             ApplicationDbContext db = new ApplicationDbContext();
             string currentUserID = HttpContext.Current.User.Identity.GetUserId();
 
-            IEnumerable<Group> accessibleGroups = from g in db.relGroups
-                                                  where g.memberID == currentUserID
-                                                  join gr in db.Groups
-                                                  on g.groupID equals gr.ID
-                                                  orderby gr.groupName ascending
-                                                  select gr;
+            var accessibleGroups = from g in db.relGroups
+                                   where g.memberID == currentUserID
+                                   join gr in db.Groups
+                                   on g.groupID equals gr.ID
+                                   orderby gr.groupName ascending
+                                   select gr;
 
             return accessibleGroups;
         }

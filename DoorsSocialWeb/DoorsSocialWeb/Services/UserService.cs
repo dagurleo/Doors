@@ -25,5 +25,10 @@ namespace DoorsSocialWeb.Services
             return userRepo.getFriendsOfCurrentUser();
         }
 
+        public IEnumerable<ApplicationUser> getMembersOfCurrentGroup(int groupID)
+        {
+            return userRepo.getMembersOfCurrentGroup(groupID);
+        }
+
     }
 }
