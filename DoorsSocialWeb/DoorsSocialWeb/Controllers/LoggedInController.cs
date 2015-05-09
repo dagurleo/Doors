@@ -38,6 +38,7 @@ namespace DoorsSocialWeb.Controllers
             PostRepository postRepo = new PostRepository();            
             var posts = new PostRepository();
             shared.posts = posts.getAllPosts();
+                        
             return View(shared);
             
         }
