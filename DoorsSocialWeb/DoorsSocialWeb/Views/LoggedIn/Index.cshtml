@@ -10,6 +10,19 @@
     <title></title>
 </head>
 <body>
-<p>her kemur listi!!!</p>
+
+    <ul>
+        @if (Model.groups != null)
+        {
+            if (Model.post().Count == 0)
+            {
+                <li>No Posts to show</li>
+            }
+            foreach (var m in Model.post)
+            {
+                <li>@m.post</li>
+            }
+        }
+    </ul>
 </body>
 </html>
