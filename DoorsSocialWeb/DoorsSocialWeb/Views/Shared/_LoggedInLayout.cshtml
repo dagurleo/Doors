@@ -38,7 +38,7 @@
             }
             foreach(var m in Model.groups)
             { 
-                <li>@m.groupName</li>
+                <li>@Html.ActionLink(m.groupName, "GroupView", "LoggedIn", new { id = m.ID }, new { @class = "" })</li>
             }
         }
         </ul>
@@ -73,7 +73,7 @@
             }
             @foreach (var m in Model.friends)
             {
-                @Html.ActionLink(m.displayName, "Profile", "LoggedIn", new { id = m.Id }, new { @class ="" })
+                <li>@Html.ActionLink(m.displayName, "Profile", "LoggedIn", new { id = m.Id }, new { @class = "" })</li>
             }
         </ul>
     </div>

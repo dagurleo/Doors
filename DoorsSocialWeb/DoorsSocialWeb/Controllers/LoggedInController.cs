@@ -39,14 +39,15 @@ namespace DoorsSocialWeb.Controllers
             return View(shared);
         }
 
-        public ActionResult GroupView()
+        public ActionResult GroupView(int id)
         {
             var groupRepo = new GroupRepository();
-            var shared = new LoggedInSharedLayoutViewModel();
+            var shared = new GroupViewModel();
             var userRepo = new UserRepository();
             shared.groups = groupRepo.getAccessibleGroups();
             shared.currentUser = userRepo.getCurrentUser();
             shared.friends = userRepo.getFriendsOfCurrentUser();
+            shared.currentGroup = groupRepo.getCurrentGroup(id);
 
             return View(shared);
         }

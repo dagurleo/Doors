@@ -6,11 +6,8 @@ using DoorsSocialWeb.Models.EntityModels;
 
 namespace DoorsSocialWeb.Models.ViewModels
 {
-    public class GroupViewModel
+    public class GroupViewModel : LoggedInSharedLayoutViewModel
     {
-        public ApplicationUser currentUser { get; set; }
-        public IEnumerable<Group> groups { get; set; }
-        public IEnumerable<ApplicationUser> friends { get; set; }
         public Group currentGroup { get; set; }
         public IEnumerable<Post> groupPosts { get; set; }
         public IEnumerable<Topic> currentGroupTopics { get; set; }

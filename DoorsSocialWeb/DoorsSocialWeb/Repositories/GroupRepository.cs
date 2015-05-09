@@ -32,6 +32,14 @@ namespace DoorsSocialWeb.Repositories
             return accessibleGroups;
         }
 
+        public Group getCurrentGroup(int id)
+        {
+            var currGroup = (from g in db.Groups
+                            where g.ID == id
+                            select g).Single();
+            return currGroup;
+        }
+
         public void addNewGroup(Group newGroup)
         {
             //TODO: Create a new group and save it
