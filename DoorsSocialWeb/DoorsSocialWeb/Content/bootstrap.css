@@ -7368,3 +7368,52 @@ body h4
       opacity: 0;
       width: 0px;
 }
+
+/* NEWSFEED */
+
+.postContainer
+{
+    width: 100%;
+    background-color: #dedede;
+}
+
+.postContainer img
+{
+    position: relative;
+    height: 100px;
+    width: 100px;
+    margin: 10px 0 0 10px;
+}
+
+.postImage
+{
+    width: 120px;
+    float: left;
+}
+
+.postDate
+{
+    width: 120px;
+    float: right;
+
+}
+
+.postContainer h1
+{
+    font-family: 'Poiret One', cursive;
+    color: black;
+    position: relative;
+    padding-top: 10px;
+}
+
+.postContainer a
+{
+    color: black;
+    text-decoration: none;
+}
+
+.postContainer a:hover
+{
+    color: black;
+    text-decoration: none;
+}
