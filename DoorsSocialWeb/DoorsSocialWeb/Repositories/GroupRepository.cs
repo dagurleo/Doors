@@ -26,6 +26,7 @@ namespace DoorsSocialWeb.Repositories
                                                   where g.memberID == currentUserID
                                                   join gr in db.Groups
                                                   on g.groupID equals gr.ID
+                                                  orderby gr.groupName ascending
                                                   select gr;
 
             return accessibleGroups;
