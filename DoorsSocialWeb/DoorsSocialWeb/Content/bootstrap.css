@@ -7180,7 +7180,8 @@ body h4
 {
 	color: white;
 	list-style: none;
-	
+	overflow-y: scroll;
+
 	margin: 0;
 	padding: 0;
 }
@@ -7200,12 +7201,35 @@ body h4
 	background: #3d4f5d;
 }
 
+.groupList li img
+{
+    position: relative;
+    top: 9px;
+}
+
+.aGroup
+{
+    position:absolute;
+    display: inline-block;
+    
+    padding-top: 11px;
+    width: 170px;
+    padding-bottom: 13px;
+
+    overflow: hidden;
+    color: white;
+}
+
+.aGroup:hover
+{
+    color: white;
+    text-decoration: none;
+}
+
 .container
 {
-    position: fixed;
+    position: relative;
     width: 100%;
-    left: 0;
-    right:200px;
     padding-top: 100px;
 }
 
@@ -7288,8 +7312,10 @@ body h4
 {
 	color: white;
 	list-style: none;
+    overflow-y:scroll;
+    overflow-x:hidden;
 	
-	margin: 5px 0 0 0;
+    height: 600px;
 	padding: 0;
 }
 
@@ -7303,13 +7329,35 @@ body h4
 	text-indent: 15px;
 }
 
+.aFriend
+{
+    position:relative;
+    display: inline-block;
+
+    padding-top: 11px;
+
+    overflow: hidden;
+    color: white;
+}
+
+.aFriend:hover
+{
+    color: white;
+    text-decoration: none;
+}
+
+.friendList li img
+{
+    position: relative;
+    bottom: 5px;
+}
+
 .friendList li:hover
 {
 	background: #3d4f5d;
 }
 
-.friendList li img
-{
-	height: 45px;
-    width: 45px;
+::-webkit-scrollbar {
+      opacity: 0;
+      width: 0px;
 }

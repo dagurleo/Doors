@@ -38,7 +38,10 @@
             }
             foreach(var m in Model.groups)
             { 
-                <li>@Html.ActionLink(m.groupName, "GroupView", "LoggedIn", new { id = m.ID }, new { @class = "" })</li>
+                <li>
+                    <img src="http://www.ads.menn.is/groups.png" height="15">
+                    @Html.ActionLink(m.groupName, "GroupView", "LoggedIn", new { id = m.ID }, new { @class = "aGroup" })
+                </li>
             }
         }
         </ul>
@@ -73,7 +76,17 @@
             }
             @foreach (var m in Model.friends)
             {
-                <li>@Html.ActionLink(m.displayName, "Profile", "LoggedIn", new { id = m.Id }, new { @class = "" })</li>
+                <li>
+                @if(m.displayImageUrl != null)
+                {
+                     <img src="@m.displayImageUrl" height="25" width="25">
+                }
+                else
+                {
+                     <img src="http://fc07.deviantart.net/fs71/f/2012/357/7/7/profile_picture_by_ospider-d5ovoc2.jpg" height="25" width="25">
+                }
+            @Html.ActionLink(m.displayName, "Profile", "LoggedIn", new { id = m.Id }, new { @class = "aFriend" })
+                </li>
             }
         </ul>
     </div>

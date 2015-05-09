@@ -54,6 +54,7 @@ namespace DoorsSocialWeb.Models
         public string registerEmail { get; set; }
 
         [Required]
+        [StringLength(20, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [Display(Name = "Display Name")]
         public string displayName { get; set; }
 
