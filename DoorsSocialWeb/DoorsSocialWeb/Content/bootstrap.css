@@ -7226,11 +7226,17 @@ body h4
     text-decoration: none;
 }
 
-.container
+.sharedContainer
 {
-    position: relative;
-    width: 100%;
+    position: initial;
+    display:inline-block;
+    padding-left: 210px; 
+    padding-right: 210px;  
     padding-top: 100px;
+
+    width: 100vw;
+    height: calc(100vh - 10px);
+    overflow-y: scroll;
 }
 
 .createGroup
@@ -7315,8 +7321,9 @@ body h4
     overflow-y:scroll;
     overflow-x:hidden;
 	
-    height: 600px;
+    height: calc(100vh - 330px);
 	padding: 0;
+
 }
 
 .friendList li
