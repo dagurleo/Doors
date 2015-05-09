@@ -18,8 +18,10 @@
 <body>
     <div class="header">
         <div class="loginLogo">
-            <img src="http://www.ads.menn.is/logo.png" height="35">
-        </div>
+            <a href='@Url.Action("Index", "LoggedIn")'>
+                <img src="http://www.ads.menn.is/logo.png" height="35">
+            </a>
+</div>
 
             @Html.ActionLink("Sign Out","Logoff","LoggedIn",null,new { @class = "logout" } )
 
@@ -55,7 +57,11 @@
         <div class="profileSnippet">
             @if(Model.currentUser.displayImageUrl != null)
             {
-                <img src="@Model.currentUser.displayImageUrl" alt="Theodor">
+                
+                <a href="@Url.Action("Profile", "LoggedIn", new { id = Model.currentUser.Id })">
+                    <img src="@Model.currentUser.displayImageUrl" alt="Theodor">
+                </a>
+                
             }
             else
             {
