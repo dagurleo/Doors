@@ -140,7 +140,8 @@ namespace DoorsSocialWeb.Repositories
          */
         public void addNewPost(Post post)
         {
-            
+            db.Posts.Add(post);
+            db.SaveChanges();
         }
     }
 }

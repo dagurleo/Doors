@@ -68,8 +68,6 @@ namespace DoorsSocialWeb.Services
             return postRepo.getGroupByPostID(postID);
         }
        
-
-
         public void addNewPost(Post post)
         {
             postRepo.addNewPost(post);

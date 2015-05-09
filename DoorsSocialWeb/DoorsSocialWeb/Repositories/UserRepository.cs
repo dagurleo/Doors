@@ -23,13 +23,19 @@ namespace DoorsSocialWeb.Repositories
         private ApplicationDbContext db = new ApplicationDbContext();
         //TODO: implement more functions we might need and connect to db;
 
-        /*
-         * Return a List<ApplicationUser> who are friends with that userID
-         */
+        public IEnumerable<ApplicationUser> getAllUsers()
+        {
+            var allUsers = (from user in db.Users
+                            select user);
+            return allUsers;
+        }
+
+
         public ApplicationUser getUserByID(string userID)
         {
-            ApplicationUser friend = (from user in db.Users where user.Id == userID select user).Single();
-            
+            ApplicationUser friend = (from user in db.Users
+                                      where user.Id == userID
+                                      select user).Single();
             return friend;
         }
 
