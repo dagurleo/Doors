@@ -35,8 +35,11 @@ namespace DoorsSocialWeb.Controllers
             shared.currentUser = userRepo.getCurrentUser();
             shared.friends = userRepo.getFriendsOfCurrentUser();
             
-
+            //
+            var posts = new PostRepository();
+            shared.posts = posts.getAllPosts();
             return View(shared);
+            //
         }
 
         public ActionResult GroupView(int id)
@@ -74,6 +77,13 @@ namespace DoorsSocialWeb.Controllers
             shared.currentUser = userRepo.getCurrentUser();
             shared.friends = userRepo.getFriendsOfCurrentUser();
             shared.friend = userRepo.getUserByID(id);
+
+            /*
+            var postRepo = new PostRepository();
+            shared.allUserPosts = postRepo.getAllPostByID(id);
+            shared.allUserTextPosts = postRepo.getAllTextPostsByID(id);
+            shared.allUserImagePosts = postRepo.getAllImagePostsByID(id);
+            */
             return View(shared);
         }
 

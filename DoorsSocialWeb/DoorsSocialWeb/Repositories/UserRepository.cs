@@ -57,7 +57,7 @@ namespace DoorsSocialWeb.Repositories
 
         public IEnumerable<ApplicationUser> getFriendsOfCurrentUser()
         {
-            string currentUser = getCurrentUser().Id;
+            string currentUser = HttpContext.Current.User.Identity.GetUserId();
 
             var leftFriends = from f in db.relUsers
                               where f.friend2Id == currentUser

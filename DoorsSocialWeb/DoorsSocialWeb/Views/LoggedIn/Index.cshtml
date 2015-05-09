@@ -1,4 +1,5 @@
-﻿@{
+﻿@model DoorsSocialWeb.Models.ViewModels.LoggedInSharedLayoutViewModel
+@{
     
 }
 
@@ -10,17 +11,17 @@
     <title></title>
 </head>
 <body>
-
+    <p>Hér á að koma texti</p>
     <ul>
-        @if (Model.groups != null)
+        @if (Model.posts != null)
         {
-            if (Model.post().Count == 0)
+            if (Model.posts.Count() == 0)
             {
                 <li>No Posts to show</li>
             }
-            foreach (var m in Model.post)
+            foreach (var m in Model.posts)
             {
-                <li>@m.post</li>
+                <li>@m.subject</li>
             }
         }
     </ul>

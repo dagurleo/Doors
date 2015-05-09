@@ -11,14 +11,14 @@ namespace DoorsSocialWeb.Services
     {
         private NotificationRepository notificationRepo = new NotificationRepository();
         
-        public List<Notification> getNotificationsByID(int notificationID)
+        public IEnumerable<Notification> getNotificationsByID(int notificationID)
         {
-            return notificationRepo.getNotificationsByID(notificationID).ToList();
+            return notificationRepo.getNotificationsByID(notificationID);
         }
 
-        public List<Notification> getAllNewNotifications()
+        public IEnumerable<Notification> getAllNewNotifications()
         {
-            return notificationRepo.getAllNewNotifications().ToList();
+            return notificationRepo.getAllNewNotifications();
         }
     }
 }

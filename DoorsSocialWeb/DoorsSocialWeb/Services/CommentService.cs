@@ -11,15 +11,15 @@ namespace DoorsSocialWeb.Services
     {
         private CommentRepository commentRepo = new CommentRepository();
 
-        public List<Comment> getCommentsByPostID(int postID)
+        public IEnumerable<Comment> getCommentsByPostID(int postID)
         {
-            return commentRepo.getCommentsByPostID(postID).ToList();
+            return commentRepo.getCommentsByPostID(postID);
         }
 
 
-        public List<Like> getLikesByComment(int commentID)
+        public IEnumerable<Like> getLikesByComment(int commentID)
         {
-            return commentRepo.getLikesByComment(commentID).ToList();
+            return commentRepo.getLikesByComment(commentID);
         }
 
         /* 
