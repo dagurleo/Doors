@@ -20,7 +20,6 @@ namespace DoorsSocialWeb.Controllers
     [Authorize]
     public class LoggedInController : Controller
     {
-
         //
         // GET: /LoggedIn/
         public ActionResult Index()
@@ -38,6 +37,7 @@ namespace DoorsSocialWeb.Controllers
 
             return View(shared);
         }
+
         public ActionResult GroupView()
         {
             var groupRepo = new GroupRepository();
@@ -45,13 +45,29 @@ namespace DoorsSocialWeb.Controllers
             var userRepo = new UserRepository();
             shared.groups = groupRepo.getAccessibleGroups();
             shared.currentUser = userRepo.getCurrentUser();
+            shared.friends = userRepo.getFriendsOfCurrentUser();
 
             return View(shared);
         }
+
+
+        public ActionResult CreateGroupView()
+        {
+            var groupRepo = new GroupRepository();
+            var shared = new LoggedInSharedLayoutViewModel();
+            var userRepo = new UserRepository();
+            shared.groups = groupRepo.getAccessibleGroups();
+            shared.currentUser = userRepo.getCurrentUser();
+            shared.friends = userRepo.getFriendsOfCurrentUser();
+
+            return View(shared);
+        }
+
         public ActionResult Logoff()
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
+        
 	}
 }

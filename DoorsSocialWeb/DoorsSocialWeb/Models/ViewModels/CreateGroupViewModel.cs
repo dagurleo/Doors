@@ -6,7 +6,7 @@ using DoorsSocialWeb.Models.EntityModels;
 
 namespace DoorsSocialWeb.Models.ViewModels
 {
-    public class GroupViewModel
+    public class CreateGroupViewModel
     {
         public ApplicationUser currentUser { get; set; }
         public IEnumerable<Group> groups { get; set; }

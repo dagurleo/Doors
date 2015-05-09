@@ -29,23 +29,34 @@
             <h4>Groups</h4>
         </div>
         <ul class="groupList">
-            @if(Model.groups.Count() == 0)
+        @if(Model.groups != null)
+        {
+            if(Model.groups.Count() == 0)
             {
                 <p>You are not a member of any group!</p>
             }
-            @foreach(var m in Model.groups)
+            foreach(var m in Model.groups)
             { 
                 <li>@m.groupName</li>
             }
+        }
         </ul>
         <div class="createGroup">
-            <h4>Create a group</h4>
+            <h4>@Html.ActionLink("Create a Group", "CreateGroupView", "LoggedIn", null)</h4>
         </div>
     </div>
 
     <div class="rightPanel">
         <div class="profileSnippet">
-            <img src="https://krazyride.com/images/Driver/188/Profile_201505040606090610.png" alt="Theodor">
+            @if(Model.currentUser.displayImageUrl != null)
+            {
+                <img src="@Model.currentUser.displayImageUrl" alt="Theodor">
+            }
+            else
+            {
+                <img src="http://fc07.deviantart.net/fs71/f/2012/357/7/7/profile_picture_by_ospider-d5ovoc2.jpg" alt="Theodor">
+
+            }
             <h3> @Model.currentUser.displayName </h3>
         </div>
         <div class="breaker"></div>
