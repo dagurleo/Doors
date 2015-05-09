@@ -15,37 +15,37 @@ namespace DoorsSocialWeb.Services
         
         public IEnumerable<Post> getPostByID(int postID)
         {
-            return postRepo.getPostByID(postID).ToList();
+            return postRepo.getPostByID(postID);
         }
 
         public IEnumerable<Post> getAllPosts()
         {
-            return postRepo.getAllPosts().ToList();
+            return postRepo.getAllPosts();
         }
 
         public IEnumerable<Post> getAllImagePosts()
         {
-            return postRepo.getAllImagePosts().ToList();
+            return postRepo.getAllImagePosts();
         }
 
         public IEnumerable<Post> getAllTextPosts()
         {
-            return postRepo.getAllTextPosts().ToList();
+            return postRepo.getAllTextPosts();
         }
 
         public IEnumerable<Post> getAllPostByID(string userID)
         {
-            return postRepo.getAllPostByID(userID).ToList();
+            return postRepo.getAllPostByID(userID);
         }
 
         public IEnumerable<Post> getAllImagePostsByID(string userID)
         {
-            return postRepo.getAllImagePostsByID(userID).ToList();
+            return postRepo.getAllImagePostsByID(userID);
         }
 
         public IEnumerable<Post> getAllTextPostsByID(string userID)
         {
-            return postRepo.getAllTextPostsByID(userID).ToList();
+            return postRepo.getAllTextPostsByID(userID);
         }
 
         public IEnumerable<Post> getAllGroupPostsByGroupID(int groupID)
@@ -68,10 +68,6 @@ namespace DoorsSocialWeb.Services
             return postRepo.getGroupByPostID(postID);
         }
        
-
-
-
-
 
 
         public void addNewPost()
