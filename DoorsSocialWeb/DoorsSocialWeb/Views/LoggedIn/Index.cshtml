@@ -19,15 +19,7 @@
         <textarea name="subject"></textarea>
         <input type="submit" value="Post" />
     }
-    <div>
-        <img src="@Model.currentUser.displayImageUrl" alt="Profile pic" width="80px" height="80px" />
-        <h1>@Model.currentUser.displayName</h1>
-        <p>
-            Aubrey Drake Graham (born October 24, 1986),[1] who records under the mononym Drake, is a Canadian rapper, songwriter,
-            record producer, and actor. He was born in Toronto, Ontario.[2] He first garnered recognition for his role as Jimmy
-            Brooks on the television series Degrassi: The Next Generation.
-        </p>
-    </div>
+    
 
     <p>Hér á að koma texti</p>
     <ul>
@@ -39,7 +31,12 @@
             }
             foreach (var m in Model.posts)
             {
-                <li>@m.subject</li>
+                <div>
+                    <img src="@Model.currentUser.displayImageUrl"alt="Profile pic" width="80px" height="80px" />
+                     <h1>@Model.currentUser.displayName</h1>
+                    <p>@m.dateCreated</p>
+                    <p>@m.subject</p>
+    </div>
             }
         }
     </ul>

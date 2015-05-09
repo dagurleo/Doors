@@ -35,12 +35,11 @@ namespace DoorsSocialWeb.Controllers
             shared.groups = groupRepo.getAccessibleGroups();
             shared.currentUser = userRepo.getCurrentUser();
             shared.friends = userRepo.getFriendsOfCurrentUser();
-            
-            //
+            PostRepository postRepo = new PostRepository();            
             var posts = new PostRepository();
             shared.posts = posts.getAllPosts();
             return View(shared);
-            //
+            
         }
 
         public ActionResult GroupView(int id)
