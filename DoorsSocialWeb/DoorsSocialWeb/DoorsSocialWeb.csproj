@@ -218,6 +218,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\Script.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -249,6 +250,7 @@
     <Content Include="Views\LoggedIn\Index.cshtml" />
     <Content Include="Views\LoggedIn\GroupView.cshtml" />
     <Content Include="Views\LoggedIn\CreateGroupView.cshtml" />
+    <Content Include="Views\LoggedIn\CreateGroupPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
