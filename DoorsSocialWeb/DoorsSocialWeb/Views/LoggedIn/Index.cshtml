@@ -19,26 +19,27 @@
         <textarea name="subject"></textarea>
         <input type="submit" value="Post" />
     }
-    
-
-    <p>Hér á að koma texti</p>
-    <ul>
+     
         @if (Model.posts != null)
         {
             if (Model.posts.Count() == 0)
             {
-                <li>No Posts to show</li>
+                <p>No Posts to show</p>
             }
             foreach (var m in Model.posts)
             {
-                <div>
-                    <img src="@Model.getAuthor(m.authorID).displayImageUrl"alt="Profile pic" width="80px" height="80px" />
-                     <h1>@Model.getAuthor(m.authorID).displayName</h1>
-                    <p>@m.dateCreated</p>
+                <div class="postContainer">
+                    <div class="postImage">
+                        <a href="@Url.Action("Profile", "LoggedIn", new { id = m.authorID })">
+                            <img src="@Model.getAuthor(m.authorID).displayImageUrl" alt="Profile pic" />
+                        </a>
+                    </div>
+
+                    <h1>@Model.getAuthor(m.authorID).displayName</h1>
+                    <p style="font-weight: bold">@m.dateCreated</p>
                     <p>@m.subject</p>
-    </div>
+                </div>
             }
         }
-    </ul>
 </body>
 </html>
