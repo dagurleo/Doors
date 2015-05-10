@@ -145,5 +145,16 @@ namespace DoorsSocialWeb.Repositories
             db.Posts.Add(post);
             db.SaveChanges();
         }
+        public Post getSinglePostById(int postId)
+        {
+            Post post = (from p in db.Posts 
+                         where p.ID == postId
+                         select p).Single();
+            return post;
+        }
+        public void removePost(int postId)
+        {
+            db.Posts.Remove(getSinglePostById(postId));
+        }
     }
 }
