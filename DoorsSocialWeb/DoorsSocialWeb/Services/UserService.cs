@@ -30,5 +30,10 @@ namespace DoorsSocialWeb.Services
             return userRepo.getMembersOfCurrentGroup(groupID);
         }
 
+        public ApplicationUser getUserById(string id)
+        {
+            return userRepo.getUserByID(id);
+        }
+
     }
 }

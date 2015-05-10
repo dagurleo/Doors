@@ -16,9 +16,14 @@ namespace DoorsSocialWeb.Services
             return groupRepo.getAccessibleGroups();
         }
 
-        public void addNewGroup()
+        public void addNewGroup(Group group)
         {
-            //groupRepo.addNewGroup(Group group);
+            groupRepo.addNewGroup(group);
+        }
+        
+        public Group getCurrentGroup(int id)
+        {
+            return groupRepo.getCurrentGroup(id);
         }
 
         public void editGroup(Group thisGroup)

@@ -15,56 +15,46 @@ using DoorsSocialWeb.Repositories;
 using DoorsSocialWeb.Services;
 using DoorsSocialWeb.Models.EntityModels;
 using DoorsSocialWeb.Models.ViewModels;
-
+using DoorsSocialWeb.Services;
 namespace DoorsSocialWeb.Controllers
 {   
     [Authorize]
     public class LoggedInController : Controller
     {
+        public UserService userService = new UserService();
+        public GroupService groupService = new GroupService();
         //
         // GET: /LoggedIn/
         public ActionResult Index()
-        {
-            //var userRepo = new UserRepository();
-            //var currentUser = userRepo.getCurrentUser();
-            //return View(currentUser);
-
-            var groupRepo = new GroupRepository();
-            var shared = new IndexViewModel();
-            var userRepo = new UserRepository();
-            shared.groups = groupRepo.getAccessibleGroups();
-            shared.currentUser = userRepo.getCurrentUser();
-            shared.friends = userRepo.getFriendsOfCurrentUser();
-            PostRepository postRepo = new PostRepository();            
-            var posts = new PostRepository();
-            shared.posts = posts.getAllPosts();
-                        
-            return View(shared);
+        {            
             
+            var shared = new IndexViewModel();
+            
+            var postService = new PostService();
+            shared.groups = groupService.getAccessibleGroups();
+            shared.currentUser = userService.getCurrentUser();
+            shared.friends = userService.getFriendsOfCurrentUser();            
+            shared.posts = postService.getAllPosts();                        
+            return View(shared);            
         }
 
         public ActionResult GroupView(int id)
-        {
-            var groupRepo = new GroupRepository();
+        {            
             var shared = new GroupViewModel();
-            var userRepo = new UserRepository();
-            shared.groups = groupRepo.getAccessibleGroups();
-            shared.currentUser = userRepo.getCurrentUser();
-            shared.friends = userRepo.getFriendsOfCurrentUser();
-            shared.currentGroup = groupRepo.getCurrentGroup(id);
-
+            shared.groups = groupService.getAccessibleGroups();
+            shared.currentUser = userService.getCurrentUser();
+            shared.friends = userService.getFriendsOfCurrentUser();
+            shared.currentGroup = groupService.getCurrentGroup(id);
             return View(shared);
         }
 
 
         public ActionResult CreateGroupView()
-        {
-            var groupRepo = new GroupRepository();
+        {            
             var shared = new LoggedInSharedLayoutViewModel();
-            var userRepo = new UserRepository();
-            shared.groups = groupRepo.getAccessibleGroups();
-            shared.currentUser = userRepo.getCurrentUser();
-            shared.friends = userRepo.getFriendsOfCurrentUser();
+            shared.groups = groupService.getAccessibleGroups();
+            shared.currentUser = userService.getCurrentUser();
+            shared.friends = userService.getFriendsOfCurrentUser();
 
             return View(shared);
         }
@@ -76,20 +66,19 @@ namespace DoorsSocialWeb.Controllers
             string groupDescription = collection["groupdescription"];
 
             Group group = new Group { groupOwnerID = groupOwnerId, groupName = groupName, groupDescription = groupDescription };
-            GroupRepository groupRepo = new GroupRepository();
-            groupRepo.addNewGroup(group);
+            
+            groupService.addNewGroup(group);
             return RedirectToAction("CreateGroupView", "LoggedIn", group.ID);
         }
 
         public ActionResult Profile(string id)
         {
-            var groupRepo = new GroupRepository();
+            
             var shared = new ProfileViewModel();
-            var userRepo = new UserRepository();
-            shared.groups = groupRepo.getAccessibleGroups();
-            shared.currentUser = userRepo.getCurrentUser();
-            shared.friends = userRepo.getFriendsOfCurrentUser();
-            shared.friend = userRepo.getUserByID(id);
+            shared.groups = groupService.getAccessibleGroups();
+            shared.currentUser = userService.getCurrentUser();
+            shared.friends = userService.getFriendsOfCurrentUser();
+            shared.friend = userService.getUserById(id);
 
             
             var postRepo = new PostRepository();
@@ -113,8 +102,8 @@ namespace DoorsSocialWeb.Controllers
             string datetime = collection["datetime"];
 
             Post post = new Post { authorID = userid, subject = subject, dateCreated = DateTime.Now };
-            PostRepository postrepo = new PostRepository();
-            postrepo.addNewPost(post);
+            var postService = new PostService();
+            postService.addNewPost(post);
             return RedirectToAction("Index", "LoggedIn");
         }
         public ActionResult Logoff()

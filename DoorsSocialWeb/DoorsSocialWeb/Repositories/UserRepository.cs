@@ -84,7 +84,12 @@ namespace DoorsSocialWeb.Repositories
             return allFriends;
         }
 
-        
+        public void addRelations(string id1, string id2)
+        {
+            relUsers relationship = new relUsers { friend1Id = id1, friend2Id = id2 };
+            db.relUsers.Add(relationship);
+            db.SaveChanges();
+        }
 
 
         public void editUserProfile(ApplicationUser thisUser)
