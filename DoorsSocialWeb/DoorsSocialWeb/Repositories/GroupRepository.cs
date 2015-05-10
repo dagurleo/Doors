@@ -58,5 +58,31 @@ namespace DoorsSocialWeb.Repositories
             //TODO: Edit thisGroup and save.
             return;
         }
+
+        //Topics
+
+        public IEnumerable<Post> getPostsByTopicID(int topicID)
+        {
+            var queryAllPostsWithinTopic = (from postWithinTopic in db.Posts where postWithinTopic.ID == topicID && postWithinTopic.postIsInGroup == true select postWithinTopic);
+            return queryAllPostsWithinTopic;
+        }
+
+        public void addTopic(Topic topic)
+        {
+            db.Topics.Add(topic);
+            db.SaveChanges();
+        }
+
+        public Topic getTopicById(int topicId)
+        {
+            Topic topic = (from t in db.Topics
+                           where t.ID == topicId
+                           select t).Single();
+            return topic;
+        }
+        public void deleteTopic(int topicId)
+        {
+            db.Topics.Remove(getTopicById(topicId));
+        }
     }
 }
