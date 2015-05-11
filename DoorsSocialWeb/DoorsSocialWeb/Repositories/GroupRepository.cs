@@ -53,6 +53,22 @@ namespace DoorsSocialWeb.Repositories
             db.SaveChanges();
         }
 
+        public Group getGroupById(int groupId)
+        {
+            var group = (from g in db.Groups
+                         where g.ID == groupId
+                         select g).Single();
+            return group;
+        }
+
+        public Group getNewestGroup()
+        {
+            var group = (from g in db.Groups
+                         orderby g.ID descending
+                         select g).First();
+            return group;
+        }
+
         public void editGroup(Group thisGroup)
         {
             //TODO: Edit thisGroup and save.

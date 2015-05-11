@@ -34,7 +34,7 @@ namespace DoorsSocialWeb.Controllers
             shared.groups = groupService.getAccessibleGroups();
             shared.currentUser = userService.getCurrentUser();
             shared.friends = userService.getFriendsOfCurrentUser();
-            shared.posts = postService.getPostsByFriends();                        
+            shared.posts = postService.getPostsByFriends();            
             return View(shared);            
         }
 
@@ -49,7 +49,7 @@ namespace DoorsSocialWeb.Controllers
         }
 
 
-        public ActionResult CreateGroupView()
+        public ActionResult CreateGroup()
         {            
             var shared = new LoggedInSharedLayoutViewModel();
             shared.groups = groupService.getAccessibleGroups();
@@ -59,7 +59,7 @@ namespace DoorsSocialWeb.Controllers
             return View(shared);
         }
         [HttpPost]
-        public ActionResult CreateGroupView(FormCollection collection)
+        public ActionResult CreateGroup(FormCollection collection)
         {
             string groupOwnerId = collection["ownerid"];
             string groupName = collection["groupname"];
@@ -68,7 +68,9 @@ namespace DoorsSocialWeb.Controllers
             Group group = new Group { groupOwnerID = groupOwnerId, groupName = groupName, groupDescription = groupDescription };
             
             groupService.addNewGroup(group);
-            return RedirectToAction("CreateGroupView", "LoggedIn", group.ID);
+            Group theGroup = groupService.getNewestGroup();
+            groupService.addUserToGroup(groupOwnerId, theGroup.ID);
+            return RedirectToAction("GroupView", "LoggedIn", new { id = theGroup.ID });
         }
 
         public ActionResult Profile(string id)
