@@ -19,9 +19,14 @@ namespace DoorsSocialWeb.Repositories
         /*
          * Selects all messages from db where sender is the user or reciever is the user. That way we can display all messages in time order
          */
-        public IEnumerable<Message> getAllMessages(string senderID)
+        public IEnumerable<Message> getAllMessages()
         {
-            var queryAllMessages = (from message in db.Messages where message.senderID == senderID || message.recieverID == senderID orderby message.dateCreated ascending select message);
+            string currentUserID = HttpContext.Current.User.Identity.GetUserId();
+            var queryAllMessages = (from message in db.Messages
+                                    where message.senderID == currentUserID || message.recieverID == currentUserID
+                                    orderby message.dateCreated ascending
+                                    group message by message.senderID into messageGroup
+                                    select messageGroup.First());
             return queryAllMessages;
         }
 
@@ -30,7 +35,10 @@ namespace DoorsSocialWeb.Repositories
          */
         public IEnumerable<Message> getConversation(string senderID, string recieverID)
         {
-            var queryConversation = (from message in db.Messages where message.senderID == senderID && message.recieverID == recieverID orderby message.dateCreated select message);
+            var queryConversation = (from message in db.Messages
+                                     where message.senderID == senderID && message.recieverID == recieverID
+                                     orderby message.dateCreated
+                                     select message);
             return queryConversation;
         }
 
