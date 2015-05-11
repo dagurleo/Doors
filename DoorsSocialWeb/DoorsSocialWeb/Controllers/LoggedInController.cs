@@ -112,6 +112,25 @@ namespace DoorsSocialWeb.Controllers
             return RedirectToAction("Index", "LoggedIn");
 
         }
+
+        public ActionResult addLikeToPost()
+        {
+            return RedirectToAction("Index", "LoggedIn");
+        }
+
+        [HttpPost]
+        public ActionResult addLikeToPost(FormCollection collection)
+        {
+            string userId = collection["userid"];
+            string postIdString = collection["postid"];
+
+            int postId = Int32.Parse(postIdString);
+
+            var likeService = new LikesService();
+            likeService.addLikeOnPost(userId, postId);
+            return RedirectToAction("Index", "LoggedIn");
+        }
+        
         public ActionResult Logoff()
         {
             FormsAuthentication.SignOut();

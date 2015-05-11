@@ -28,5 +28,22 @@ namespace DoorsSocialWeb.Repositories
 
             return likes;
         }
+
+        public void addLikeToPost(string userId, int postId)
+        {
+            Like newLike = new Like { authorID = userId, postID = postId, commentID = 0 };
+            db.Likes.Add(newLike);
+            db.SaveChanges();
+        }
+
+        public IEnumerable<ApplicationUser> getUsersWhoLiked(IEnumerable<Like> likes)
+        {
+            var users = from l in likes
+                        join u in db.Users
+                        on l.authorID equals u.Id
+                        select u;
+
+            return users;
+        }
     }
 }
