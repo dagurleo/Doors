@@ -13,6 +13,7 @@ namespace DoorsSocialWeb.Models.ViewModels
     {
         public UserService userService = new UserService();
         public LikesService likeService = new LikesService();
+        public CommentService commentService = new CommentService();
         public IEnumerable<Post> posts { get; set; }
         public PostViewModel post { get; set; }
         public IEnumerable<Like> getLikesForPost(int postId)
@@ -41,6 +42,14 @@ namespace DoorsSocialWeb.Models.ViewModels
         public ApplicationUser getAuthor(string id)
         {
             return userService.getUserById(id);
+        }
+
+        public IEnumerable<Comment> comments { get; set; }
+
+        public IEnumerable<Comment> getCommentsForPost(int postID)
+        {
+            var comments = commentService.getCommentsByPostID(postID);
+            return comments;
         }
     }
 }

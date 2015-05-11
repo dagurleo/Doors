@@ -45,5 +45,20 @@ namespace DoorsSocialWeb.Repositories
 
             return users;
         }
+
+        public void removeLikeOnPost(string userId, int postId)
+        {
+            Like likeToRemove = (from l in db.Likes
+                                 where l.postID == postId &&
+                                 l.authorID == userId
+                                 select l).SingleOrDefault();
+            if (likeToRemove != null)
+            {
+                db.Likes.Remove(likeToRemove);
+                db.SaveChanges();
+            }
+        }
+
+       
     }
 }

@@ -23,6 +23,7 @@ namespace DoorsSocialWeb.Controllers
     {
         public UserService userService = new UserService();
         public GroupService groupService = new GroupService();
+        public LikesService likeService = new LikesService();
         //
         // GET: /LoggedIn/
         public ActionResult Index()
@@ -123,13 +124,47 @@ namespace DoorsSocialWeb.Controllers
         {
             string userId = collection["userid"];
             string postIdString = collection["postid"];
-
-            int postId = Int32.Parse(postIdString);
-
-            var likeService = new LikesService();
+            int postId = Int32.Parse(postIdString);            
             likeService.addLikeOnPost(userId, postId);
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
+
+        public ActionResult RemoveLikeFromPost()
+        {
+            return RedirectToAction("Index", "LoggedIn");
+        }
+
+        [HttpPost]
+        public ActionResult RemoveLikeFromPost(FormCollection collection)
+        {
+            string userId = collection["userid"];
+            string postIdString = collection["postid"];
+            int postId = Int32.Parse(postIdString);
+            likeService.removeLikeOnPost(userId, postId);
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);            
+        }
+
+        public ActionResult addCommentToPost()
+        {
+            return RedirectToAction("Index", "LoggedIn");
+        }
+
+        [HttpPost]
+        public ActionResult addCommentToPost(FormCollection collection)
+        {
+            string userID = collection["userid"];
+            string postIdString = collection["postid"];
+            string subject = collection["subject"];
+            int postId = Int32.Parse(postIdString);
+
+            if (subject != "")
+            {
+                var commentService = new CommentService();
+                commentService.addNewComment(userID, postId, subject);
+            }
+            return RedirectToAction("Index", "LoggedIn");
+        }
+
         
         public ActionResult Logoff()
         {

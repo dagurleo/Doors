@@ -27,6 +27,11 @@ namespace DoorsSocialWeb.Services
             likeRepo.addLikeToPost(userId, postId);
         }
 
+        public void removeLikeOnPost(string userId, int postId)
+        {
+            likeRepo.removeLikeOnPost(userId, postId);
+        }
+
         public IEnumerable<ApplicationUser> getUsersWhoLikedPost(int postID)
         {
             return likeRepo.getUsersWhoLiked(getLikesOnPost(postID));

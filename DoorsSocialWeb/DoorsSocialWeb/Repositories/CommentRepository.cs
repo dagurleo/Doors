@@ -16,7 +16,9 @@ namespace DoorsSocialWeb.Repositories
          */
         public IEnumerable<Comment> getCommentsByPostID(int postID)
         {
-            var listOfComments = (from comment in db.Comments where comment.ID == postID select comment);
+            var listOfComments = (from comment in db.Comments
+                                  where comment.postID == postID
+                                  select comment);
             return listOfComments;
         }
 
@@ -34,10 +36,11 @@ namespace DoorsSocialWeb.Repositories
         /* 
          * Need info on what variables i have to parse
          */
-        public void addNewComment()
+        public void addNewComment(string userId, int postId, string subject)
         {
-            //TODO: create a new comment and save it
-            return;
+            Comment comment = new Comment { authorID = userId, postID = postId, subject = subject, dateCreated = DateTime.Now };
+            db.Comments.Add(comment);
+            db.SaveChanges();
         }
     }
 }

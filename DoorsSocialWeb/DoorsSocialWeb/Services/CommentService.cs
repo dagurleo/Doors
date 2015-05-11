@@ -25,9 +25,9 @@ namespace DoorsSocialWeb.Services
         /* 
          * Need info on what variables i have to parse
          */
-        public void addNewComment()
+        public void addNewComment(string authorID, int postID, string subject)
         {
-            commentRepo.addNewComment();
+            commentRepo.addNewComment(authorID, postID, subject);
         }
     }
 }
