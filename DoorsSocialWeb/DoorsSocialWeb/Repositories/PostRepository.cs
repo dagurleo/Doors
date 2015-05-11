@@ -140,15 +140,20 @@ namespace DoorsSocialWeb.Repositories
         public IEnumerable<Post> getPostsFromFriends()
         {   
             var userRepo = new UserRepository();
-            IEnumerable<ApplicationUser> friends = userRepo.getFriendsOfCurrentUser();
-            
+            IEnumerable<ApplicationUser> friends = userRepo.getFriendsOfCurrentUser();            
             var friendsPosts = from f in friends
-                               join p in db.Posts on f.Id equals p.authorID
-                               orderby p.dateCreated descending
+                               join p in db.Posts on f.Id equals p.authorID                                                             
                                select p;
-            
 
-            return friendsPosts;
+            var myPosts = getAllPostByID(userRepo.getCurrentUser().Id);
+
+            friendsPosts = friendsPosts.Concat(myPosts);
+            var allPosts = from f in friendsPosts
+                           orderby f.dateCreated descending
+                           select f;
+
+
+            return allPosts;
                              
         }
 
