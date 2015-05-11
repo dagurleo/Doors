@@ -11,26 +11,42 @@
     <title></title>
 </head>
 <body>
-    <div>
         <h1>@Model.friend.displayName</h1>
 
         @if (Model.posts != null)
         {
             if (Model.posts.Count() == 0)
             {
-                <li>No Posts to show</li>
+                
             }
             foreach (var m in Model.posts)
             {
-                <<div>
-                    <img src="@Model.getAuthor(m.authorID).displayImageUrl" alt="Profile pic" width="80px" height="80px" />
-                    <h1>@Model.getAuthor(m.authorID).displayName</h1>
-                    <p>@m.dateCreated</p>
-                    <p>@m.subject</p>
-                </div>
+                <div class="postContainer">
+                        <div class="postDate">
+                            <p style="font-weight: bold">@m.dateCreated</p>
+                        </div>
+                        <div class="postImage">
+                            <a href="@Url.Action("Profile", "LoggedIn", new { id = m.authorID })">
+                                <img src="@Model.getAuthor(m.authorID).displayImageUrl" alt="Profile pic" />
+                            </a>
+                        </div>
+                            <h1>@Model.getAuthor(m.authorID).displayName</h1>
+                        <div class="postText">
+                            <p>@m.subject</p>
+                        </div>
+                        <div class="postLikes">
+                            <p>@Model.getLikesForPost(m.ID).Count()</p>
+                        </div>
+                    
+                        @using (Html.BeginForm("addLikeToPost", "LoggedIn", FormMethod.Post))
+                        {
+                            <input type="hidden" name="userid" value="@Model.currentUser.Id" />
+                            <input type="hidden" name="postid" value="@m.ID" />
+                            <input type="submit" value="POST" />
+                        }
+                    </div>
             }
         }
 
-    </div>
 </body>
 </html>

@@ -7417,6 +7417,13 @@ body h4
     text-decoration: none;
 }
 
+
+/*  profile view */
+
+.profileHeader
+{
+
+}
 .postContainer a:hover
 {
     color: black;

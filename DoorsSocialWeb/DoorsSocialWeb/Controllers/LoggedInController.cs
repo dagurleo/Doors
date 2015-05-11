@@ -128,7 +128,7 @@ namespace DoorsSocialWeb.Controllers
 
             var likeService = new LikesService();
             likeService.addLikeOnPost(userId, postId);
-            return RedirectToAction("Index", "LoggedIn");
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
         
         public ActionResult Logoff()

@@ -17,7 +17,6 @@ namespace DoorsSocialWeb.Models.ViewModels
         public PostViewModel post { get; set; }
         public IEnumerable<Like> getLikesForPost(int postId)
         {
-            
             var likes = likeService.getLikesOnPost(postId);
             return likes;
         }
