@@ -101,10 +101,14 @@ namespace DoorsSocialWeb.Controllers
             string subject = collection["subject"];
             string datetime = collection["datetime"];
 
-            Post post = new Post { authorID = userid, subject = subject, dateCreated = DateTime.Now };
-            var postService = new PostService();
-            postService.addNewPost(post);
+            if(subject != "")
+            {
+                Post post = new Post { authorID = userid, subject = subject, dateCreated = DateTime.Now };
+                var postService = new PostService();
+                postService.addNewPost(post);
+            }
             return RedirectToAction("Index", "LoggedIn");
+
         }
         public ActionResult Logoff()
         {
