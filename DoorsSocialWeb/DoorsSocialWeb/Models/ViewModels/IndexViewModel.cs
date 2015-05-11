@@ -16,15 +16,31 @@ namespace DoorsSocialWeb.Models.ViewModels
         public IEnumerable<Post> posts { get; set; }
         public PostViewModel post { get; set; }
         public IEnumerable<Like> getLikesForPost(int postId)
+        {                       
+            return likeService.getLikesOnPost(postId);
+        }
+
+        public IEnumerable<ApplicationUser> getUsersWhoLikesPost(int postId)
         {
-            var likes = likeService.getLikesOnPost(postId);
-            return likes;
+            return likeService.getUsersWhoLikedPost(postId);
+        }
+
+        public bool hasCurrentUserLikedPost(int postId)
+        {
+            var users = getUsersWhoLikesPost(postId);
+            foreach (var i in users)
+            {
+                if (i.Id == currentUser.Id)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public ApplicationUser getAuthor(string id)
         {
             return userService.getUserById(id);
         }
-
     }
 }

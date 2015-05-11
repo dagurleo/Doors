@@ -44,15 +44,20 @@
                         <p>@m.subject</p>
                     </div>
                     <div class="postLikes">
-                        <p>@Model.getLikesForPost(m.ID).Count()</p>
+                        <p>@Model.getUsersWhoLikesPost(m.ID).Count()</p>
                     </div>
-                    
-                    @using (Html.BeginForm("addLikeToPost", "LoggedIn", FormMethod.Post))
+                    @if(Model.hasCurrentUserLikedPost(m.ID) == false)
                     {
-                        <input type="hidden" name="userid" value="@Model.currentUser.Id" />
-                        <input type="hidden" name="postid" value="@m.ID" />
-                        <input type="submit" value="POST" />
+                       
+                        using (Html.BeginForm("addLikeToPost", "LoggedIn", FormMethod.Post))
+                        {
+                            <input type="hidden" name="userid" value="@Model.currentUser.Id" />
+                            <input type="hidden" name="postid" value="@m.ID" />
+                            <input type="submit" value="Like" />
+                        }
                     }
+                    
+                    
                 </div>
             }
         }
