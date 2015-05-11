@@ -12,12 +12,14 @@
 </head>
 <body>
     
-    @using (Html.BeginForm("Post", "LoggedIn", FormMethod.Post, new { role = "form" }))
-    {   
+    @using (Html.BeginForm("Post", "LoggedIn", FormMethod.Post))
+    {
         <input type="hidden" name="userid" value="@Model.currentUser.Id" />
         <input type="hidden" name="datetime" value="@Model.datetime" />
-        <textarea name="subject"></textarea>
-        <input type="submit" value="Post" />
+        <div class="createPost">
+            <textarea name="subject"></textarea>
+            <input type="submit" value="POST" />
+        </div>
     }
      
         @if (Model.posts != null)
