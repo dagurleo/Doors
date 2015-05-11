@@ -41,6 +41,9 @@
                     <div class="postText">
                         <p>@m.subject</p>
                     </div>
+                    <div class="postLikes">
+                        <p>@Model.getLikesForPost(m.ID).Count()</p>
+                    </div>
                 </div>
             }
         }

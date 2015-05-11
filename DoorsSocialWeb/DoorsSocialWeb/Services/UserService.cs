@@ -41,5 +41,7 @@ namespace DoorsSocialWeb.Services
             userRepo.addRelations(id1, id2);
         }
 
+
+  
     }
 }

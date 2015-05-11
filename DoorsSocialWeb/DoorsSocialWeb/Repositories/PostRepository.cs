@@ -176,5 +176,7 @@ namespace DoorsSocialWeb.Repositories
         {
             db.Posts.Remove(getSinglePostById(postId));
         }
+
+        
     }
 }
