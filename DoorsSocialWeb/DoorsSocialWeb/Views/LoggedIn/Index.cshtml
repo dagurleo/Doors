@@ -17,7 +17,7 @@
         <input type="hidden" name="userid" value="@Model.currentUser.Id" />
         <input type="hidden" name="datetime" value="@Model.datetime" />
         <div class="createPost">
-            <textarea name="subject"></textarea>
+            <textarea name="subject" placeholder="Share your thoughts with your friends!"></textarea>
             <input type="submit" value="POST" />
         </div>
     }
@@ -46,6 +46,7 @@
                     <div class="postLikes">
                         <p>@Model.getLikesForPost(m.ID).Count()</p>
                     </div>
+                    
                     @using (Html.BeginForm("addLikeToPost", "LoggedIn", FormMethod.Post))
                     {
                         <input type="hidden" name="userid" value="@Model.currentUser.Id" />
