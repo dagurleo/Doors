@@ -61,11 +61,11 @@ namespace DoorsSocialWeb.Repositories
 
         //Topics
 
-        public IEnumerable<Post> getPostsByTopicID(int topicID)
-        {
-            var queryAllPostsWithinTopic = (from postWithinTopic in db.Posts where postWithinTopic.ID == topicID && postWithinTopic.postIsInGroup == true select postWithinTopic);
-            return queryAllPostsWithinTopic;
-        }
+        //public IEnumerable<Post> getPostsByTopicID(int topicID)
+       // {
+         //   IEnumerable<Post> bla = new IEnumerable<Post>();
+        //    return bla;
+      //  }
 
         public void addTopic(Topic topic)
         {

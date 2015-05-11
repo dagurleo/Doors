@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using DoorsSocialWeb.Repositories;
 using DoorsSocialWeb.Models;
+using DoorsSocialWeb.Models.EntityModels;
 
 namespace DoorsSocialWeb.Services
 {
@@ -33,6 +34,11 @@ namespace DoorsSocialWeb.Services
         public ApplicationUser getUserById(string id)
         {
             return userRepo.getUserByID(id);
+        }
+
+        public void addRelations(string id1, string id2)
+        {
+            userRepo.addRelations(id1, id2);
         }
 
     }

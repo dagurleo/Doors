@@ -106,7 +106,7 @@ namespace DoorsSocialWeb.Repositories
         public IEnumerable<Post> getAllGroupPostsByGroupID(int groupID)
         {
             var allGroupPosts = (from post in db.Posts
-                                 where post.postIsInGroup == true &&
+                                 where post.groupId != null &&
                                  post.groupId == groupID
                                  orderby post.dateCreated ascending
                                  select post);
@@ -116,7 +116,7 @@ namespace DoorsSocialWeb.Repositories
         public IEnumerable<Post> getGroupTopicPostsByGroupID(int groupID, int topicID)
         {
             var groupTopicPosts = (from post in db.Posts
-                                   where post.postIsInGroup == true &&
+                                   where post.groupId != null &&
                                    post.groupId == groupID &&
                                    post.groupTopicID == topicID
                                    orderby post.dateCreated ascending
@@ -128,13 +128,28 @@ namespace DoorsSocialWeb.Repositories
         public Group getGroupByPostID(int postID)
         {
             var group = (from post in db.Posts
-                         where post.postIsInGroup == true &&
+                         where post.groupId != null &&
                          post.ID == postID
                          join gr in db.Groups
                          on post.groupId equals gr.ID
                          select gr
                          ).Single();
             return group;
+        }
+
+        public IEnumerable<Post> getPostsFromFriends()
+        {   
+            var userRepo = new UserRepository();
+            IEnumerable<ApplicationUser> friends = userRepo.getFriendsOfCurrentUser();
+            
+            var friendsPosts = from f in friends
+                               join p in db.Posts on f.Id equals p.authorID
+                               orderby p.dateCreated descending
+                               select p;
+            
+
+            return friendsPosts;
+                             
         }
 
         /*

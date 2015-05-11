@@ -27,11 +27,10 @@ namespace DoorsSocialWeb.Repositories
          * Return a list of posts within that topic
          * Does this belong here or in Posts ?
          */
-        public IEnumerable<Post> getPostsByTopicID(int topicID)
-        {
-            var queryAllPostsWithinTopic = (from postWithinTopic in db.Posts where postWithinTopic.ID == topicID && postWithinTopic.postIsInGroup == true select postWithinTopic);
-            return queryAllPostsWithinTopic;
-        }
+        //public IEnumerable<Post> getPostsByTopicID(int topicID)
+       // {
+            
+        //}
 
         /*
          * Add new topic

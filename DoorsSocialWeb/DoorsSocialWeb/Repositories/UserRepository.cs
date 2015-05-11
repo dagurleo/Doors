@@ -73,7 +73,7 @@ namespace DoorsSocialWeb.Repositories
                                where f.friend1Id == currentUser
                                select f.friend2Id;
 
-            var combined = rightFriends.Concat(leftFriends);
+            var combined = rightFriends.Concat(leftFriends);            
 
             var allFriends = from u in db.Users
                              join f in combined

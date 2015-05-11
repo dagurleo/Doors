@@ -33,8 +33,8 @@ namespace DoorsSocialWeb.Controllers
             var postService = new PostService();
             shared.groups = groupService.getAccessibleGroups();
             shared.currentUser = userService.getCurrentUser();
-            shared.friends = userService.getFriendsOfCurrentUser();            
-            shared.posts = postService.getAllPosts();                        
+            shared.friends = userService.getFriendsOfCurrentUser();
+            shared.posts = postService.getPostsByFriends();                        
             return View(shared);            
         }
 
