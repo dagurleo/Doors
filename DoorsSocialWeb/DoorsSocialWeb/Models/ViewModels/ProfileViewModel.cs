@@ -25,5 +25,23 @@ namespace DoorsSocialWeb.Models.ViewModels
             var likes = likeService.getLikesOnPost(postId);
             return likes;
         }
+
+        public bool hasCurrentUserLikedPost(int postId)
+        {
+            var users = getUsersWhoLikesPost(postId);
+            foreach (var i in users)
+            {
+                if (i.Id == currentUser.Id)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public IEnumerable<ApplicationUser> getUsersWhoLikesPost(int postId)
+        {
+            return likeService.getUsersWhoLikedPost(postId);
+        }
     }
 }
