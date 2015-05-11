@@ -46,16 +46,60 @@
                     <div class="postLikes">
                         <p>@Model.getUsersWhoLikesPost(m.ID).Count()</p>
                     </div>
-                    @if(Model.hasCurrentUserLikedPost(m.ID) == false)
-                    {
-                       
-                        using (Html.BeginForm("addLikeToPost", "LoggedIn", FormMethod.Post))
+                    <div class="likebutton">
+                        @if (Model.hasCurrentUserLikedPost(m.ID) == false)
                         {
-                            <input type="hidden" name="userid" value="@Model.currentUser.Id" />
-                            <input type="hidden" name="postid" value="@m.ID" />
-                            <input type="submit" value="Like" />
+
+                            using (Html.BeginForm("addLikeToPost", "LoggedIn", FormMethod.Post))
+                            {
+                                <input type="hidden" name="userid" value="@Model.currentUser.Id" />
+                                <input type="hidden" name="postid" value="@m.ID" />
+                                <input type="submit" value="Like" />
+                            }
                         }
+                        else
+                        {
+                            using (Html.BeginForm("RemoveLikeFromPost", "LoggedIn", FormMethod.Post))
+                            {
+                                <input type="hidden" name="userid" value="@Model.currentUser.Id" />
+                                <input type="hidden" name="postid" value="@m.ID" />
+                                <input type="submit" value="Unlike" />
+                            }
+                        }
+                    </div>
+
+                    <div class="postComments">
+
+                        @if (Model.getCommentsForPost(m.ID).Count() == 0)
+                        {
+                            <p>HEYNOCOMMENTSYOUCUNT</p>
+                        }
+                        else
+                        {
+                            foreach (var c in Model.getCommentsForPost(m.ID))
+                            {
+                                <div class="postCommentAuthor">
+                                    <h3>@Model.getAuthor(c.authorID).displayName</h3>
+                                </div>
+                                <div class="postCommentDateTime">
+                                    <p>@c.dateCreated</p>
+                                </div>
+                                <div class="postCommentSubject">
+                                    <p>@c.subject</p>
+                                </div>
+                            }
+                        }
+                    </div>
+                    @using (Html.BeginForm("addCommentToPost", "LoggedIn", FormMethod.Post))
+                    {
+                        <input type="hidden" name="userid" value="@Model.currentUser.Id" />
+                        <input type="hidden" name="postid" value="@m.ID" />
+                        <div class="commentOnPost">
+                            <textarea name="subject" placeholder="Share your comment with your friends!"></textarea>
+                            <input type="submit" value="POST" />
+                        </div>
                     }
+
                     
                     
                 </div>
