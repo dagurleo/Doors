@@ -201,6 +201,21 @@ namespace DoorsSocialWeb.Controllers
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
 
+        public ActionResult removeFriend()
+        {
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+        }
+
+        [HttpPost]
+        public ActionResult removeFriend(FormCollection collection)
+        {
+            string currentUserId = collection["userid"];
+            string friendUserId = collection["friendid"];
+
+            userService.removeRelations(currentUserId, friendUserId);
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+        }
+
         [HttpPost]
         public ActionResult Search(FormCollection collection)
         {

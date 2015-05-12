@@ -91,6 +91,16 @@ namespace DoorsSocialWeb.Repositories
             db.SaveChanges();
         }
 
+        public void removeRelations(string id1, string id2)
+        {
+            var relationship = (from r in db.relUsers
+                               where r.friend1Id == id1 && r.friend2Id == id2
+                               select r).SingleOrDefault();
+
+            db.relUsers.Remove(relationship);
+            db.SaveChanges();
+        }
+
 
         public void editUserProfile(ApplicationUser thisUser)
         {

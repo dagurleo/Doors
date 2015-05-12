@@ -41,6 +41,11 @@ namespace DoorsSocialWeb.Services
             userRepo.addRelations(id1, id2);
         }
 
+        public void removeRelations(string id1, string id2)
+        {
+            userRepo.removeRelations(id1, id2);
+        }
+
         public void editProfile(ApplicationUser userUpdate)
         {
             userRepo.editUserProfile(userUpdate);
