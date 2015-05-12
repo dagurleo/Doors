@@ -26,7 +26,7 @@ namespace DoorsSocialWeb.Services
         {
             return groupRepo.getCurrentGroup(id);
         }
-        
+
         public void addUserToGroup(string userId, int groupId)
         {
             groupRepo.addUserToGroup(userId, groupId);
@@ -54,14 +54,14 @@ namespace DoorsSocialWeb.Services
             return groupRepo.getGroupRequests(groupID);
         }
 
-        public void sendGroupRequest(string userID, int groupID)
+        public void sendGroupRequest(string requestUserId, int groupId, string groupOwner)
         {
-            groupRepo.sendGroupRequest(userID, groupID);
+            groupRepo.sendGroupRequest(requestUserId, groupId, groupOwner);
         }
 
-        public void approveGroupRequest(string currentUserID, int groupIdInt)
+        public void approveGroupRequest(groupRequest groupReq)
         {
-            groupRepo.approveGroupRequest(currentUserID, groupIdInt);
+            groupRepo.approveGroupRequest(groupReq);
         }
     }
 }

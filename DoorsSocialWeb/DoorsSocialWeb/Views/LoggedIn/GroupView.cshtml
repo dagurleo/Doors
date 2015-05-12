@@ -26,6 +26,7 @@
                 {
                     <input type="hidden" name="userid" value="@Model.currentUser.Id" />
                     <input type="hidden" name="groupid" value="@Model.currentGroup.ID" />
+                    <input type="hidden" name="groupOwner" value="@Model.currentGroup.groupOwnerID" />
                     <input type="submit" value="Click me to request to join this group" />
                 }
         }
@@ -39,7 +40,7 @@
                 <!--Foreach skilar mér requestuserIds sem ég get acceptað sem ég converta í userdisplayname-->
                 foreach(var m in Model.pendingRequests(Model.currentGroup.ID))
                 {
-                    if (m.userIsApproved == false)
+                    if (@m.userIsApproved == false)
                     {
                         using (Html.BeginForm("ownerOfGroupAcceptsUsers", "LoggedIn", FormMethod.Post))
                         {
