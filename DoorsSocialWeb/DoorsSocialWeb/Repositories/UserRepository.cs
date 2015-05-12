@@ -94,7 +94,13 @@ namespace DoorsSocialWeb.Repositories
 
         public void editUserProfile(ApplicationUser thisUser)
         {
-            //TODO: edit thisUser profile
+            var user = getCurrentUser();
+
+            user.displayName = thisUser.displayName;
+            user.displayAbout = thisUser.displayAbout;
+            user.displayEmail = thisUser.displayEmail;
+            user.displayPhoneNumber = thisUser.displayPhoneNumber;
+            db.SaveChanges();
         }
     }
 }

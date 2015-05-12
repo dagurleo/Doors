@@ -15,7 +15,7 @@
     <script src="~/Scripts/Script.js"></script>
 </head>
 <body>
-    <div id="openModal" class="modalDialog">
+    <div id="createGroup" class="modalDialog">
         <div>
             @using (Html.BeginForm("CreateGroup", "LoggedIn", FormMethod.Post, new { role = "form" }))
             {
@@ -59,7 +59,7 @@
         }
         </ul>
         <div class="createGroup">
-            <a href="#openModal"><h4>Create a Group</h4></a>
+            <a href="#createGroup"><h4>Create a Group</h4></a>
         </div>
       
     </div>

@@ -52,12 +52,7 @@ namespace DoorsSocialWeb.Controllers
 
         public ActionResult CreateGroup()
         {            
-            var shared = new LoggedInSharedLayoutViewModel();
-            shared.groups = groupService.getAccessibleGroups();
-            shared.currentUser = userService.getCurrentUser();
-            shared.friends = userService.getFriendsOfCurrentUser();
-
-            return View(shared);
+            return View();
         }
         [HttpPost]
         public ActionResult CreateGroup(FormCollection collection)
@@ -72,6 +67,24 @@ namespace DoorsSocialWeb.Controllers
             Group theGroup = groupService.getNewestGroup();
             groupService.addUserToGroup(groupOwnerId, theGroup.ID);
             return RedirectToAction("GroupView", "LoggedIn", new { id = theGroup.ID });
+        }
+
+        public  ActionResult EditProfile()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult EditProfile(FormCollection collection)
+        {
+            string displayName = collection["displayname"];
+            string displayAbout = collection["about"];
+            string displayEmail = collection["displayemail"];
+            string displayPhone = collection["displayphone"];
+
+            ApplicationUser userInfo = new ApplicationUser { displayAbout = displayAbout, displayName = displayName, displayPhoneNumber = displayPhone, displayEmail = displayEmail };
+            userService.editProfile(userInfo);
+
+            return RedirectToAction("Profile", "LoggedIn", new { id = userService.getCurrentUser().Id });
         }
 
         public ActionResult Profile(string id)

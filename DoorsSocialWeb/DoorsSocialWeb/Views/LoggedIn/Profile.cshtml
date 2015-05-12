@@ -18,10 +18,43 @@
                 <a href="#close" title="Close" class="close">X</a>
                 <h1>EditProfile</h1>
                 <input type="hidden" name="ownerid" value="@Model.currentUser.Id" />
-
-                <input type="text" name="groupname" />
-                <textarea name="groupdescription"></textarea>
-                <input type="submit" value="Create Group" />
+                <table class="editInfo">
+                    <tr>
+                        <td>
+                            Display Name:
+                        </td>
+                        <td>
+                            <input type="text" name="displayname" value="@Model.currentUser.displayName" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Display About:
+                        </td>
+                        <td>
+                            <textarea name="about">@Model.currentUser.displayAbout</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Display Email:
+                        </td>
+                        <td>
+                            <input type="text" name="displayemail" value="@Model.currentUser.displayEmail" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Display Phone:
+                        </td>
+                        <td>
+                            <input type="text" name="displayphone" value="@Model.currentUser.displayPhoneNumber" />
+                        </td>
+                    </tr>
+                </table>
+                
+                
+                <input type="submit" value="Submit changes" class="editProfileBtn"  />
             }
         </div>
     </div>
@@ -35,15 +68,15 @@
         <h1>@Model.friend.displayName</h1>
         <div class="profileInformation">
             <ul>
-                @if(Model.friend.displayAbout != null)
+                @if (Model.friend.displayAbout != null && Model.friend.displayAbout != "")
                 {
                     <li>About: @Model.friend.displayAbout</li>
                 }
-                @if(Model.friend.displayEmail != null)
+                @if (Model.friend.displayEmail != null && Model.friend.displayEmail != "")
                 {
                     <li>Email: @Model.friend.displayEmail</li>
                 }
-                @if (Model.friend.displayPhoneNumber != null)
+                @if (Model.friend.displayPhoneNumber != null && Model.friend.displayPhoneNumber != "")
                 {
                     <li>PhoneNumber: @Model.friend.displayPhoneNumber</li>
                 }
