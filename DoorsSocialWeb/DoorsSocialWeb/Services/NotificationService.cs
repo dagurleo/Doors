@@ -20,5 +20,12 @@ namespace DoorsSocialWeb.Services
         {
             return notificationRepo.getAllNewNotifications();
         }
+
+        /*
+        public IEnumerable<Notification> getAllNewGroupRequests(int groupID, string ownerID)
+        {
+            //return notificationRepo.getAllNewGroupRequests(groupID, ownerID);
+        }
+         */
     }
 }

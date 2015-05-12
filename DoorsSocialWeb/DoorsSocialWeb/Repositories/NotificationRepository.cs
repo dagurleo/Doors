@@ -28,5 +28,16 @@ namespace DoorsSocialWeb.Repositories
                                          select notification);
             return queryNewNotifications;
         }
+
+        /*
+        public IEnumerable<Notification> getAllNewGroupRequests(int groupID, string ownerID)
+        {
+
+            var requests = from gr in db.Groups
+                           where gr.ID == groupID
+                           join ur in db.groupRequests
+                           on gr.ID equals ur.id
+        }
+         */
     }
 }

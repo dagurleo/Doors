@@ -35,6 +35,7 @@ namespace DoorsSocialWeb.Services
         {
             return groupRepo.getNewestGroup();
         }
+
         public void editGroup(Group thisGroup)
         {
             //TODO: Edit thisGroup and save.
