@@ -10,17 +10,103 @@
     <meta name="viewport" content="width=device-width" />
     <title></title>
 </head>
-<body>
+<body>      
+    <div id="editProfile" class="modalDialog">
+        <div>
+            @using (Html.BeginForm("EditProfile", "LoggedIn", FormMethod.Post, new { role = "form" }))
+            {
+                <a href="#close" title="Close" class="close">X</a>
+                <h1>EditProfile</h1>
+                <input type="hidden" name="ownerid" value="@Model.currentUser.Id" />
+                <table class="editInfo">
+                    <tr>
+                        <td>
+                            Display Name:
+                        </td>
+                        <td>
+                            <input type="text" name="displayname" value="@Model.currentUser.displayName" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Display About:
+                        </td>
+                        <td>
+                            <textarea name="about">@Model.currentUser.displayAbout</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Display Email:
+                        </td>
+                        <td>
+                            <input type="text" name="displayemail" value="@Model.currentUser.displayEmail" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Display Phone:
+                        </td>
+                        <td>
+                            <input type="text" name="displayphone" value="@Model.currentUser.displayPhoneNumber" />
+                        </td>
+                    </tr>
+                </table>
+                
+                
+                <input type="submit" value="Submit changes" class="editProfileBtn"  />
+            }
+        </div>
+    </div>
+
+
+
+    <div class="profileHeader">
+        <div class="profileImage">
+                <img src="@Model.friend.displayImageUrl" alt="Profile pic" />
+        </div>
         <h1>@Model.friend.displayName</h1>
+        <div class="profileInformation">
+            <ul>
+                @if (Model.friend.displayAbout != null && Model.friend.displayAbout != "")
+                {
+                    <li>About: @Model.friend.displayAbout</li>
+                }
+                @if (Model.friend.displayEmail != null && Model.friend.displayEmail != "")
+                {
+                    <li>Email: @Model.friend.displayEmail</li>
+                }
+                @if (Model.friend.displayPhoneNumber != null && Model.friend.displayPhoneNumber != "")
+                {
+                    <li>PhoneNumber: @Model.friend.displayPhoneNumber</li>
+                }
+            </ul>
+        </div>
+        @if(Model.friend.Id == Model.currentUser.Id)
+        {
+            <a href="#editProfile"><h4>Edit my profile</h4></a>   
+        }
+    </div>    
+
+    <br />
+    @using (Html.BeginForm("Post", "LoggedIn", FormMethod.Post))
+    {
+        <input type="hidden" name="userid" value="@Model.currentUser.Id" />
+        <input type="hidden" name="datetime" value="@Model.datetime" />
+        <div class="createPost">
+            <textarea name="subject" placeholder="Share your thoughts with your friends!"></textarea>
+            <input type="submit" value="POST" />
+        </div>
+    }
 
         @if (Model.posts != null)
-        {
-            if (Model.posts.Count() == 0)
-            {
-                
-            }
-            foreach (var m in Model.posts)
-            {
+{
+    if (Model.posts.Count() == 0)
+    {
+        <h1>There are no posts to show</h1>
+    }
+    foreach (var m in Model.posts)
+    {
                 <div class="postContainer">
                         <div class="postDate">
                             <p style="font-weight: bold">@m.dateCreated</p>
@@ -38,11 +124,15 @@
                             <p>@Model.getLikesForPost(m.ID).Count()</p>
                         </div>
                     
-                        @using (Html.BeginForm("addLikeToPost", "LoggedIn", FormMethod.Post))
+                        @if(Model.hasCurrentUserLikedPost(m.ID) == false)
                         {
-                            <input type="hidden" name="userid" value="@Model.currentUser.Id" />
-                            <input type="hidden" name="postid" value="@m.ID" />
-                            <input type="submit" value="POST" />
+                       
+                            using (Html.BeginForm("addLikeToPost", "LoggedIn", FormMethod.Post))
+                            {
+                                <input type="hidden" name="userid" value="@Model.currentUser.Id" />
+                                <input type="hidden" name="postid" value="@m.ID" />
+                                <input type="submit" value="Like" />
+                            }
                         }
                     </div>
             }

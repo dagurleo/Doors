@@ -41,6 +41,10 @@ namespace DoorsSocialWeb.Services
             userRepo.addRelations(id1, id2);
         }
 
+        public void editProfile(ApplicationUser userUpdate)
+        {
+            userRepo.editUserProfile(userUpdate);
+        }
 
   
     }
