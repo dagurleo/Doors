@@ -9,7 +9,23 @@
 </head>
 <body>
     <div>
-        <h1>@Model.currentGroup.groupName</h1>
+        @if (Model.currentGroup.groupName != null && Model.currentGroup.groupName != "")
+        {
+            <h1>@Model.currentGroup.groupName</h1>
+        }
+        @if (Model.currentGroup.groupDescription != null && Model.currentGroup.groupName != "")
+        {
+            <h1>@Model.currentGroup.groupDescription</h1>
+        }
     </div>
+
+    <div>
+        @if (Model.userIsMember(Model.currentUser()))
+        {
+            
+        }
+    </div>
+
+
 </body>
 </html>

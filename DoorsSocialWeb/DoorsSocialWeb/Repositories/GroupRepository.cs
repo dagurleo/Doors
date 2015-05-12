@@ -100,5 +100,19 @@ namespace DoorsSocialWeb.Repositories
         {
             db.Topics.Remove(getTopicById(topicId));
         }
+
+        public void getUserRequests()
+        {
+
+        }
+
+
+        public IEnumerable<Group> searchGroupsByName(string searchTerm)
+        {
+            var groups = from g in db.Groups
+                         where g.groupName.Contains(searchTerm)
+                         select g;
+            return groups;
+        }
     }
 }

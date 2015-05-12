@@ -41,5 +41,10 @@ namespace DoorsSocialWeb.Services
             //TODO: Edit thisGroup and save.
             return;
         }
+
+        public IEnumerable<Group> searchGroupsByName(string searchTerm)
+        {
+            return groupRepo.searchGroupsByName(searchTerm);
+        }       
     }
 }
