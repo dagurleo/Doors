@@ -10,5 +10,6 @@ namespace DoorsSocialWeb.Models.ViewModels
     {   
         public IEnumerable<ApplicationUser> usersSearched { get; set; }
         public IEnumerable<Group> groupsSearched { get; set; }
+
     }
 }
