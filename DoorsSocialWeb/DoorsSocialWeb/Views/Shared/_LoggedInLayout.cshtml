@@ -40,8 +40,7 @@
             <div class="searchContainer">
                 @using (Html.BeginForm("Search", "LoggedIn", FormMethod.Post, new { role = "search" }))
                 {
-                <input type="text" name="searchTerm" />
-                <input type="submit" value="Search" id="searchSumbit" />
+                <input type="text" name="searchTerm"/>
                 }  
             </div>          
                 @Html.ActionLink("Sign Out","Logoff","LoggedIn",null,new { @class = "logout" } )

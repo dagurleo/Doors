@@ -17,7 +17,14 @@
             {
                 <li>
                     <a href="@Url.Action("Profile", "LoggedIn", new { id = i.Id })">
-                        @i.displayName
+                        <div>
+                            <div>
+                                <img src="@i.displayImageUrl" alt="@i.displayName image" height="80px"/>
+                            </div>
+                            <div>
+                                @i.displayName
+                            </div>
+                        </div>
                     </a>
                 </li>
             }
