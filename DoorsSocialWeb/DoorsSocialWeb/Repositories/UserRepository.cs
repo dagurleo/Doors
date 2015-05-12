@@ -84,6 +84,37 @@ namespace DoorsSocialWeb.Repositories
             return allFriends;
         }
 
+        public void requestFriend(string currentUserId, string friendUserId)
+        {
+            friendRequest friendReq = new friendRequest { userID = friendUserId, userRequestID = currentUserId, userIsApproved = false };
+            db.friendRequests.Add(friendReq);
+            db.SaveChanges();
+        }
+
+        public IEnumerable<friendRequest> getFriendRequests(string userID)
+        {
+            var requests = from fr in db.friendRequests
+                           where fr.userID == userID
+                           select fr;
+
+            return requests;
+        }
+
+        public void approveUser(friendRequest frReq)
+        {
+            //TODO - búa til nýtt req með þessum strings og approved = true
+            //TODO - finna gamla, færa þetta yfir í það og savea changes
+            friendRequest oldFriendReq =  (from fr in db.friendRequests
+                                           where fr.userID == frReq.userID &&
+                                           fr.userRequestID == frReq.userRequestID
+                                           select fr).SingleOrDefault();
+
+            oldFriendReq.userID = frReq.userID;
+            oldFriendReq.userRequestID = frReq.userID;
+            oldFriendReq.userIsApproved = frReq.userIsApproved;
+            db.SaveChanges();
+        }
+
         public void addRelations(string id1, string id2)
         {
             relUsers relationship = new relUsers { friend1Id = id1, friend2Id = id2 };

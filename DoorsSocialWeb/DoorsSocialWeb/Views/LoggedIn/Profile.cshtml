@@ -52,8 +52,6 @@
                         </td>
                     </tr>
                 </table>
-                
-                
                 <input type="submit" value="Submit changes" class="editProfileBtn"  />
             }
         </div>
@@ -85,12 +83,20 @@
         <div>
             @if ((!Model.userIsFriend(Model.friend.Id)) && (Model.friend.Id != Model.currentUser.Id))
             {
-                using (Html.BeginForm("addFriend", "LoggedIn", FormMethod.Post))
+                if (!(Model.userIsPendingFriend(Model.friend.Id, Model.currentUser.Id)))
                 {
-                    <input type="hidden" name="userid" value="@Model.currentUser.Id" />
-                    <input type="hidden" name="friendid" value="@Model.friend.Id" />
-                    <input type="submit" value="addFriend" />
+                    using (Html.BeginForm("requestFriendship", "LoggedIn", FormMethod.Post))
+                    {
+                        <input type="hidden" name="userid" value="@Model.currentUser.Id" />
+                        <input type="hidden" name="friendid" value="@Model.friend.Id" />
+                        <input type="submit" value="Request Friend" />
+                    } 
                 }
+                else
+                {
+                    <p>Chill the fuck out m8</p>
+                }
+
             }
             else if ((Model.userIsFriend(Model.friend.Id)) && (Model.friend.Id != Model.currentUser.Id))
             {
@@ -98,7 +104,7 @@
                 {
                     <input type="hidden" name="userid" value="@Model.currentUser.Id" />
                     <input type="hidden" name="friendid" value="@Model.friend.Id" />
-                    <input type="submit" value="removeFriend" />
+                    <input type="submit" value="Remove Friend" />
                 }
             }
         </div>
@@ -107,6 +113,28 @@
             <a href="#editProfile"><h4>Edit my profile</h4></a>   
         }
     </div>    
+
+    <div>
+        @if (Model.friend.Id == Model.currentUser.Id)
+        {
+            if(Model.getFriendRequests(Model.currentUser.Id) != null)
+            {
+                foreach(var m in Model.getFriendRequests(Model.currentUser.Id))
+                {
+                    if(m.userIsApproved == false)
+                    {
+                        using (Html.BeginForm("userApprovesFriendRequests", "LoggedIn", FormMethod.Post))
+                        {
+                            <input type="hidden" name="userid" value="@Model.currentUser.Id"/>
+                            <input type="hidden" name="friendid" value="@m.userRequestID"/>
+                            <p>Approve user: @Model.getAuthor(m.userRequestID).displayName</p>
+                            <input type="submit" value="Accept this user as your friend"/>
+                        }
+                    }
+                }
+            }
+        }
+    </div>
 
     <br />
     @using (Html.BeginForm("Post", "LoggedIn", FormMethod.Post))
@@ -119,44 +147,50 @@
         </div>
     }
 
-        @if (Model.posts != null)
-{
-    if (Model.posts.Count() == 0)
+    @if (Model.posts != null)
     {
-        <h1>There are no posts to show</h1>
-    }
-    foreach (var m in Model.posts)
-    {
-                <div class="postContainer">
-                        <div class="postDate">
-                            <p style="font-weight: bold">@m.dateCreated</p>
-                        </div>
-                        <div class="postImage">
-                            <a href="@Url.Action("Profile", "LoggedIn", new { id = m.authorID })">
-                                <img src="@Model.getAuthor(m.authorID).displayImageUrl" alt="Profile pic" />
-                            </a>
-                        </div>
-                            <h1>@Model.getAuthor(m.authorID).displayName</h1>
-                        <div class="postText">
-                            <p>@m.subject</p>
-                        </div>
-                        <div class="postLikes">
-                            <p>@Model.getLikesForPost(m.ID).Count()</p>
-                        </div>
-                    
-                        @if(Model.hasCurrentUserLikedPost(m.ID) == false)
-                        {
-                       
-                            using (Html.BeginForm("addLikeToPost", "LoggedIn", FormMethod.Post))
-                            {
-                                <input type="hidden" name="userid" value="@Model.currentUser.Id" />
-                                <input type="hidden" name="postid" value="@m.ID" />
-                                <input type="submit" value="Like" />
-                            }
-                        }
-                    </div>
+        if(Model.userIsFriend(Model.currentUser.Id) || Model.friend.Id == Model.currentUser.Id)
+        {
+            if (Model.posts.Count() == 0)
+            {
+                <h1>There are no posts to show</h1>
             }
-        }
 
+            else
+            {
+                foreach (var m in Model.posts)
+                {
+                    <div class="postContainer">
+                            <div class="postDate">
+                                <p style="font-weight: bold">@m.dateCreated</p>
+                            </div>
+                            <div class="postImage">
+                                <a href="@Url.Action("Profile", "LoggedIn", new { id = m.authorID })">
+                                    <img src="@Model.getAuthor(m.authorID).displayImageUrl" alt="Profile pic" />
+                                </a>
+                            </div>
+                                <h1>@Model.getAuthor(m.authorID).displayName</h1>
+                            <div class="postText">
+                                <p>@m.subject</p>
+                            </div>
+                            <div class="postLikes">
+                                <p>@Model.getLikesForPost(m.ID).Count()</p>
+                            </div>
+                    
+                            @if(Model.hasCurrentUserLikedPost(m.ID) == false)
+                            {
+                                using (Html.BeginForm("addLikeToPost", "LoggedIn", FormMethod.Post))
+                                {
+                                    <input type="hidden" name="userid" value="@Model.currentUser.Id" />
+                                    <input type="hidden" name="postid" value="@m.ID" />
+                                    <input type="submit" value="Like"/>
+                                }
+                            }
+                        </div>
+                }
+            }
+            
+        }
+    }
 </body>
 </html>
