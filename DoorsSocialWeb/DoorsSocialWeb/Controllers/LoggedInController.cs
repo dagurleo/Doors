@@ -24,6 +24,7 @@ namespace DoorsSocialWeb.Controllers
         public UserService userService = new UserService();
         public GroupService groupService = new GroupService();
         public LikesService likeService = new LikesService();
+        public PostService postService = new PostService();
         //
         // GET: /LoggedIn/
         public ActionResult Index()
@@ -31,7 +32,7 @@ namespace DoorsSocialWeb.Controllers
             
             var shared = new IndexViewModel();
             
-            var postService = new PostService();
+            
             shared.groups = groupService.getAccessibleGroups();
             shared.currentUser = userService.getCurrentUser();
             shared.friends = userService.getFriendsOfCurrentUser();
@@ -107,7 +108,7 @@ namespace DoorsSocialWeb.Controllers
             if(subject != "")
             {
                 Post post = new Post { authorID = userid, subject = subject, dateCreated = DateTime.Now };
-                var postService = new PostService();
+                
                 postService.addNewPost(post);
             }
             return RedirectToAction("Index", "LoggedIn");
@@ -126,6 +127,7 @@ namespace DoorsSocialWeb.Controllers
             string postIdString = collection["postid"];
             int postId = Int32.Parse(postIdString);            
             likeService.addLikeOnPost(userId, postId);
+            var thePost = postService.getPostByID(postId);
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
 

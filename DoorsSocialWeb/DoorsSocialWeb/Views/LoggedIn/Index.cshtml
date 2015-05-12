@@ -50,7 +50,7 @@
                         @if (Model.hasCurrentUserLikedPost(m.ID) == false)
                         {
 
-                            using (Html.BeginForm("addLikeToPost", "LoggedIn", FormMethod.Post))
+                            using (Html.BeginForm("addLikeToPost", "LoggedIn", FormMethod.Post, new { id="likeForm" }))
                             {
                                 <input type="hidden" name="userid" value="@Model.currentUser.Id" />
                                 <input type="hidden" name="postid" value="@m.ID" />
