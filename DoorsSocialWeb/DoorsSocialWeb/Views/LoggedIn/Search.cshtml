@@ -15,14 +15,18 @@
         <ul>
             @foreach (var i in Model.usersSearched)
             {
-                <li>@i.displayName</li>
+                <li>
+                    <a href="@Url.Action("Profile", "LoggedIn", new { id = i.Id })">
+                        @i.displayName
+                    </a>
+                </li>
             }
         </ul>
         <div class="groupsFound">
             <ul>
                 @foreach (var i in Model.groupsSearched)
                 {
-                    <li>@i.</li>
+                    <li>@i.groupName</li>
                 }
             </ul>
         </div>

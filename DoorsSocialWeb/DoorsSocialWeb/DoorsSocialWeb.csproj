@@ -264,6 +264,7 @@
     <Content Include="Views\LoggedIn\CreateGroup.cshtml" />
     <Content Include="Views\LoggedIn\Profile.cshtml" />
     <Content Include="Views\LoggedIn\PostPartial.cshtml" />
+    <Content Include="Views\LoggedIn\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
