@@ -37,6 +37,21 @@ namespace DoorsSocialWeb.Models.ViewModels
             return false;
         }
 
+        public bool userIsApprovedMember(string userID)
+        {
+            foreach(var r in pendingRequests(currentGroup.ID))
+            {
+                if (r.userRequestId == userID)
+                {
+                    if(r.userIsApproved == true)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         public IEnumerable<groupRequest> pendingRequests(int groupID)
         {
             return groupService.getGroupRequests(groupID);

@@ -240,12 +240,12 @@ namespace DoorsSocialWeb.Controllers
 
         [HttpPost] ActionResult ownerOfGroupAcceptsUsers(FormCollection collection)
         {
-            string currentUserID = collection["userid"];
+            string requestUserId = collection["userid"];
             string groupIDstring = collection["groupid"];
 
             var groupIdInt = Int32.Parse(groupIDstring);
-            groupService.approveGroupRequest(currentUserID, groupIdInt);
-            groupService.addUserToGroup(currentUserID, groupIdInt);
+            groupService.approveGroupRequest(requestUserId, groupIdInt);
+            groupService.addUserToGroup(requestUserId, groupIdInt);
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
         

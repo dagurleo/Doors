@@ -63,6 +63,5 @@ namespace DoorsSocialWeb.Services
         {
             groupRepo.approveGroupRequest(currentUserID, groupIdInt);
         }
-
     }
 }

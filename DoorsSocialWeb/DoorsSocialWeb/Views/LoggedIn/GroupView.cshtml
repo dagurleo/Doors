@@ -20,7 +20,7 @@
     </div>
 
     <div>
-        @if ((!(Model.userIsMember(Model.currentUser.Id)) && Model.currentUser.Id != Model.currentGroup.groupOwnerID))
+        @if ((!(Model.userIsMember(Model.currentUser.Id)) && Model.currentUser.Id != Model.currentGroup.groupOwnerID) && Model.userIsPendingMember(Model.currentUser.Id) == false)
         {
                 using (Html.BeginForm("requestToJoinGroup", "LoggedIn", FormMethod.Post))
                 {
@@ -39,12 +39,15 @@
                 <!--Foreach skilar mér requestuserIds sem ég get acceptað sem ég converta í userdisplayname-->
                 foreach(var m in Model.pendingRequests(Model.currentGroup.ID))
                 {
-                    using (Html.BeginForm("ownerOfGroupAcceptsUsers", "LoggedIn", FormMethod.Post))
+                    if (m.userIsApproved == false)
                     {
-                        <input type="hidden" name="userid" value=m/>
-                        <input type="hidden" name="groupid" value="@Model.currentGroup.ID"/>
-                        <p>@Model.getUserByID(m.userRequestId).displayName</p>
-                        <input type="submit" value="Accept this user"/>
+                        using (Html.BeginForm("ownerOfGroupAcceptsUsers", "LoggedIn", FormMethod.Post))
+                        {
+                            <input type="hidden" name="userid" value="@m.userRequestId"/>
+                            <input type="hidden" name="groupid" value="@Model.currentGroup.ID"/>
+                            <p>@Model.getUserByID(m.userRequestId).displayName</p>
+                            <input type="submit" value="Accept this user"/>
+                        }
                     }
                 }
             }
