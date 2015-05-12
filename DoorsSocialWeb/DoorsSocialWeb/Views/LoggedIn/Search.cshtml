@@ -11,13 +11,21 @@
     <title></title>
 </head>
 <body>
-    <div>
+    <div class="usersFound">
         <ul>
             @foreach (var i in Model.usersSearched)
             {
                 <li>@i.displayName</li>
             }
         </ul>
+        <div class="groupsFound">
+            <ul>
+                @foreach (var i in Model.groupsSearched)
+                {
+                    <li>@i.</li>
+                }
+            </ul>
+        </div>
     </div>
 </body>
 </html>

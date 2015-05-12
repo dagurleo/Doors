@@ -210,6 +210,7 @@ namespace DoorsSocialWeb.Controllers
             shared.currentUser = userService.getCurrentUser();
             shared.friends = userService.getFriendsOfCurrentUser();
             shared.usersSearched = userService.searchUsersByName(searchTerm);
+            shared.groupsSearched = groupService.searchGroupsByName(searchTerm);
             return View(shared);
 
         }
