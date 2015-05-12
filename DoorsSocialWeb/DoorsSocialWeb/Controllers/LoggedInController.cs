@@ -180,6 +180,20 @@ namespace DoorsSocialWeb.Controllers
             return RedirectToAction("Index", "LoggedIn");
         }
 
+        public ActionResult addFriend()
+        {
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+        }
+
+        [HttpPost]
+        public ActionResult addFriend(FormCollection collection)
+        {
+            string currentUserId = collection["userid"];
+            string friendUserId = collection["friendid"];
+
+            userService.addRelations(currentUserId, friendUserId);
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+        }
         
         public ActionResult Logoff()
         {

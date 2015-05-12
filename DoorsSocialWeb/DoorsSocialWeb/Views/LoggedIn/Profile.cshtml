@@ -82,6 +82,17 @@
                 }
             </ul>
         </div>
+        <div>
+            @if ((!Model.userIsFriend(Model.friend.Id)) && (Model.friend.Id != Model.currentUser.Id))
+            {
+                using (Html.BeginForm("addFriend", "LoggedIn", FormMethod.Post))
+                {
+                    <input type="hidden" name="userid" value="@Model.currentUser.Id" />
+                    <input type="hidden" name="friendid" value="@Model.friend.Id" />
+                    <input type="submit" value="addFriend" />
+                }
+            }
+        </div>
         @if(Model.friend.Id == Model.currentUser.Id)
         {
             <a href="#editProfile"><h4>Edit my profile</h4></a>   

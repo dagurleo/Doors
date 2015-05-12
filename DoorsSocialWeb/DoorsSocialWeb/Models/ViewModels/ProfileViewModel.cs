@@ -43,5 +43,15 @@ namespace DoorsSocialWeb.Models.ViewModels
         {
             return likeService.getUsersWhoLikedPost(postId);
         }
+
+        public bool userIsFriend(string friendId)
+        {
+            IEnumerable<ApplicationUser> friends = userRepo.getFriendsOfCurrentUser();
+            if(friends.Contains(userRepo.getUserByID(friendId)))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
