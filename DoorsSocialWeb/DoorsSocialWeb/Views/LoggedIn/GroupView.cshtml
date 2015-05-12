@@ -56,6 +56,12 @@
         }
     </div>
 
+    <div>
+        @if (Model.userIsApprovedMember(Model.currentUser.Id))
+        {
+            <!-- TODO allow users to post posts and see them/likethem/commentonthem-->
+        }
+    </div>
 
 </body>
 </html>
