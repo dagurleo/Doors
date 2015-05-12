@@ -257,10 +257,12 @@ namespace DoorsSocialWeb.Controllers
         {
             string requestUserId = collection["userid"];
             string groupIDstring = collection["groupid"];
-
+            string groupOwner = collection["groupOwner"];
             var groupIdInt = Int32.Parse(groupIDstring);
-            groupService.approveGroupRequest(requestUserId, groupIdInt);
-            groupService.addUserToGroup(requestUserId, groupIdInt);
+            groupRequest groupReq = new groupRequest();
+
+            groupService.approveGroupRequest(groupReq);
+            groupService.addUserToGroup(groupReq);
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
         

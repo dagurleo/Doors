@@ -129,8 +129,8 @@ namespace DoorsSocialWeb.Repositories
         public void approveGroupRequest(string currentUserID, int groupIdInt)
         {
             groupRequest request = (from r in db.groupRequests
-                          where r.userRequestId == currentUserID
-                          select r).SingleOrDefault();
+                                    where r.userRequestId == currentUserID
+                                    select r).SingleOrDefault();
             request.userIsApproved = true;
             db.SaveChanges();
         }

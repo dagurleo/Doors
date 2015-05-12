@@ -45,6 +45,7 @@
                         {
                             <input type="hidden" name="userid" value="@m.userRequestId"/>
                             <input type="hidden" name="groupid" value="@Model.currentGroup.ID"/>
+                            <input type="hidden" name="groupOwner" value="@Model.currentGroup.groupOwnerID" />
                             <p>@Model.getUserByID(m.userRequestId).displayName</p>
                             <input type="submit" value="Accept this user"/>
                         }
