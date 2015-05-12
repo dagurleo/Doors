@@ -46,7 +46,6 @@ namespace DoorsSocialWeb.Repositories
             db.SaveChanges();
             
         }
-
         public void addUserToGroup(string userId, int groupId)
         {
             relGroup relationship = new relGroup { memberID = userId, groupID = groupId };
@@ -119,24 +118,20 @@ namespace DoorsSocialWeb.Repositories
             return requests;
         }
 
-        public void sendGroupRequest(string requestUserId, int groupId, string groupOwner)
+        public void sendGroupRequest(string userID, int groupID)
         {
-            groupRequest groupReq = new groupRequest { groupID = groupId, groupOwnerId = groupOwner, userIsApproved = false, userRequestId = requestUserId };
-            db.groupRequests.Add(groupReq);
+            string owner = getGroupById(groupID).groupOwnerID;
+            groupRequest groupRequest = new groupRequest { groupID = groupID, userRequestId = userID, groupOwnerId = owner, userIsApproved = false};
+            db.groupRequests.Add(groupRequest);
             db.SaveChanges();
         }
 
-        public void approveGroupRequest(groupRequest groupReq)
+        public void approveGroupRequest(string currentUserID, int groupIdInt)
         {
             groupRequest request = (from r in db.groupRequests
-                                    where r.userRequestId == groupReq.userRequestId &&
-                                    r.groupID == groupReq.groupID
+                                    where r.userRequestId == currentUserID
                                     select r).SingleOrDefault();
-
-            request.groupID = groupReq.groupID;
-            request.groupOwnerId = groupReq.groupOwnerId;
-            request.userRequestId = groupReq.userRequestId;
-            request.userIsApproved = groupReq.userIsApproved;
+            request.userIsApproved = true;
             db.SaveChanges();
         }
     }

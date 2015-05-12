@@ -239,30 +239,30 @@ namespace DoorsSocialWeb.Controllers
         [HttpPost]
         public ActionResult requestToJoinGroup(FormCollection collection)
         {
-            string requestUserId = collection["userid"];
+            string currentUserId = collection["userid"];
             string groupId = collection["groupid"];
-            string groupOwner = collection["groupOwner"];
+
             var groupIdInt = Int32.Parse(groupId);
 
-            groupService.sendGroupRequest(requestUserId, groupIdInt, groupOwner);
+            groupService.sendGroupRequest(currentUserId, groupIdInt);
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
 
         public ActionResult ownerOfGroupAcceptsUsers()
         {
-            return View();
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
 
-        [HttpPost]
-        public ActionResult ownerOfGroupAcceptsUsers(FormCollection collection)
+        [HttpPost] ActionResult ownerOfGroupAcceptsUsers(FormCollection collection)
         {
             string requestUserId = collection["userid"];
             string groupIDstring = collection["groupid"];
             string groupOwner = collection["groupOwner"];
             var groupIdInt = Int32.Parse(groupIDstring);
-            groupRequest groupReq = new groupRequest { groupID = groupIdInt, groupOwnerId = groupOwner, userIsApproved = true, userRequestId = requestUserId};
+            groupRequest groupReq = new groupRequest();
+
             groupService.approveGroupRequest(groupReq);
-            groupService.addUserToGroup(requestUserId, groupIdInt);
+            groupService.addUserToGroup(groupReq);
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
         
