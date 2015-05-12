@@ -40,8 +40,7 @@
             <div class="searchContainer">
                 @using (Html.BeginForm("Search", "LoggedIn", FormMethod.Post, new { role = "search" }))
                 {
-                <input type="text" name="searchTerm" />
-                <input type="submit" value="Search" id="searchSumbit" />
+                <input type="text" name="searchTerm"/>
                 }  
             </div>          
                 @Html.ActionLink("Sign Out","Logoff","LoggedIn",null,new { @class = "logout" } )
@@ -96,26 +95,30 @@
             <div class="friendLabel"><h4>Friends</h4></div>
             <div class="friendCount"><h4>@Model.friends.Count()</h4></div>
         </div>
-        <ul class="friendList">
+        <div class="friendList">
             @if (Model.friends.Count() == 0)
             {
                 <p>You dont have any friends.</p>
             }
             @foreach (var m in Model.friends)
             {
-                <li>
-                @if(m.displayImageUrl != null)
-                {
-                     <img src="@m.displayImageUrl" height="25" width="25">
-                }
-                else
-                {
-                     <img src="http://fc07.deviantart.net/fs71/f/2012/357/7/7/profile_picture_by_ospider-d5ovoc2.jpg" height="25" width="25">
-                }
-            @Html.ActionLink(m.displayName, "Profile", "LoggedIn", new { id = m.Id }, new { @class = "aFriend" })
-                </li>
+                <a href="@Url.Action("Profile", "LoggedIn", new { id = m.Id })">
+                    <div class="perFriend">
+
+                        @if (m.displayImageUrl != null)
+                        {
+                            <img src="@m.displayImageUrl" height="25" width="25">
+                        }
+                        else
+                        {
+                            <img src="http://fc07.deviantart.net/fs71/f/2012/357/7/7/profile_picture_by_ospider-d5ovoc2.jpg" height="25" width="25">
+                        }
+                        <p class="aFriend">@m.displayName</p>
+
+                    </div>
+                </a>
             }
-        </ul>
+        </div>
     </div>
     <div class="sharedContainer">
         @RenderBody()
