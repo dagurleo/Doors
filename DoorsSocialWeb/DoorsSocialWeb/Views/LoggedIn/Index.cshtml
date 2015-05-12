@@ -1,6 +1,6 @@
 ﻿@model DoorsSocialWeb.Models.ViewModels.IndexViewModel
 @{
-    
+
 }
 
 <!DOCTYPE html>
@@ -12,7 +12,7 @@
 
 </head>
 <body>
-    
+
     @using (Html.BeginForm("Post", "LoggedIn", FormMethod.Post))
     {
         <input type="hidden" name="userid" value="@Model.currentUser.Id" />
@@ -22,89 +22,94 @@
             <input type="submit" value="POST" />
         </div>
     }
-     
-        @if (Model.posts != null)
+
+    @if (Model.posts != null)
+    {
+        if (Model.posts.Count() == 0)
         {
-            if (Model.posts.Count() == 0)
-            {
-                <p>No Posts to show</p>
-            }
-            foreach (var m in Model.posts)
-            {
-                <div class="postContainer">
-                    <div class="postDate">
-                        <p style="font-weight: bold">@m.dateCreated</p>
-                    </div>
-                    <div class="postImage">
-                        <a href="@Url.Action("Profile", "LoggedIn", new { id = m.authorID })">
-                            <img src="@Model.getAuthor(m.authorID).displayImageUrl" alt="Profile pic" />
-                        </a>
-                    </div>
-                        <h1>@Model.getAuthor(m.authorID).displayName</h1>
-                    <div class="postText">
-                        <p>@m.subject</p>
-                    </div>
-                    <div class="postLikes">
-                        <p id="likeCount">@Model.getUsersWhoLikesPost(m.ID).Count()</p>
-                    </div>
-                    <div class="likebutton">
-                        @if (Model.hasCurrentUserLikedPost(m.ID) == false)
-                        {
+            <p>No Posts to show</p>
+        }
+        foreach (var m in Model.posts)
+        {
+            <div class="postContainer">
+                <div class="postDate">
+                    <p style="font-weight: bold">@m.dateCreated</p>
+                </div>
+                <div class="postImage">
+                    <a href="@Url.Action("Profile", "LoggedIn", new { id = m.authorID })">
+                        <img src="@Model.getAuthor(m.authorID).displayImageUrl" alt="Profile pic" />
+                    </a>
+                </div>
+                <h1>@Model.getAuthor(m.authorID).displayName</h1>
+                <div class="postText">
+                    <p>@m.subject</p>
+                </div>
+                <div class="postLikes">
+                    <p id="likeCount">@Model.getUsersWhoLikesPost(m.ID).Count()</p>
+                </div>
+                <div class="likebutton">
+                    @if (Model.hasCurrentUserLikedPost(m.ID) == false)
+                    {
 
-                            using (Html.BeginForm("addLikeToPost", "LoggedIn", FormMethod.Post, new { id="likeForm" }))
-                            {
-                                <input type="hidden" name="userid" value="@Model.currentUser.Id" id="userId" />
-                                <input type="hidden" name="postid" value="@m.ID" id="postId"/>
-                                <input type="submit" value="Like" />
-                            }
-                        }
-                        else
+                        using (Html.BeginForm("addLikeToPost", "LoggedIn", FormMethod.Post, new { id = "likeForm" }))
                         {
-                            using (Html.BeginForm("RemoveLikeFromPost", "LoggedIn", FormMethod.Post))
-                            {
-                                <input type="hidden" name="userid" value="@Model.currentUser.Id" />
-                                <input type="hidden" name="postid" value="@m.ID" />
-                                <input type="submit" value="Unlike" />
-                            }
+                            <input type="hidden" name="userid" value="@Model.currentUser.Id" id="userId" />
+                            <input type="hidden" name="postid" value="@m.ID" id="postId" />
+                            <input type="submit" value="Like" />
                         }
-                    </div>
+                    }
+                    else
+                    {
+                        using (Html.BeginForm("RemoveLikeFromPost", "LoggedIn", FormMethod.Post))
+                        {
+                            <input type="hidden" name="userid" value="@Model.currentUser.Id" />
+                            <input type="hidden" name="postid" value="@m.ID" />
+                            <input type="submit" value="Unlike" />
+                        }
+                    }
+                </div>
 
-                    <div class="postComments">
-
-                        @if (Model.getCommentsForPost(m.ID).Count() == 0)
+                <div class="postComments">
+                    @if (Model.getCommentsForPost(m.ID).Count() == 0)
+                    {
+                        <p>HEYNOCOMMENTSYOUCUNT</p>
+                    }
+                    else
+                    {
+                        foreach (var c in Model.getCommentsForPost(m.ID))
                         {
-                            <p>HEYNOCOMMENTSYOUCUNT</p>
-                        }
-                        else
-                        {
-                            foreach (var c in Model.getCommentsForPost(m.ID))
-                            {
-                                <div class="postCommentAuthor">
-                                    <h3>@Model.getAuthor(c.authorID).displayName</h3>
+                            <div class="commentContainer">
+                                <div class="commentDate">
+                                    <p style="font-weight: bold">@m.dateCreated</p>
                                 </div>
-                                <div class="postCommentDateTime">
-                                    <p>@c.dateCreated</p>
+                                <div class="commentImage">
+                                    <a href="@Url.Action("Profile", "LoggedIn", new { id = c.authorID })">
+                                        <img src="@Model.getAuthor(c.authorID).displayImageUrl" alt="Profile pic" />
+                                    </a>
                                 </div>
-                                <div class="postCommentSubject">
+                                <h2>@Model.getAuthor(c.authorID).displayName</h2>
+                                <div class="postText">
                                     <p>@c.subject</p>
                                 </div>
-                            }
+                            </div>
                         }
-                    </div>
-                    @using (Html.BeginForm("addCommentToPost", "LoggedIn", FormMethod.Post))
-                    {
-                        <input type="hidden" name="userid" value="@Model.currentUser.Id" />
-                        <input type="hidden" name="postid" value="@m.ID" />
-                        <div class="commentOnPost">
-                            <textarea name="subject" placeholder="Share your comment with your friends!"></textarea>
-                            <input type="submit" value="POST" />
-                        </div>
                     }
-
-                    
-                    
                 </div>
-            }
+                @using (Html.BeginForm("addCommentToPost", "LoggedIn", FormMethod.Post))
+                {
+
+                    <input type="hidden" name="userid" value="@Model.currentUser.Id" />
+                    <input type="hidden" name="postid" value="@m.ID" />
+                    <div class="commentOnPost">
+                        <textarea name="subject" placeholder="Share your comment with your friends!"></textarea>
+                        <input type="submit" value="POST" />
+                    </div>
+                }
+
+
+
+            </div>
         }
+    }
 </body>
 </html>
