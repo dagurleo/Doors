@@ -186,17 +186,32 @@ namespace DoorsSocialWeb.Controllers
             return RedirectToAction("Index", "LoggedIn");
         }
 
-        public ActionResult addFriend()
+        public ActionResult requestFriendship()
         {
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
 
         [HttpPost]
-        public ActionResult addFriend(FormCollection collection)
+        public ActionResult requestFriendship(FormCollection collection)
         {
             string currentUserId = collection["userid"];
             string friendUserId = collection["friendid"];
+            userService.requestFriend(currentUserId, friendUserId);
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+        }
 
+        public ActionResult userApprovesFriendRequests()
+        {
+            return View();
+        }
+        
+        [HttpPost]
+        public ActionResult userApprovesFriendRequests(FormCollection collection)
+        {
+            string currentUserId = collection["userid"];
+            string friendUserId = collection["friendid"];
+            friendRequest frReq = new friendRequest { userID = currentUserId, userRequestID = friendUserId, userIsApproved = true };
+            userService.approveUser(frReq);
             userService.addRelations(currentUserId, friendUserId);
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }

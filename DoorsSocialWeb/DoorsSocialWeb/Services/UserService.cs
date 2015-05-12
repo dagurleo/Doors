@@ -36,6 +36,21 @@ namespace DoorsSocialWeb.Services
             return userRepo.getUserByID(id);
         }
 
+        public void requestFriend(string currentUserId, string friendUserId)
+        {
+            userRepo.requestFriend(currentUserId, friendUserId);
+        }
+
+        public IEnumerable<friendRequest> getFriendRequests(string userID)
+        {
+            return userRepo.getFriendRequests(userID);
+        }
+
+        public void approveUser(friendRequest frReq)
+        {
+            userRepo.approveUser(frReq);
+        }
+
         public void addRelations(string id1, string id2)
         {
             userRepo.addRelations(id1, id2);
