@@ -13,7 +13,7 @@
 <body>      
     <div id="editProfile" class="modalDialog">
         <div>
-            @using (Html.BeginForm("EditProfile", "LoggedIn", FormMethod.Post, new { role = "form" }))
+            @using (Html.BeginForm("EditProfile", "LoggedIn", FormMethod.Post))
             {
                 <a href="#close" title="Close" class="close">X</a>
                 <h1>EditProfile</h1>

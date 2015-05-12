@@ -13,7 +13,7 @@ namespace DoorsSocialWeb.Services
         private PostRepository postRepo = new PostRepository();
 
         
-        public IEnumerable<Post> getPostByID(int postID)
+        public Post getPostByID(int postID)
         {
             return postRepo.getPostByID(postID);
         }

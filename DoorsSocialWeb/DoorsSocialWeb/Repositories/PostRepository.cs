@@ -15,11 +15,11 @@ namespace DoorsSocialWeb.Repositories
         /*
          * Return a post with that ID
          */
-        public IEnumerable<Post> getPostByID(int postID)
+        public Post getPostByID(int postID)
         {
             var queryAllPostsMadeByPostID = (from post in db.Posts
                                              where post.ID == postID
-                                             select post);
+                                             select post).Single();
             return queryAllPostsMadeByPostID;
         }
 

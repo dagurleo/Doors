@@ -46,6 +46,11 @@ namespace DoorsSocialWeb.Services
             userRepo.editUserProfile(userUpdate);
         }
 
+        public IEnumerable<ApplicationUser> searchUsersByName(string searchTerm)
+        {
+            return userRepo.searchUsersByName(searchTerm);
+        }
+
   
     }
 }

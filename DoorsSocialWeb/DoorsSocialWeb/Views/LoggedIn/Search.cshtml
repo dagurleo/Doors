@@ -1,0 +1,23 @@
+﻿@model DoorsSocialWeb.Models.ViewModels.SearchViewModel
+@{
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <ul>
+            @foreach (var i in Model.usersSearched)
+            {
+                <li>@i.displayName</li>
+            }
+        </ul>
+    </div>
+</body>
+</html>

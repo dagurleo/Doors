@@ -9,6 +9,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title></title>
+
 </head>
 <body>
     
@@ -44,7 +45,7 @@
                         <p>@m.subject</p>
                     </div>
                     <div class="postLikes">
-                        <p>@Model.getUsersWhoLikesPost(m.ID).Count()</p>
+                        <p id="likeCount">@Model.getUsersWhoLikesPost(m.ID).Count()</p>
                     </div>
                     <div class="likebutton">
                         @if (Model.hasCurrentUserLikedPost(m.ID) == false)
@@ -52,8 +53,8 @@
 
                             using (Html.BeginForm("addLikeToPost", "LoggedIn", FormMethod.Post, new { id="likeForm" }))
                             {
-                                <input type="hidden" name="userid" value="@Model.currentUser.Id" />
-                                <input type="hidden" name="postid" value="@m.ID" />
+                                <input type="hidden" name="userid" value="@Model.currentUser.Id" id="userId" />
+                                <input type="hidden" name="postid" value="@m.ID" id="postId"/>
                                 <input type="submit" value="Like" />
                             }
                         }

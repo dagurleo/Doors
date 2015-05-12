@@ -102,5 +102,13 @@ namespace DoorsSocialWeb.Repositories
             user.displayPhoneNumber = thisUser.displayPhoneNumber;
             db.SaveChanges();
         }
+
+        public IEnumerable<ApplicationUser> searchUsersByName(string searchTerm)
+        {
+            var users = from u in db.Users
+                        where u.displayName.Contains(searchTerm)
+                        select u;
+            return users;
+        }
     }
 }

@@ -12,6 +12,7 @@
     <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
     <title></title>
     @Styles.Render("~/Content/css")
+    @Scripts.Render("~/Scripts/ajax.js")
     <script src="~/Scripts/Script.js"></script>
 </head>
 <body>
@@ -34,9 +35,18 @@
             <a href='@Url.Action("Index", "LoggedIn")'>
                 <img src="http://www.ads.menn.is/logo.png" height="35">
             </a>
-            </div>            
-                @Html.ActionLink("Sign Out","Logoff","LoggedIn",null,new { @class = "logout" } )
+           
             </div>
+            <div class="searchContainer">
+                @using (Html.BeginForm("Search", "LoggedIn", FormMethod.Post, new { role = "search" }))
+                {
+                <input type="text" name="searchTerm" />
+                <input type="submit" value="Search" id="searchSumbit" />
+                }  
+            </div>          
+                @Html.ActionLink("Sign Out","Logoff","LoggedIn",null,new { @class = "logout" } )
+    </div>
+    
 
     <div class="leftPanel">
         <div id="groupHeader">
@@ -110,5 +120,8 @@
     <div class="sharedContainer">
         @RenderBody()
     </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/ajax.js")
+    @RenderSection("scripts", required: false)
 </body>
 </html>
