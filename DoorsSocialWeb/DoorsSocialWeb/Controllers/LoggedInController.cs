@@ -214,6 +214,24 @@ namespace DoorsSocialWeb.Controllers
             return View(shared);
 
         }
+
+
+        public ActionResult requestToJoinGroup()
+        {
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+        }
+
+        [HttpPost]
+        public ActionResult requestToJoinGroup(FormCollection collection)
+        {
+            string currentUserId = collection["userid"];
+            string groupId = collection["groupid"];
+
+            var groupIdInt = Int32.Parse(groupId);
+
+            groupService.sendGroupRequest(currentUserId, groupIdInt);
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+        }
         
         public ActionResult Logoff()
         {

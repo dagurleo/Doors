@@ -24,6 +24,15 @@ namespace DoorsSocialWeb.Models.ViewModels
             return false;
         }
 
-
+        /*
+        public bool userIsPendingMember(string userID)
+        {
+            if(groupService.getGroupRequests(currentGroup.ID).Contains(userService.getUserById(userID)))
+            {
+                return true;
+            }
+            return false;
+        }
+        */
     }
 }

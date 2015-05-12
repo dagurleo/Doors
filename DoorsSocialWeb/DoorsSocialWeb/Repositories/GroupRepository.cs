@@ -106,13 +106,33 @@ namespace DoorsSocialWeb.Repositories
 
         }
 
-
         public IEnumerable<Group> searchGroupsByName(string searchTerm)
         {
             var groups = from g in db.Groups
                          where g.groupName.Contains(searchTerm)
                          select g;
             return groups;
+        }
+
+        /*
+        public IEnumerable<ApplicationUser> getGroupRequests(int groupID)
+        {
+            UserRepository userRepo = new UserRepository();
+            var requests = from g in db.Groups
+                           where g.ID == groupID
+                           join r in db.groupRequests
+                           on g.ID equals r.groupID
+                           select userRepo.getUserByID(r.userRequestId);
+
+            return requests;
+        }
+        */
+        public void sendGroupRequest(string userID, int groupID)
+        {
+            string owner = getGroupById(groupID).groupOwnerID;
+            groupRequest groupRequest = new groupRequest { groupID = groupID, userRequestId = userID, groupOwnerId = owner, userIsApproved = false};
+            db.groupRequests.Add(groupRequest);
+            db.SaveChanges();
         }
     }
 }

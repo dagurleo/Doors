@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using DoorsSocialWeb.Repositories;
+using DoorsSocialWeb.Models;
 using DoorsSocialWeb.Models.EntityModels;
 
 namespace DoorsSocialWeb.Services
@@ -46,5 +47,17 @@ namespace DoorsSocialWeb.Services
         {
             return groupRepo.searchGroupsByName(searchTerm);
         }       
+
+        /*
+        public IEnumerable<ApplicationUser> getGroupRequests(int groupID)
+        {
+            return groupRepo.getGroupRequests(groupID);
+        }
+        */
+        public void sendGroupRequest(string userID, int groupID)
+        {
+            groupRepo.sendGroupRequest(userID, groupID);
+        }
+
     }
 }

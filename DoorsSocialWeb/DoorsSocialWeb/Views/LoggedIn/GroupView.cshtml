@@ -20,10 +20,20 @@
     </div>
 
     <div>
-        @if (Model.userIsMember(Model.currentUser()))
+        @if ((!(Model.userIsMember(Model.currentUser.Id)) && Model.currentUser.Id != Model.currentGroup.groupOwnerID))
         {
-            
+                using (Html.BeginForm("requestToJoinGroup", "LoggedIn", FormMethod.Post))
+                {
+                    <input type="hidden" name="userid" value="@Model.currentUser.Id" />
+                    <input type="hidden" name="groupid" value="@Model.currentGroup.ID" />
+                    <input type="submit" value="requestToJoinGroup" />
+                }
         }
+        @if(Model.currentGroup.groupOwnerID == Model.currentGroup.groupOwnerID)
+        {
+            <!--ACCEPT USERS-->
+        }
+
     </div>
 
 
