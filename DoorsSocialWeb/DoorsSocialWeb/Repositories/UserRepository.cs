@@ -35,7 +35,7 @@ namespace DoorsSocialWeb.Repositories
         {
             ApplicationUser friend = (from user in db.Users
                                       where user.Id == userID
-                                      select user).Single();
+                                      select user).SingleOrDefault();
             return friend;
         }
 

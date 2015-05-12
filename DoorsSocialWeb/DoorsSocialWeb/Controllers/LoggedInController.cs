@@ -232,6 +232,22 @@ namespace DoorsSocialWeb.Controllers
             groupService.sendGroupRequest(currentUserId, groupIdInt);
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
+
+        public ActionResult ownerOfGroupAcceptsUsers()
+        {
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+        }
+
+        [HttpPost] ActionResult ownerOfGroupAcceptsUsers(FormCollection collection)
+        {
+            string currentUserID = collection["userid"];
+            string groupIDstring = collection["groupid"];
+
+            var groupIdInt = Int32.Parse(groupIDstring);
+            groupService.approveGroupRequest(currentUserID, groupIdInt);
+            groupService.addUserToGroup(currentUserID, groupIdInt);
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+        }
         
         public ActionResult Logoff()
         {

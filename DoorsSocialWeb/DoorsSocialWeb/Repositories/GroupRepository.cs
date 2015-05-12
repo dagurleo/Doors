@@ -75,14 +75,6 @@ namespace DoorsSocialWeb.Repositories
             return;
         }
 
-        //Topics
-
-        //public IEnumerable<Post> getPostsByTopicID(int topicID)
-       // {
-         //   IEnumerable<Post> bla = new IEnumerable<Post>();
-        //    return bla;
-      //  }
-
         public void addTopic(Topic topic)
         {
             db.Topics.Add(topic);
@@ -96,6 +88,7 @@ namespace DoorsSocialWeb.Repositories
                            select t).Single();
             return topic;
         }
+
         public void deleteTopic(int topicId)
         {
             db.Topics.Remove(getTopicById(topicId));
@@ -114,24 +107,31 @@ namespace DoorsSocialWeb.Repositories
             return groups;
         }
 
-        /*
-        public IEnumerable<ApplicationUser> getGroupRequests(int groupID)
+        public IEnumerable<groupRequest> getGroupRequests(int groupID)
         {
-            UserRepository userRepo = new UserRepository();
             var requests = from g in db.Groups
                            where g.ID == groupID
                            join r in db.groupRequests
                            on g.ID equals r.groupID
-                           select userRepo.getUserByID(r.userRequestId);
+                           select r;
 
             return requests;
         }
-        */
+
         public void sendGroupRequest(string userID, int groupID)
         {
             string owner = getGroupById(groupID).groupOwnerID;
             groupRequest groupRequest = new groupRequest { groupID = groupID, userRequestId = userID, groupOwnerId = owner, userIsApproved = false};
             db.groupRequests.Add(groupRequest);
+            db.SaveChanges();
+        }
+
+        public void approveGroupRequest(string currentUserID, int groupIdInt)
+        {
+            groupRequest request = (from r in db.groupRequests
+                          where r.userRequestId == currentUserID
+                          select r).SingleOrDefault();
+            request.userIsApproved = true;
             db.SaveChanges();
         }
     }

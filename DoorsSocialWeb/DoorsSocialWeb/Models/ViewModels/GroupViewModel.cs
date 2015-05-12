@@ -24,15 +24,28 @@ namespace DoorsSocialWeb.Models.ViewModels
             return false;
         }
 
-        /*
+
         public bool userIsPendingMember(string userID)
         {
-            if(groupService.getGroupRequests(currentGroup.ID).Contains(userService.getUserById(userID)))
+            foreach(var r in pendingRequests(currentGroup.ID))
             {
-                return true;
+                if(r.userRequestId == userID)
+                {
+                    return true;
+                }
             }
             return false;
         }
-        */
+
+        public IEnumerable<groupRequest> pendingRequests(int groupID)
+        {
+            return groupService.getGroupRequests(groupID);
+        }
+
+        public ApplicationUser getUserByID(string userID)
+        {
+            return userService.getUserById(userID);
+        }
+        
     }
 }

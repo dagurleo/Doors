@@ -26,14 +26,29 @@
                 {
                     <input type="hidden" name="userid" value="@Model.currentUser.Id" />
                     <input type="hidden" name="groupid" value="@Model.currentGroup.ID" />
-                    <input type="submit" value="requestToJoinGroup" />
+                    <input type="submit" value="Click me to request to join this group" />
                 }
         }
-        @if(Model.currentGroup.groupOwnerID == Model.currentGroup.groupOwnerID)
+        @if(Model.currentGroup.groupOwnerID == Model.currentUser.Id)
         {
             <!--ACCEPT USERS-->
+            <!-- Búa til fall sem sækir öll request's-->
+            <!-- og birtir þau hér, með html form sem hann getur samþykkt og þá vistast sá notandi í gagnagrunnin-->
+            if (Model.pendingRequests(Model.currentGroup.ID) != null)
+            {
+                <!--Foreach skilar mér requestuserIds sem ég get acceptað sem ég converta í userdisplayname-->
+                foreach(var m in Model.pendingRequests(Model.currentGroup.ID))
+                {
+                    using (Html.BeginForm("ownerOfGroupAcceptsUsers", "LoggedIn", FormMethod.Post))
+                    {
+                        <input type="hidden" name="userid" value=m/>
+                        <input type="hidden" name="groupid" value="@Model.currentGroup.ID"/>
+                        <p>@Model.getUserByID(m.userRequestId).displayName</p>
+                        <input type="submit" value="Accept this user"/>
+                    }
+                }
+            }
         }
-
     </div>
 
 

@@ -48,15 +48,20 @@ namespace DoorsSocialWeb.Services
             return groupRepo.searchGroupsByName(searchTerm);
         }       
 
-        /*
-        public IEnumerable<ApplicationUser> getGroupRequests(int groupID)
+
+        public IEnumerable<groupRequest> getGroupRequests(int groupID)
         {
             return groupRepo.getGroupRequests(groupID);
         }
-        */
+
         public void sendGroupRequest(string userID, int groupID)
         {
             groupRepo.sendGroupRequest(userID, groupID);
+        }
+
+        public void approveGroupRequest(string currentUserID, int groupIdInt)
+        {
+            groupRepo.approveGroupRequest(currentUserID, groupIdInt);
         }
 
     }
