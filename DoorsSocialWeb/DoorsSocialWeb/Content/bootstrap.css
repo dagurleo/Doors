@@ -7330,7 +7330,7 @@ body h4
 
 }
 
-.friendList li
+.perFriend
 {
 	margin-bottom: 2px;
 	height: 45px;
@@ -7338,6 +7338,11 @@ body h4
 
 	background: #33414e;
 	text-indent: 15px;
+}
+
+.perFriend:hover
+{
+    background: #3d4f5d;
 }
 
 .aFriend
@@ -7351,21 +7356,10 @@ body h4
     color: white;
 }
 
-.aFriend:hover
-{
-    color: white;
-    text-decoration: none;
-}
-
-.friendList li img
+.friendList img
 {
     position: relative;
-    bottom: 5px;
-}
-
-.friendList li:hover
-{
-	background: #3d4f5d;
+    bottom: 15px;
 }
 
 ::-webkit-scrollbar {
