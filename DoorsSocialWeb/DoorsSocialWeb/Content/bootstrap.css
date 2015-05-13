@@ -7154,6 +7154,20 @@ body h4
     padding-left: 10px;
 }
 
+.messages
+{
+    background: url(http://www.ads.menn.is/message.png);
+    background-size: 28px;
+    background-repeat: no-repeat;
+    position: absolute;
+    height: 50px;
+    width: 40px; 
+
+    margin-top: 16px;
+    text-indent: -9999px;
+    right: 105px;
+}
+
 .notification
 {
     background: url(http://www.ads.menn.is/earth.png);
@@ -7170,10 +7184,10 @@ body h4
 
 .notificationContainer
 {
-    height: 400px;
+    height: 500px;
 }
 
-.friendRequests
+.notificationContainer h1:first-child
 {
     text-align: center;
     position: relative;
@@ -7181,12 +7195,54 @@ body h4
     float: left;
 }
 
-.groupRequests
+.notificationContainer h1
 {
     text-align: center;
     position: relative;
     width: 50%;
     float: right;
+}
+
+.friendRequests
+{
+    position: absolute;
+    top: 80px;
+    width: calc(50% - 30px);
+    left: 30px;
+    height: 420px;
+    overflow-y: scroll;
+}
+
+.groupRequests
+{
+    position: absolute;
+    top: 80px;
+    width: calc(50% - 30px);
+    right: 30px;
+}
+
+.request
+{
+    height: 100px;
+    margin: 10px;
+}
+
+.request img
+{    
+    width: 80px;
+    height: 80px;
+    position: absolute;
+}
+
+.request p
+{
+    padding-top: 10px;
+    padding-left: 100px;
+}
+
+.request input[type=submit]
+{
+    margin-left: 100px;
 }
 
 .logout

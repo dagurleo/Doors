@@ -16,6 +16,13 @@
     <script src="~/Scripts/Script.js"></script>
 </head>
 <body>
+    <div id="messageCenter" class="modalDialog">
+        <div>
+            <a href="#close" title="Close" class="close">X</a>
+            <p>SMEGMA MESSAGES</p>
+        </div>
+    </div>
+
     <div id="createGroup" class="modalDialog">
         <div class="notificationPopup">
             @using (Html.BeginForm("CreateGroup", "LoggedIn", FormMethod.Post, new { role = "form" }))
@@ -35,11 +42,31 @@
         <div>
             <a href="#close" title="Close" class="close">X</a>
             <div class="notificationContainer">
+                <h1>Friend Requests</h1>
                 <div class="friendRequests">
-                    <h1>Friend Requests</h1>
+                    @if (Model.getFriendRequests(Model.currentUser.Id) != null)
+                    {
+                        foreach (var m in Model.getFriendRequests(Model.currentUser.Id))
+                        {
+                            if (m.userIsApproved == false)
+                            {
+                                using (Html.BeginForm("userApprovesFriendRequests", "LoggedIn", FormMethod.Post))
+                                {
+                                    <div class="request">
+                                        <input type="hidden" name="userid" value="@Model.currentUser.Id" />
+                                        <input type="hidden" name="friendid" value="@m.userRequestID" />
+                                        <img src="@Model.getAuthor(m.userRequestID).displayImageUrl" />
+                                        <p>@Model.getAuthor(m.userRequestID).displayName has added you!</p>
+                                        <input type="submit" value="Accept" />
+                                    </div>
+                                }
+                            }
+                        }
+                    }
+
                 </div>
+                <h1>Group Requests</h1>
                 <div class="groupRequests">
-                    <h1>Group Requests</h1>
                 </div>
             </div>
         </div>
@@ -58,10 +85,10 @@
                 <input type="text" name="searchTerm" />
             }
         </div>
-
+        <a href="#messageCenter"><div class="messages"></div></a>
         <a href="#notificationCenter"><div class="notification"></div></a>
-        @Html.ActionLink("Sign Out","Logoff","LoggedIn",null,new { @class = "logout" })
-    </div>
+            @Html.ActionLink("Sign Out","Logoff","LoggedIn",null,new { @class = "logout" })
+        </div>
     
 
     <div class="leftPanel">
