@@ -20,9 +20,9 @@
         <div>
             <a href="#close" title="Close" class="close">X</a>
             <p>SMEGMA MESSAGES</p>
-            @if(Model.getFirstMessages(Model.currentUser.Id)!= null)
+            @if(Model.getFirstMessages(@Model.currentUser.Id)!= null)
             {
-                foreach(var m in Model.getFirstMessages(Model.currentUser.Id))
+                foreach (var m in Model.getFirstMessages(@Model.currentUser.Id))
                 {
                     <p>@m.dateCreated</p>
                     if(m.senderID == Model.currentUser.Id)
