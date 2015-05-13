@@ -33,7 +33,9 @@
             <ul>
                 @foreach (var i in Model.groupsSearched)
                 {
-                    <li>@i.groupName</li>
+                    <a href="@Url.Action("GroupView", "LoggedIn", new { id = i.ID })">
+                        <li>@i.groupName</li>
+                    </a>
                 }
             </ul>
         </div>

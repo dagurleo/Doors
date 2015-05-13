@@ -35,12 +35,14 @@
                 <div class="postDate">
                     <p style="font-weight: bold">@m.dateCreated</p>
                 </div>
-                <div class="postImage">
-                    <a href="@Url.Action("Profile", "LoggedIn", new { id = m.authorID })">
+                <a href="@Url.Action("Profile", "LoggedIn", new { id = m.authorID })">
+                    <div class="postImage">
+
                         <img src="@Model.getAuthor(m.authorID).displayImageUrl" alt="Profile pic" />
-                    </a>
-                </div>
-                <h1>@Model.getAuthor(m.authorID).displayName</h1>
+                    </div>
+
+                    <h1>@Model.getAuthor(m.authorID).displayName</h1>
+                </a>
                 <div class="postText">
                     <p>@m.subject</p>
                 </div>
@@ -82,32 +84,30 @@
                                 <div class="commentDate">
                                     <p style="font-weight: bold">@m.dateCreated</p>
                                 </div>
-                                <div class="commentImage">
-                                    <a href="@Url.Action("Profile", "LoggedIn", new { id = c.authorID })">
-                                        <img src="@Model.getAuthor(c.authorID).displayImageUrl" alt="Profile pic" />
-                                    </a>
-                                </div>
-                                <h2>@Model.getAuthor(c.authorID).displayName</h2>
+                                <a href="@Url.Action("Profile", "LoggedIn", new { id = c.authorID })">
+                                    <div class="commentImage">
+                                            <img src="@Model.getAuthor(c.authorID).displayImageUrl" alt="Profile pic" />                                        
+                                    </div>
+                                    <h2>@Model.getAuthor(c.authorID).displayName</h2>
+                                </a>
                                 <div class="postText">
                                     <p>@c.subject</p>
                                 </div>
-                            </div>
+</div>
                         }
                     }
                 </div>
-                @using (Html.BeginForm("addCommentToPost", "LoggedIn", FormMethod.Post))
-                {
-
-                    <input type="hidden" name="userid" value="@Model.currentUser.Id" />
-                    <input type="hidden" name="postid" value="@m.ID" />
-                    <div class="commentOnPost">
-                        <textarea name="subject" placeholder="Share your comment with your friends!"></textarea>
-                        <input type="submit" value="POST" />
-                    </div>
-                }
-
-
-
+                <div class="commentCreator">
+                    @using (Html.BeginForm("addCommentToPost", "LoggedIn", FormMethod.Post))
+                    {
+                        <input type="hidden" name="userid" value="@Model.currentUser.Id" />
+                        <input type="hidden" name="postid" value="@m.ID" />
+                        <div class="createComment">
+                            <textarea name="subject" placeholder="Share your thoughts with your friends!"></textarea>
+                            <input type="submit" value="COMMENT" />
+                        </div>
+                    }
+                </div>
             </div>
         }
     }

@@ -6991,7 +6991,6 @@ td.visible-print {
 
 }
 
-
 nav a {
 	position: relative;
 	display: inline-block;
@@ -7139,6 +7138,36 @@ body h4
 	background: #33414e;
 }
 
+.header input[type=text]
+{
+    margin-left: 10px;
+    margin-top: 15px;
+    width: calc((100vw - 400px) / 3);
+    height: 30px;
+
+    border: none;
+    font-size: 16px;
+}
+
+.header input[type=text]:focus
+{
+    padding-left: 10px;
+}
+
+.notification
+{
+    background: url(http://www.ads.menn.is/earth.png);
+    background-size: 23px;
+    background-repeat: no-repeat;
+    position: absolute;
+    height: 40px;
+    width: 40px; 
+
+    margin-top: 17px;
+    text-indent: -9999px;
+    right: 55px;
+}
+
 .logout
 {
     background: url(https://yemekhane.anadolu.edu.tr/resources/images/logout.png);
@@ -7151,7 +7180,6 @@ body h4
     margin-top: 12px;
     text-indent: -9999px;
     right: 10px;
-
 }
 
 .loginLogo
@@ -7374,6 +7402,7 @@ body h4
     width: 100%;
     background-color: #dedede;
     min-height: 120px;
+    padding-bottom: 10px;
 }
 
 .postContainer img
@@ -7568,6 +7597,38 @@ body h4
     margin: 20px 0 0 -5px;
     height: 100px;
     width: 50px;
+    
+    background: #33414e;
+    border-style: none;
+
+    color: white;
+    
+}
+
+.createComment
+{
+    margin: 20px 0 10px 10px;
+    height: 90px;
+    position: relative;
+    background-color: #999;
+    width: calc((100vw - 400px) / 3 * 2);
+}
+
+.createComment textarea
+{
+    margin: 20px 0 20px 20px;
+    padding-bottom: 10px;
+    resize: none;
+    width: calc(((100vw - 400px) / 3 * 2 ) - 125px);
+    height: 50px;
+    border-style: none;
+}
+
+.createComment input[type=submit]
+{
+    margin: 20px 0 0 -5px;
+    height: 50px;
+    width: 85px;
     
     background: #33414e;
     border-style: none;
