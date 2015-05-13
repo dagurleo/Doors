@@ -16,6 +16,8 @@ using DoorsSocialWeb.Services;
 using DoorsSocialWeb.Models.EntityModels;
 using DoorsSocialWeb.Models.ViewModels;
 using DoorsSocialWeb.Services;
+using System.Net;
+using System.IO;
 namespace DoorsSocialWeb.Controllers
 {
     [Authorize]
@@ -295,8 +297,41 @@ namespace DoorsSocialWeb.Controllers
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
 
+        [HttpPost]
+        public ActionResult Profile(HttpPostedFileBase file)
+        {
 
-     
+            if (file.ContentLength > 0)
+            {
+                string imageID = userService.getCurrentUser().Id;
+                UploadToFtp(file, imageID);
+            }
+
+            return RedirectToAction("Profile");
+        }
+
+        void UploadToFtp(HttpPostedFileBase uploadfile, string imageID)
+        {
+            var uploadurl = "ftp://ads.menn.is/public_html/doors/images";
+            var uploadfilename = uploadfile.FileName;
+            var username = "ads.menn.is";
+            var password = "5zXvxNtyTRDvp3uE";
+            Stream streamObj = uploadfile.InputStream;
+            byte[] buffer = new byte[uploadfile.ContentLength];
+            streamObj.Read(buffer, 0, buffer.Length);
+            streamObj.Close();
+            streamObj = null;
+            string ftpurl = String.Format("{0}/{1}", uploadurl, imageID);
+            var requestObj = FtpWebRequest.Create(ftpurl) as FtpWebRequest;
+            requestObj.Method = WebRequestMethods.Ftp.UploadFile;
+            requestObj.Credentials = new NetworkCredential(username, password);
+            Stream requestStream = requestObj.GetRequestStream();
+            requestStream.Write(buffer, 0, buffer.Length);
+            requestStream.Flush();
+            requestStream.Close();
+            requestObj = null;
+        }
+
         public ActionResult Logoff()
         {
             FormsAuthentication.SignOut();
