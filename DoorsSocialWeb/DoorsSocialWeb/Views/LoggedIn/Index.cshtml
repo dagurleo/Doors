@@ -32,7 +32,6 @@
         foreach (var m in Model.posts)
         {
             <div class="postContainer">
-                <a href="@Url.Action("DeletePost", "LoggedIn", new {postId = m.ID})">Remove Post</a>
                 <div class="postDate">
                     <p style="font-weight: bold">@m.dateCreated</p>
                 </div>
@@ -58,7 +57,7 @@
                         {
                             <input type="hidden" name="userid" value="@Model.currentUser.Id" id="userId" />
                             <input type="hidden" name="postid" value="@m.ID" id="postId" />
-                            <input type="submit" value="Like" />
+                            <input type="image" src="http://icons.iconarchive.com/icons/custom-icon-design/mono-business-2/128/thumbs-up-icon.png" width="30px" height="30px" alt="submit">
                         }
                     }
                     else
@@ -67,37 +66,38 @@
                         {
                             <input type="hidden" name="userid" value="@Model.currentUser.Id" />
                             <input type="hidden" name="postid" value="@m.ID" />
-                            <input type="submit" value="Unlike" />
+                            <input type="image" src="http://icons.iconarchive.com/icons/custom-icon-design/mono-business-2/32/thumbs-down-icon.png" width="30px" height="30px" alt="submit">
                         }
                     }
                 </div>
-
+                @if(m.authorID == Model.currentUser.Id)
+                {
+                    <a href="@Url.Action("DeletePost", "LoggedIn", new {postId = m.ID})">Remove Post</a>
+                }
+                
                 <div class="postComments">
-                    @if (Model.getCommentsForPost(m.ID).Count() == 0)
+                    @foreach (var c in Model.getCommentsForPost(m.ID))
                     {
-                        <p>HEYNOCOMMENTSYOUCUNT</p>
-                    }
-                    else
-                    {
-                        foreach (var c in Model.getCommentsForPost(m.ID))
-                        {
-                            <a href="@Url.Action("removeCommentFromPost", "LoggedIn", new { commentId = c.ID })">Remove Comment</a>
-                            <div class="commentContainer">
-                                <div class="commentDate">
-                                    <p style="font-weight: bold">@c.dateCreated</p>
+                        <div class="commentContainer">
+                            <div class="commentDate">
+                                <p style="font-weight: bold">@c.dateCreated</p>
+                            </div>
+                            <a href="@Url.Action("Profile", "LoggedIn", new { id = c.authorID })">
+                                <div class="commentImage">
+                                        <img src="@Model.getAuthor(c.authorID).displayImageUrl" alt="Profile pic" />                                        
                                 </div>
-                                <a href="@Url.Action("Profile", "LoggedIn", new { id = c.authorID })">
-                                    <div class="commentImage">
-                                            <img src="@Model.getAuthor(c.authorID).displayImageUrl" alt="Profile pic" />                                        
-                                    </div>
-                                    <h2>@Model.getAuthor(c.authorID).displayName</h2>
-                                </a>
-                                <div class="postText">
-                                    <p>@c.subject</p>
-                                </div>
-</div>
-                        }
+                                <h2>@Model.getAuthor(c.authorID).displayName</h2>
+                            </a>
+                            <div class="postText">
+                                <p>@c.subject</p>
+                            </div>
+                            @if(c.authorID == Model.currentUser.Id)
+                            {
+                                <a href="@Url.Action("removeCommentFromPost", "LoggedIn", new { commentId = c.ID })">Remove Comment</a>   
+                            }
+                        </div>
                     }
+                    
                 </div>
                 <div class="commentCreator">
                     @using (Html.BeginForm("addCommentToPost", "LoggedIn", FormMethod.Post))

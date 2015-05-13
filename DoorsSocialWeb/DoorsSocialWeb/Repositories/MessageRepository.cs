@@ -60,7 +60,7 @@ namespace DoorsSocialWeb.Repositories
             var queryFirstMessages = (from message in db.Messages
                                       where message.senderID == userID ||
                                       message.recieverID == userID
-                                          )
+                                      select message);
 
 
             var queryAllMessages = (from message in db.Messages
