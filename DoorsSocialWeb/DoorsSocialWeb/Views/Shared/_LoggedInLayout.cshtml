@@ -30,6 +30,17 @@
             }
         </div>
     </div>
+
+    <div id="notificationCenter" class="modalDialog">
+        <div>
+            <a href="#close" title="Close" class="close">X</a>
+            <h1>Friend requests</h1>
+            <ul>
+                <p>smegma</p>
+            </ul>
+        </div>
+    </div>
+
     <div class="header">
         <div class="loginLogo">
             <a href='@Url.Action("Index", "LoggedIn")'>
@@ -37,13 +48,15 @@
             </a>
            
             </div>
-            <div class="searchContainer">
-                @using (Html.BeginForm("Search", "LoggedIn", FormMethod.Post, new { role = "search" }))
-                {
-                <input type="text" name="searchTerm"/>
-                }  
-            </div>          
-                @Html.ActionLink("Sign Out","Logoff","LoggedIn",null,new { @class = "logout" } )
+        <div>
+            @using (Html.BeginForm("Search", "LoggedIn", FormMethod.Post, new { role = "form" }))
+            {
+                <input type="text" name="searchTerm" />
+            }
+        </div>
+
+        <a href="#notificationCenter"><div class="notification"></div></a>
+        @Html.ActionLink("Sign Out","Logoff","LoggedIn",null,new { @class = "logout" })
     </div>
     
 
@@ -102,7 +115,7 @@
             }
             @foreach (var m in Model.friends)
             {
-                <a href="@Url.Action("Profile", "LoggedIn", new { id = m.Id })">
+                <a href="@Url.Action("Profile", "LoggedIn", new { id = m.Id})">
                     <div class="perFriend">
 
                         @if (m.displayImageUrl != null)
