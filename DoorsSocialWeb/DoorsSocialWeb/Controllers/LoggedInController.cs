@@ -17,7 +17,7 @@ using DoorsSocialWeb.Models.EntityModels;
 using DoorsSocialWeb.Models.ViewModels;
 using DoorsSocialWeb.Services;
 namespace DoorsSocialWeb.Controllers
-{   
+{
     [Authorize]
     public class LoggedInController : Controller
     {
@@ -28,20 +28,20 @@ namespace DoorsSocialWeb.Controllers
         //
         // GET: /LoggedIn/
         public ActionResult Index()
-        {            
-            
+        {
+
             var shared = new IndexViewModel();
-            
-            
+
+
             shared.groups = groupService.getAccessibleGroups();
             shared.currentUser = userService.getCurrentUser();
             shared.friends = userService.getFriendsOfCurrentUser();
-            shared.posts = postService.getPostsByFriends();            
-            return View(shared);            
+            shared.posts = postService.getPostsByFriends();
+            return View(shared);
         }
 
         public ActionResult GroupView(int id)
-        {            
+        {
             var shared = new GroupViewModel();
             shared.groups = groupService.getAccessibleGroups();
             shared.currentUser = userService.getCurrentUser();
@@ -52,7 +52,7 @@ namespace DoorsSocialWeb.Controllers
 
 
         public ActionResult CreateGroup()
-        {            
+        {
             return View();
         }
         [HttpPost]
@@ -63,14 +63,14 @@ namespace DoorsSocialWeb.Controllers
             string groupDescription = collection["groupdescription"];
 
             Group group = new Group { groupOwnerID = groupOwnerId, groupName = groupName, groupDescription = groupDescription };
-            
+
             groupService.addNewGroup(group);
             Group theGroup = groupService.getNewestGroup();
             groupService.addUserToGroup(groupOwnerId, theGroup.ID);
             return RedirectToAction("GroupView", "LoggedIn", new { id = theGroup.ID });
         }
 
-        public  ActionResult EditProfile()
+        public ActionResult EditProfile()
         {
             return View();
         }
@@ -90,19 +90,19 @@ namespace DoorsSocialWeb.Controllers
 
         public ActionResult Profile(string id)
         {
-            
+
             var shared = new ProfileViewModel();
             shared.groups = groupService.getAccessibleGroups();
             shared.currentUser = userService.getCurrentUser();
             shared.friends = userService.getFriendsOfCurrentUser();
             shared.friend = userService.getUserById(id);
 
-            
+
             var postRepo = new PostRepository();
             shared.posts = postRepo.getAllPostByID(id);
             //shared.allUserTextPosts = postRepo.getAllTextPostsByID(id);
             //shared.allUserImagePosts = postRepo.getAllImagePostsByID(id);
-            
+
             return View(shared);
         }
 
@@ -110,7 +110,7 @@ namespace DoorsSocialWeb.Controllers
         {
             return RedirectToAction("Index", "LoggedIn");
         }
-        
+
         [HttpPost]
         public ActionResult Post(FormCollection collection)
         {
@@ -118,10 +118,10 @@ namespace DoorsSocialWeb.Controllers
             string subject = collection["subject"];
             string datetime = collection["datetime"];
 
-            if(subject != "")
+            if (subject != "")
             {
                 Post post = new Post { authorID = userid, subject = subject, dateCreated = DateTime.Now };
-                
+
                 postService.addNewPost(post);
             }
             return RedirectToAction("Index", "LoggedIn");
@@ -141,10 +141,10 @@ namespace DoorsSocialWeb.Controllers
             shared.groups = groupService.getAccessibleGroups();
             shared.currentUser = userService.getCurrentUser();
             shared.friends = userService.getFriendsOfCurrentUser();
-            
+
             string userId = collection["userid"];
             string postIdString = collection["postid"];
-            int postId = Int32.Parse(postIdString);            
+            int postId = Int32.Parse(postIdString);
             likeService.addLikeOnPost(userId, postId);
             var theLike = new Like { authorID = userId, postID = postId, commentID = 0 };
             return Json(theLike, JsonRequestBehavior.AllowGet);
@@ -162,7 +162,7 @@ namespace DoorsSocialWeb.Controllers
             string postIdString = collection["postid"];
             int postId = Int32.Parse(postIdString);
             likeService.removeLikeOnPost(userId, postId);
-            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);            
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
 
         public ActionResult addCommentToPost()
@@ -204,7 +204,7 @@ namespace DoorsSocialWeb.Controllers
         {
             return View();
         }
-        
+
         [HttpPost]
         public ActionResult userApprovesFriendRequests(FormCollection collection)
         {
@@ -234,15 +234,21 @@ namespace DoorsSocialWeb.Controllers
         [HttpPost]
         public ActionResult Search(FormCollection collection)
         {
-            var searchTerm = collection["searchTerm"];           
+            var searchTerm = collection["searchTerm"];
             var shared = new SearchViewModel();
             shared.groups = groupService.getAccessibleGroups();
             shared.currentUser = userService.getCurrentUser();
             shared.friends = userService.getFriendsOfCurrentUser();
             shared.usersSearched = userService.searchUsersByName(searchTerm);
             shared.groupsSearched = groupService.searchGroupsByName(searchTerm);
-            return View(shared);
-
+            if (searchTerm == "")
+            {
+                return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+            }
+            else
+            {
+                return View(shared);
+            }
         }
 
 
@@ -254,38 +260,38 @@ namespace DoorsSocialWeb.Controllers
         [HttpPost]
         public ActionResult requestToJoinGroup(FormCollection collection)
         {
-            string currentUserId = collection["userid"];
+            string requestUserId = collection["userid"];
             string groupId = collection["groupid"];
-
+            string groupOwner = collection["groupOwner"];
             var groupIdInt = Int32.Parse(groupId);
 
-            groupService.sendGroupRequest(currentUserId, groupIdInt);
+            groupService.sendGroupRequest(requestUserId, groupIdInt, groupOwner);
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
 
         public ActionResult ownerOfGroupAcceptsUsers()
         {
-            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+            return View();
         }
 
-        [HttpPost] ActionResult ownerOfGroupAcceptsUsers(FormCollection collection)
+        [HttpPost]
+        public ActionResult ownerOfGroupAcceptsUsers(FormCollection collection)
         {
             string requestUserId = collection["userid"];
             string groupIDstring = collection["groupid"];
             string groupOwner = collection["groupOwner"];
             var groupIdInt = Int32.Parse(groupIDstring);
-            groupRequest groupReq = new groupRequest();
-
+            groupRequest groupReq = new groupRequest { groupID = groupIdInt, groupOwnerId = groupOwner, userIsApproved = true, userRequestId = requestUserId };
             groupService.approveGroupRequest(groupReq);
-            groupService.addUserToGroup(groupReq);
+            groupService.addUserToGroup(requestUserId, groupIdInt);
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
-        
+
         public ActionResult Logoff()
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
-        
-	}
+
+    }
 }
