@@ -42,5 +42,15 @@ namespace DoorsSocialWeb.Repositories
             db.Comments.Add(comment);
             db.SaveChanges();
         }
+
+        public void removeComment(int commentId)
+        {
+            var comment = (from c in db.Comments
+                          where c.ID == commentId
+                          select c).Single();
+
+            db.Comments.Remove(comment);
+            db.SaveChanges();
+        }
     }
 }

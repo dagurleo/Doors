@@ -29,5 +29,10 @@ namespace DoorsSocialWeb.Services
         {
             commentRepo.addNewComment(authorID, postID, subject);
         }
+
+        public void removeComment(int commentId)
+        {
+            commentRepo.removeComment(commentId);
+        }
     }
 }

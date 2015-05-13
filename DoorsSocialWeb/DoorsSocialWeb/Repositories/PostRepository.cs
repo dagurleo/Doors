@@ -174,7 +174,20 @@ namespace DoorsSocialWeb.Repositories
         }
         public void removePost(int postId)
         {
-            db.Posts.Remove(getSinglePostById(postId));
+            var post = (from p in db.Posts
+                        where p.ID == postId
+                        select p).Single();
+
+            var comments = from c in db.Comments
+                           where c.postID == postId
+                           select c;
+
+            foreach(var co in comments)
+            {
+                db.Comments.Remove(co);
+            }
+            db.Posts.Remove(post);
+            db.SaveChanges();
         }
 
         

@@ -32,6 +32,7 @@
         foreach (var m in Model.posts)
         {
             <div class="postContainer">
+                <a href="@Url.Action("DeletePost", "LoggedIn", new {postId = m.ID})">Remove Post</a>
                 <div class="postDate">
                     <p style="font-weight: bold">@m.dateCreated</p>
                 </div>
@@ -80,9 +81,10 @@
                     {
                         foreach (var c in Model.getCommentsForPost(m.ID))
                         {
+                            <a href="@Url.Action("removeCommentFromPost", "LoggedIn", new { commentId = c.ID })">Remove Comment</a>
                             <div class="commentContainer">
                                 <div class="commentDate">
-                                    <p style="font-weight: bold">@m.dateCreated</p>
+                                    <p style="font-weight: bold">@c.dateCreated</p>
                                 </div>
                                 <a href="@Url.Action("Profile", "LoggedIn", new { id = c.authorID })">
                                     <div class="commentImage">
@@ -108,6 +110,8 @@
                         </div>
                     }
                 </div>
+
+              
             </div>
         }
     }

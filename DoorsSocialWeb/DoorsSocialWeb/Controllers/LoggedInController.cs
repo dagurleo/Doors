@@ -25,6 +25,7 @@ namespace DoorsSocialWeb.Controllers
         public GroupService groupService = new GroupService();
         public LikesService likeService = new LikesService();
         public PostService postService = new PostService();
+        public CommentService commentService = new CommentService();
         //
         // GET: /LoggedIn/
         public ActionResult Index()
@@ -128,6 +129,13 @@ namespace DoorsSocialWeb.Controllers
 
         }
 
+        public ActionResult DeletePost(int postId)
+        {
+            postService.removePost(postId);
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+        }
+
+
         /*
         public ActionResult addLikeToPost()
         {
@@ -184,6 +192,12 @@ namespace DoorsSocialWeb.Controllers
                 commentService.addNewComment(userID, postId, subject);
             }
             return RedirectToAction("Index", "LoggedIn");
+        }
+
+        public ActionResult removeCommentFromPost(int commentId)
+        {
+            commentService.removeComment(commentId);
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
 
         public ActionResult requestFriendship()
