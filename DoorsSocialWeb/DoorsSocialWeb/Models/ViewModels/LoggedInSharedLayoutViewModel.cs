@@ -12,6 +12,7 @@ namespace DoorsSocialWeb.Models.ViewModels
     {
         private UserService userService = new UserService();
         private MessageService messageService = new MessageService();
+        private GroupService groupService = new GroupService();
         public ApplicationUser currentUser { get; set; }
         public IEnumerable<Group> groups {get; set; }
         public IEnumerable<ApplicationUser> friends { get; set; }
@@ -20,6 +21,11 @@ namespace DoorsSocialWeb.Models.ViewModels
         public ApplicationUser getAuthor(string id)
         {
             return userService.getUserById(id);
+        }
+
+        public Group getGroupById(int id)
+        {
+            return groupService.getGroupById(id);
         }
 
         public bool userIsFriend(string friendId)
@@ -37,6 +43,11 @@ namespace DoorsSocialWeb.Models.ViewModels
             return userService.getFriendRequests(userID);
         }
 
+        public IEnumerable<groupRequest> getGroupRequestsYouAreOwnerOf()
+        {
+
+            return groupService.getGroupRequestsYouAreOwnerOf(currentUser.Id);
+        }
         public bool userIsPendingFriend(string friendID, string currentUserId)
         {
             //Sækja öll friend request sem VINUR minn á, tékka hvort ég sé á honum.

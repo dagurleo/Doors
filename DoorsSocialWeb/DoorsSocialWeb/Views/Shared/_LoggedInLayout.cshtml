@@ -87,6 +87,23 @@
                 </div>
                 <h1>Group Requests</h1>
                 <div class="groupRequests">
+                  @if(Model.getGroupRequestsYouAreOwnerOf() != null)
+                  {
+                      foreach(var m in Model.getGroupRequestsYouAreOwnerOf())
+                      {
+                          if(m.userIsApproved == false)
+                          {
+                             <div class="request">
+                                 <img src="@Model.getAuthor(m.userRequestId).displayImageUrl" />
+                                 <p>@Model.getAuthor(m.userRequestId).displayName request to join @Model.getGroupById(m.groupID).groupName</p>
+                                 <div class="decision">
+                                     <a href="@Url.Action("userAcceptsGroupRequest", "LoggedIn", new { requestId = m.id })"><input type="submit" value="Accept" class="approveFriend" /></a>
+                                     <a href="@Url.Action("userDeclinesGroupRequest", "LoggedIn", new { requestId = m.id })"><input type="submit" value="Decline" class="declineFriend" /></a>
+                                 </div>
+                             </div>
+                          }
+                      }
+                  }
                 </div>
             </div>
         </div>

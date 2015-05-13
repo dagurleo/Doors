@@ -230,6 +230,18 @@ namespace DoorsSocialWeb.Controllers
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri + "#notificationCenter");
         }
 
+        public ActionResult userAcceptsGroupRequest(int requestId)
+        {
+            groupService.userApprovesGroupRequest(requestId);
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri + "#notificationCenter");
+        }
+
+        public ActionResult userDeclinesGroupRequest(int requestId)
+        {
+            groupService.userDeclinesGroupRequest(requestId);  
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri + "#notificationCenter");
+        }
+
         public ActionResult removeFriend()
         {
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
@@ -283,24 +295,8 @@ namespace DoorsSocialWeb.Controllers
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
 
-        public ActionResult ownerOfGroupAcceptsUsers()
-        {
-            return View();
-        }
 
-        [HttpPost]
-        public ActionResult ownerOfGroupAcceptsUsers(FormCollection collection)
-        {
-            string requestUserId = collection["userid"];
-            string groupIDstring = collection["groupid"];
-            string groupOwner = collection["groupOwner"];
-            var groupIdInt = Int32.Parse(groupIDstring);
-            groupRequest groupReq = new groupRequest { groupID = groupIdInt, groupOwnerId = groupOwner, userIsApproved = true, userRequestId = requestUserId };
-            groupService.approveGroupRequest(groupReq);
-            groupService.addUserToGroup(requestUserId, groupIdInt);
-            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
-        }
-
+     
         public ActionResult Logoff()
         {
             FormsAuthentication.SignOut();

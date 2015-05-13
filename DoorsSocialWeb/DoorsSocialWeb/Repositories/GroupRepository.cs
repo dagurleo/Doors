@@ -135,19 +135,37 @@ namespace DoorsSocialWeb.Repositories
             db.groupRequests.Add(groupReq);
             db.SaveChanges();
         }
-
-        public void approveGroupRequest(groupRequest groupReq)
+        
+        public groupRequest getGroupRequestById(int requestId)
         {
-            groupRequest request = (from r in db.groupRequests
-                                    where r.userRequestId == groupReq.userRequestId &&
-                                    r.groupID == groupReq.groupID
-                                    select r).SingleOrDefault();
+            var request = (from r in db.groupRequests
+                           where r.id == requestId
+                           select r).Single();
+            return request;
+        }
 
-            request.groupID = groupReq.groupID;
-            request.groupOwnerId = groupReq.groupOwnerId;
-            request.userRequestId = groupReq.userRequestId;
-            request.userIsApproved = groupReq.userIsApproved;
+        public void userApprovesGroupRequest(int requestId)
+        {
+
+            var request = getGroupRequestById(requestId);
+            addUserToGroup(request.userRequestId, request.groupID);
+            db.groupRequests.Remove(request);
             db.SaveChanges();
+        }
+
+        public void userDeclinesGroupRequest(int requestId)
+        {
+            var request = getGroupRequestById(requestId);
+            db.groupRequests.Remove(request);
+            db.SaveChanges();
+        }
+        public IEnumerable<groupRequest> getGroupRequestsYouAreOwnerOf(string userId)
+        {
+            var requests = from r in db.groupRequests
+                           where r.groupOwnerId == userId
+                           select r;
+
+            return requests;
         }
     }
 }

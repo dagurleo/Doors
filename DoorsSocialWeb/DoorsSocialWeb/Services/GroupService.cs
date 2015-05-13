@@ -27,9 +27,24 @@ namespace DoorsSocialWeb.Services
             return groupRepo.getCurrentGroup(id);
         }
 
+        public Group getGroupById(int id)
+        {
+            return groupRepo.getGroupById(id);
+        }
+
         public void addUserToGroup(string userId, int groupId)
         {
             groupRepo.addUserToGroup(userId, groupId);
+        }
+
+        public void userApprovesGroupRequest(int requestId)
+        {
+            groupRepo.userApprovesGroupRequest(requestId);
+        }
+
+        public void userDeclinesGroupRequest(int requestId)
+        {
+            groupRepo.userDeclinesGroupRequest(requestId);
         }
 
         public Group getNewestGroup()
@@ -59,14 +74,15 @@ namespace DoorsSocialWeb.Services
             groupRepo.sendGroupRequest(requestUserId, groupId, groupOwner);
         }
 
-        public void approveGroupRequest(groupRequest groupReq)
-        {
-            groupRepo.approveGroupRequest(groupReq);
-        }
-
+     
         public IEnumerable<Topic> getTopicsForGroup(int groupId)
         {
             return groupRepo.getTopicsForGroup(groupId);
+        }
+
+        public IEnumerable<groupRequest> getGroupRequestsYouAreOwnerOf(string userId)
+        {
+            return groupRepo.getGroupRequestsYouAreOwnerOf(userId);
         }
     }
 }
