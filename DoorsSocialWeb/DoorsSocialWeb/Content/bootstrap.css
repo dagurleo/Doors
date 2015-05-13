@@ -7168,6 +7168,27 @@ body h4
     right: 55px;
 }
 
+.notificationContainer
+{
+    height: 400px;
+}
+
+.friendRequests
+{
+    text-align: center;
+    position: relative;
+    width: 50%;
+    float: left;
+}
+
+.groupRequests
+{
+    text-align: center;
+    position: relative;
+    width: 50%;
+    float: right;
+}
+
 .logout
 {
     background: url(https://yemekhane.anadolu.edu.tr/resources/images/logout.png);
@@ -7515,7 +7536,6 @@ body h4
 
 .modalDialog {
 	position: fixed;
-	 
 	top: 0;
 	right: 0;
 	bottom: 0;
