@@ -36,7 +36,8 @@ namespace DoorsSocialWeb.Repositories
         public IEnumerable<Message> getConversation(string senderID, string recieverID)
         {
             var queryConversation = (from message in db.Messages
-                                     where message.senderID == senderID && message.recieverID == recieverID
+                                     where (message.senderID == senderID && message.recieverID == recieverID)
+                                     || (message.senderID == recieverID && message.recieverID == senderID)  
                                      orderby message.dateCreated
                                      select message);
             return queryConversation;
@@ -48,7 +49,9 @@ namespace DoorsSocialWeb.Repositories
         public IEnumerable<Message> getNewMessages()
         {
             string currentUserId = HttpContext.Current.User.Identity.GetUserId();
-            var queryNewMessages = (from message in db.Messages where message.recieverID == currentUserId && message.messageIsRead == false select message);
+            var queryNewMessages = (from message in db.Messages 
+                                    where message.recieverID == currentUserId && message.messageIsRead == false 
+                                    select message);
             return queryNewMessages;
         }
 
@@ -60,6 +63,9 @@ namespace DoorsSocialWeb.Repositories
                                     group m by m.dateCreated into mGroup
                                     let latest = mGroup.FirstOrDefault()
                                     select latest);
+
+            
+                               
 
             //var queryAllMessages = queryAllRecievingFirstMessages.Concat(queryAllSendingFirstMessages);
 
