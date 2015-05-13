@@ -70,7 +70,11 @@ namespace DoorsSocialWeb.Services
         {
             return userRepo.searchUsersByName(searchTerm);
         }
-
+        
+        public bool isUserPendingRequest(string friendId)
+        {
+            return userRepo.isFriendRequestPending(friendId);
+        }
   
     }
 }

@@ -44,41 +44,6 @@ namespace DoorsSocialWeb.Models.ViewModels
             return likeService.getUsersWhoLikedPost(postId);
         }
 
-        public bool userIsFriend(string friendId)
-        {
-            IEnumerable<ApplicationUser> friends = userRepo.getFriendsOfCurrentUser();
-            if(friends.Contains(userRepo.getUserByID(friendId)))
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public IEnumerable<friendRequest> getFriendRequests(string userID)
-        {
-            return userRepo.getFriendRequests(userID);
-        }
-
-        public bool userIsPendingFriend(string friendID, string currentUserId)
-        {
-            //Sækja öll friend request sem VINUR minn á, tékka hvort ég sé á honum.
-            IEnumerable<friendRequest> fRequests = userRepo.getFriendRequests(friendID);
-            if(fRequests != null)
-            {
-                foreach(var f in fRequests)
-                {
-                    if(f.userRequestID == currentUserId)
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        public bool isUserPendingRequest(string friendID)
-        {
-            return userRepo.isFriendRequestPending(friendID);
-        }
+        
     }
 }
