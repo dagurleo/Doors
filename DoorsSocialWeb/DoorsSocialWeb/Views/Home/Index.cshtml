@@ -7,7 +7,6 @@
 
 @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
-
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
@@ -21,5 +20,4 @@
         @Html.LabelFor(m => m.RememberMe, new { @class = "labels" })
     </div>
     <input type="submit" value="Log in" class="loginBtn" />
-        
 }

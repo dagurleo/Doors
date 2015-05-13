@@ -35,14 +35,7 @@
                             <textarea name="about">@Model.currentUser.displayAbout</textarea>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            Display image:
-                        </td>
-                        <td>
-                            <input type="file" name="displayimage"/>
-                        </td>
-                    </tr>
+                    
                     <tr>
                         <td>
                             Display Email:
@@ -120,6 +113,13 @@
         {
             <a href="#editProfile"><h4>Edit my profile</h4></a>   
         }
+        <form action="" method="post" enctype="multipart/form-data">
+
+            <label for="file">Filename:</label>
+            <input type="file" name="file" id="file" />
+
+            <input type="submit" />
+        </form>
     </div>    
     <br />
     @if (Model.posts != null)
