@@ -126,7 +126,7 @@ namespace DoorsSocialWeb.Repositories
                           select r).Single();
 
             addRelations(request.userID, request.userRequestID);
-            request.userIsApproved = true;            
+            db.friendRequests.Remove(request);
             db.SaveChanges();
         }
 
