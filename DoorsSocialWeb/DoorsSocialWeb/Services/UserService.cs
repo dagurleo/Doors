@@ -51,6 +51,11 @@ namespace DoorsSocialWeb.Services
             userRepo.approveUser(frReq);
         }
 
+        public void declineUser(int requestId)
+        {
+            userRepo.declineUser(requestId);
+        }
+
         public void addRelations(string id1, string id2)
         {
             userRepo.addRelations(id1, id2);

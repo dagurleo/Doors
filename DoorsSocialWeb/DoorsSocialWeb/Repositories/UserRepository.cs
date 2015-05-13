@@ -132,6 +132,15 @@ namespace DoorsSocialWeb.Repositories
             db.SaveChanges();
         }
 
+        public void declineUser(int requestId)
+        {
+            var request = (from r in db.friendRequests
+                          where r.ID == requestId
+                          select r).Single();
+            db.friendRequests.Remove(request);
+            db.SaveChanges();
+        }
+
         public void addRelations(string id1, string id2)
         {
             relUsers relationship = new relUsers { friend1Id = id1, friend2Id = id2 };

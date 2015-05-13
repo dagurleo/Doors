@@ -232,6 +232,12 @@ namespace DoorsSocialWeb.Controllers
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
 
+        public ActionResult userDeclinesFriendRequest(int requestId)
+        {
+            userService.declineUser(requestId);
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+        }
+
         public ActionResult removeFriend()
         {
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
