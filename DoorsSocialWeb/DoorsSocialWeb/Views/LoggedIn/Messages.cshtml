@@ -12,7 +12,17 @@
 </head>
 <body>
     <div>
-    
+        @if(Model.messagesWithUser != null)
+        {
+            foreach(var m in Model.messagesWithUser)
+            {
+                <!--TODO show first message from messageswithuser with senderID.displayName and -->
+                <p>@Model.getAuthor(m.senderID).displayName</p>
+                <p>@m.dateCreated</p>
+                <p>@m.subject</p>
+                <!-- Todo implement anhor to MESSAGE view with currentUser and the author of the message-->
+            }
+        }
     </div>
 </body>
 </html>
