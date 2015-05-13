@@ -63,5 +63,10 @@ namespace DoorsSocialWeb.Services
         {
             groupRepo.approveGroupRequest(groupReq);
         }
+
+        public IEnumerable<Topic> getTopicsForGroup(int groupId)
+        {
+            return groupRepo.getTopicsForGroup(groupId);
+        }
     }
 }

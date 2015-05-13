@@ -82,6 +82,16 @@ namespace DoorsSocialWeb.Repositories
             db.SaveChanges();
         }
 
+        public IEnumerable<Topic> getTopicsForGroup(int groupId)
+        {
+            var topics = from t in db.Topics
+                         where t.groupID == groupId
+                         orderby t.topicName ascending
+                         select t;
+
+            return topics;
+        }
+
         public Topic getTopicById(int topicId)
         {
             Topic topic = (from t in db.Topics

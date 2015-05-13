@@ -26,6 +26,7 @@ namespace DoorsSocialWeb.Controllers
         public LikesService likeService = new LikesService();
         public PostService postService = new PostService();
         public CommentService commentService = new CommentService();
+        
         //
         // GET: /LoggedIn/
         public ActionResult Index()
@@ -48,6 +49,7 @@ namespace DoorsSocialWeb.Controllers
             shared.currentUser = userService.getCurrentUser();
             shared.friends = userService.getFriendsOfCurrentUser();
             shared.currentGroup = groupService.getCurrentGroup(id);
+            shared.currentGroupTopics = groupService.getTopicsForGroup(shared.currentGroup.ID);
             return View(shared);
         }
 
