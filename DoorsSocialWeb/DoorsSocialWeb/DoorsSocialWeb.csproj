@@ -182,10 +182,12 @@
     <Compile Include="Models\EntityModels\Notification.cs" />
     <Compile Include="Models\EntityModels\Post.cs" />
     <Compile Include="Models\EntityModels\Topic.cs" />
+    <Compile Include="Models\ViewModels\AllMessagesViewModel.cs" />
     <Compile Include="Models\ViewModels\CreateGroupViewModel.cs" />
     <Compile Include="Models\ViewModels\GroupViewModel.cs" />
     <Compile Include="Models\ViewModels\IndexViewModel.cs" />
     <Compile Include="Models\ViewModels\LoggedInSharedLayoutViewModel.cs" />
+    <Compile Include="Models\ViewModels\MessageViewModel.cs" />
     <Compile Include="Models\ViewModels\PostViewModel.cs" />
     <Compile Include="Models\ViewModels\ProfileViewModel.cs" />
     <Compile Include="Models\ViewModels\SearchViewModel.cs" />
@@ -265,6 +267,8 @@
     <Content Include="Views\LoggedIn\Profile.cshtml" />
     <Content Include="Views\LoggedIn\PostPartial.cshtml" />
     <Content Include="Views\LoggedIn\Search.cshtml" />
+    <Content Include="Views\LoggedIn\Messages.cshtml" />
+    <Content Include="Views\LoggedIn\Conversation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
