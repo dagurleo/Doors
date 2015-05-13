@@ -54,20 +54,14 @@ namespace DoorsSocialWeb.Repositories
 
         public IEnumerable<Message> getFirstMessages(string userID)
         {
-            UserRepository userRepo = new UserRepository();
-            var allUsers = userRepo.getAllUsers();
+            var queryAllMessages = (from m in db.Messages
+                                    where m.recieverID == userID ||
+                                    m.senderID == userID
+                                    group m by m.dateCreated into mGroup
+                                    let latest = mGroup.FirstOrDefault()
+                                    select latest);
 
-            var queryFirstMessages = (from message in db.Messages
-                                      where message.senderID == userID ||
-                                      message.recieverID == userID
-                                      select message);
-
-
-            var queryAllMessages = (from message in db.Messages
-                                    where message.senderID == userID || message.recieverID == userID
-                                    orderby message.dateCreated ascending
-                                    group message by message.senderID into messageGroup
-                                    select messageGroup.FirstOrDefault());
+            //var queryAllMessages = queryAllRecievingFirstMessages.Concat(queryAllSendingFirstMessages);
 
             return queryAllMessages;
         }
