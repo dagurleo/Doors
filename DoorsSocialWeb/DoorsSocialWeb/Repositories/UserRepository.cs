@@ -174,6 +174,14 @@ namespace DoorsSocialWeb.Repositories
             db.SaveChanges();
         }
 
+        public void editProfilePicture(string imageURL)
+        {
+            var user = getCurrentUser();
+
+            user.displayImageUrl = imageURL;
+            db.SaveChanges();
+        }
+
         public IEnumerable<ApplicationUser> searchUsersByName(string searchTerm)
         {
             var users = from u in db.Users

@@ -305,7 +305,12 @@ namespace DoorsSocialWeb.Controllers
             {
                 string imageID = userService.getCurrentUser().Id;
                 UploadToFtp(file, imageID);
+
+                string URL = "http://www.ads.menn.is/doors/images/" + imageID;
+                userService.editProfilePicture(URL);
             }
+
+            
 
             return RedirectToAction("Profile");
         }

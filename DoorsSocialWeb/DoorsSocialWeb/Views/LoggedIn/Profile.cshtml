@@ -1,5 +1,14 @@
 ﻿@model DoorsSocialWeb.Models.ViewModels.ProfileViewModel
 @{
+    string profileDiv;
+    if(Model.friend.Id == Model.currentUser.Id)
+    {
+        profileDiv = "ownProfileHeader";
+    }
+    else
+    {
+        profileDiv = "profileHeader";
+    }
     
 }
 
@@ -57,14 +66,25 @@
             }
         </div>
     </div>
-
-
-
-    <div class="profileHeader">
+    <div class="@profileDiv">
         <div class="profileImage">
-                <img src="@Model.friend.displayImageUrl" alt="Profile pic" />
+            <img src="@Model.friend.displayImageUrl" alt="Profile pic" />
+            @if(Model.friend.Id == Model.currentUser.Id)
+            {
+            <div class="changeImage">
+                <form action="" method="post" enctype="multipart/form-data">
+
+                    <label for="file">Change display image</label>
+                    <input type="file" name="file" id="file" />
+
+                    <input type="submit" />
+                </form>
+            </div>
+            }
+            
         </div>
         <h1>@Model.friend.displayName</h1>
+        
         <div class="profileInformation">
             <ul>
                 @if (Model.friend.displayAbout != null && Model.friend.displayAbout != "")
@@ -113,13 +133,7 @@
         {
             <a href="#editProfile"><h4>Edit my profile</h4></a>   
         }
-        <form action="" method="post" enctype="multipart/form-data">
-
-            <label for="file">Filename:</label>
-            <input type="file" name="file" id="file" />
-
-            <input type="submit" />
-        </form>
+        
     </div>    
     <br />
     @if (Model.posts != null)

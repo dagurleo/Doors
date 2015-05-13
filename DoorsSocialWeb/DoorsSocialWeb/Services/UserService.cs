@@ -72,6 +72,11 @@ namespace DoorsSocialWeb.Services
             userRepo.editUserProfile(userUpdate);
         }
 
+        public void editProfilePicture(string profileURL)
+        {
+            userRepo.editProfilePicture(profileURL);
+        }
+
         public IEnumerable<ApplicationUser> searchUsersByName(string searchTerm)
         {
             return userRepo.searchUsersByName(searchTerm);
@@ -81,6 +86,5 @@ namespace DoorsSocialWeb.Services
         {
             return userRepo.isFriendRequestPending(friendId);
         }
-  
     }
 }

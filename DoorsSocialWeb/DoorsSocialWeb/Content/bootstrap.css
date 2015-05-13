@@ -7793,7 +7793,15 @@ body h4
     min-height: 220px;
 }
 
-.profileHeader img
+.ownProfileHeader
+{
+    min-width: 480px;
+    background-color: #dedede;
+    min-height: 305px;
+}
+
+.profileHeader img,
+.ownProfileHeader img
 {
     position: relative;
     height: 200px;
@@ -7801,13 +7809,25 @@ body h4
     margin: 10px 0 0 10px;
 }
 
+.profileHeader ul,
+.ownProfileHeader ul
+{
+    margin-left: 60px;
+}
+
 .profileImage
 {
-    width: 240px;
+    width: 225px;
+    height: 350px;
     float: left;
 }
 
-.profileHeader h1
+.changeImage
+{
+    padding: 10px 10px 10px 10px;
+}
+.profileHeader h1,
+.ownProfileHeader h1
 {
     font-family: 'Poiret One', cursive;
     color: black;
@@ -7822,18 +7842,22 @@ body h4
     text-align: justify;
 }
 
-.profileHeader ul li 
+.profileHeader ul li,
+.ownProfileHeader ul li 
 {
     list-style: none;
     padding-bottom: 10px;
 }
 
-.profileHeader h4
+.profileHeader h4,
+.ownProfileHeader h4
 {
     color: black;
+
 }
 
-.profileHeader a:hover
+.profileHeader a:hover,
+.ownProfileHeader a:hover
 {
     text-decoration: none;
 }
