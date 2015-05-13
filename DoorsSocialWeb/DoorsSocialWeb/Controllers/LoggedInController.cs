@@ -221,13 +221,13 @@ namespace DoorsSocialWeb.Controllers
         {
             
             userService.approveUser(requestId);            
-            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri + "#notificationCenter");
         }
 
         public ActionResult userDeclinesFriendRequest(int requestId)
         {
             userService.declineUser(requestId);
-            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri + "#notificationCenter");
         }
 
         public ActionResult removeFriend()

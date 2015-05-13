@@ -7245,11 +7245,55 @@ body h4
     margin-left: 100px;
 }
 
-.decision a
-{
-    height: 50px;
-    background-color: blue;
+.declineFriend {
+	-moz-box-shadow:inset 0px 34px 0px -15px #b54b3a;
+	-webkit-box-shadow:inset 0px 34px 0px -15px #b54b3a;
+	box-shadow:inset 0px 34px 0px -15px #b54b3a;
+	background-color:#a73f2d;
+	border: none;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:9px 23px;
+	text-decoration:none;
+	text-shadow:0px -1px 0px #7a2a1d;
 }
+.declineFriend:hover {
+	background-color:#b34332;
+}
+.declineFriend:active {
+	position:relative;
+	top:1px;
+}
+
+.approveFriend {
+	-moz-box-shadow:inset 0px 34px 0px -15px #518a37;
+	-webkit-box-shadow:inset 0px 34px 0px -15px #518a37;
+	box-shadow:inset 0px 34px 0px -15px #518a37;
+	background-color:#4c8032;
+	border: none;
+	display:inline-block;
+	cursor:pointer;
+    border:1px solid #241d13;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:9px 23px;
+	text-decoration:none;
+	text-shadow:0px -1px 0px #5b8a3c;
+}
+.approveFriend:hover {
+	background-color:#5f8f47;
+}
+.approveFriend:active {
+	position:relative;
+	top:1px;
+}
+
 
 .logout
 {

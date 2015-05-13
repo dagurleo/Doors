@@ -37,6 +37,14 @@
                     </tr>
                     <tr>
                         <td>
+                            Display image:
+                        </td>
+                        <td>
+                            <input type="file" name="displayimage"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
                             Display Email:
                         </td>
                         <td>
@@ -113,29 +121,6 @@
             <a href="#editProfile"><h4>Edit my profile</h4></a>   
         }
     </div>    
-
-    <div>
-        @if (Model.friend.Id == Model.currentUser.Id)
-        {
-            if(Model.getFriendRequests(Model.currentUser.Id) != null)
-            {
-                foreach(var m in Model.getFriendRequests(Model.currentUser.Id))
-                {
-                    if(m.userIsApproved == false)
-                    {
-                        using (Html.BeginForm("userApprovesFriendRequests", "LoggedIn", FormMethod.Post))
-                        {
-                            <input type="hidden" name="userid" value="@Model.currentUser.Id"/>
-                            <input type="hidden" name="friendid" value="@m.userRequestID"/>
-                            <p>Approve user: @Model.getAuthor(m.userRequestID).displayName</p>
-                            <input type="submit" value="Accept this user as your friend"/>
-                        }
-                    }
-                }
-            }
-        }
-    </div>
-
     <br />
     @if (Model.posts != null)
     {
