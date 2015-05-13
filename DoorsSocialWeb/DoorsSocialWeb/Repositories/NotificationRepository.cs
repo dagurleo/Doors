@@ -16,7 +16,9 @@ namespace DoorsSocialWeb.Repositories
         //TODO: implement more functions we might need and connect to db;
         public IEnumerable<Notification> getNotificationsByID(int notificationID)
         {
-            var queryNotificationByID = (from notification in db.Notifications where notification.ID == notificationID select notification);
+            var queryNotificationByID = (from notification in db.Notifications 
+                                         where notification.ID == notificationID 
+                                         select notification);
             return queryNotificationByID;
         }
 

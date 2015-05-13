@@ -128,7 +128,12 @@ namespace DoorsSocialWeb.Repositories
                                where r.friend1Id == id1 && r.friend2Id == id2
                                select r).SingleOrDefault();
 
-            
+            if(relationship == null)
+            {
+                relationship = (from r in db.relUsers
+                                where r.friend1Id == id2 && r.friend2Id == id1
+                                select r).SingleOrDefault();
+            }
             db.relUsers.Remove(relationship);
             db.SaveChanges();
         }
