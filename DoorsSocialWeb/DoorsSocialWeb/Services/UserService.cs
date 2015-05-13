@@ -46,9 +46,10 @@ namespace DoorsSocialWeb.Services
             return userRepo.getFriendRequests(userID);
         }
 
-        public void approveUser(friendRequest frReq)
+    
+        public void approveUser(int requestId)
         {
-            userRepo.approveUser(frReq);
+            userRepo.approveUser(requestId);
         }
 
         public void declineUser(int requestId)

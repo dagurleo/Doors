@@ -216,19 +216,11 @@ namespace DoorsSocialWeb.Controllers
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
 
-        public ActionResult userApprovesFriendRequests()
+        
+        public ActionResult userApprovesFriendRequest(int requestId)
         {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult userApprovesFriendRequests(FormCollection collection)
-        {
-            string currentUserId = collection["userid"];
-            string friendUserId = collection["friendid"];
-            friendRequest frReq = new friendRequest { userID = currentUserId, userRequestID = friendUserId, userIsApproved = true };
-            userService.approveUser(frReq);
-            userService.addRelations(currentUserId, friendUserId);
+            
+            userService.approveUser(requestId);            
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
 

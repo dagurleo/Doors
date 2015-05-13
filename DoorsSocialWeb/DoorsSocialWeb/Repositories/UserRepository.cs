@@ -117,18 +117,16 @@ namespace DoorsSocialWeb.Repositories
             return (requests != null);
         }
 
-        public void approveUser(friendRequest frReq)
+        public void approveUser(int requestId)
         {
             //TODO - búa til nýtt req með þessum strings og approved = true
             //TODO - finna gamla, færa þetta yfir í það og savea changes
-            friendRequest oldFriendReq =  (from fr in db.friendRequests
-                                           where fr.userID == frReq.userID &&
-                                           fr.userRequestID == frReq.userRequestID
-                                           select fr).SingleOrDefault();
+            var request = (from r in db.friendRequests
+                          where r.ID == requestId
+                          select r).Single();
 
-            oldFriendReq.userID = frReq.userID;
-            oldFriendReq.userRequestID = frReq.userID;
-            oldFriendReq.userIsApproved = frReq.userIsApproved;
+            addRelations(request.userID, request.userRequestID);
+            request.userIsApproved = true;            
             db.SaveChanges();
         }
 
