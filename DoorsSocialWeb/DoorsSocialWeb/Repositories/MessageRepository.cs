@@ -52,6 +52,26 @@ namespace DoorsSocialWeb.Repositories
             return queryNewMessages;
         }
 
+        public IEnumerable<Message> getFirstMessages(string userID)
+        {
+            UserRepository userRepo = new UserRepository();
+            var allUsers = userRepo.getAllUsers();
+
+            var queryFirstMessages = (from message in db.Messages
+                                      where message.senderID == userID ||
+                                      message.recieverID == userID
+                                          )
+
+
+            var queryAllMessages = (from message in db.Messages
+                                    where message.senderID == userID || message.recieverID == userID
+                                    orderby message.dateCreated ascending
+                                    group message by message.senderID into messageGroup
+                                    select messageGroup.FirstOrDefault());
+
+            return queryAllMessages;
+        }
+
         /*
          * Need info on what variables will be parsed here
          */

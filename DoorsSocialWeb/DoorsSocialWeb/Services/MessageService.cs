@@ -9,12 +9,13 @@ namespace DoorsSocialWeb.Services
 {
     public class MessageService
     {
+        private MessageRepository messageRepo = new MessageRepository();       
         /*
          * Selects all messages from db where sender is the user or reciever is the user. That way we can display all messages in time order
          */
         public IEnumerable<Message> getAllMessages(string senderID)
         {
-            return getAllMessages(senderID);
+            return messageRepo.getAllMessages();
         }
 
         /*
@@ -22,7 +23,7 @@ namespace DoorsSocialWeb.Services
          */
         public IEnumerable<Message> getConversation(string senderID, string recieverID)
         {
-            return getConversation(senderID, recieverID);
+            return messageRepo.getConversation(senderID, recieverID);
         }
 
         /*
@@ -30,7 +31,12 @@ namespace DoorsSocialWeb.Services
          */
         public IEnumerable<Message> getNewMessages()
         {
-            return getNewMessages();
+            return messageRepo.getNewMessages();
+        }
+
+        public IEnumerable<Message> getFirstMessages(string userID)
+        {
+            return messageRepo.getFirstMessages(userID);
         }
 
         /*

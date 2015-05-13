@@ -11,9 +11,11 @@ namespace DoorsSocialWeb.Models.ViewModels
     public class LoggedInSharedLayoutViewModel
     {
         private UserService userService = new UserService();
+        private MessageService messageService = new MessageService();
         public ApplicationUser currentUser { get; set; }
         public IEnumerable<Group> groups {get; set; }
         public IEnumerable<ApplicationUser> friends { get; set; }
+        public IEnumerable<Message> messages { get; set; }
         public DateTime datetime { get; set; }
         public ApplicationUser getAuthor(string id)
         {
@@ -55,6 +57,12 @@ namespace DoorsSocialWeb.Models.ViewModels
         public bool isUserPendingRequest(string friendID)
         {
             return userService.isUserPendingRequest(friendID);
+        }
+
+        public IEnumerable<Message> getFirstMessages(string userID)
+        {
+            messages = messageService.getFirstMessages(userID);
+            return messages;
         }
     }
 }
