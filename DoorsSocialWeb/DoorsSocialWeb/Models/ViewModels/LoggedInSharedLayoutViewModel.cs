@@ -15,6 +15,10 @@ namespace DoorsSocialWeb.Models.ViewModels
         public IEnumerable<Group> groups {get; set; }
         public IEnumerable<ApplicationUser> friends { get; set; }
         public DateTime datetime { get; set; }
+        public ApplicationUser getAuthor(string id)
+        {
+            return userService.getUserById(id);
+        }
 
         public bool userIsFriend(string friendId)
         {
