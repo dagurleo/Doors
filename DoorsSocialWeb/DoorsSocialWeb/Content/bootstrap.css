@@ -7245,6 +7245,12 @@ body h4
     margin-left: 100px;
 }
 
+.decision a
+{
+    height: 50px;
+    background-color: blue;
+}
+
 .logout
 {
     background: url(https://yemekhane.anadolu.edu.tr/resources/images/logout.png);

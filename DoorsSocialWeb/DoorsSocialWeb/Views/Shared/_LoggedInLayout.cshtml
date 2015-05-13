@@ -37,7 +37,6 @@
                         <p>You recieved</p>
                         <p>@m.subject</p>
                     }
-
                 }
             }
             else
@@ -78,14 +77,13 @@
                                     <img src="@Model.getAuthor(m.userRequestID).displayImageUrl" />
                                     <p>@Model.getAuthor(m.userRequestID).displayName has added you!</p>
                                     <div class="decision">
-                                        <a href="@Url.Action("userApprovesFriendRequest", "LoggedIn", new { requestId = m.ID })">Accept</a>
-                                        <a href="@Url.Action("userDeclinesFriendRequest", "LoggedIn", new { requestId = m.ID })">Decline</a>
+                                        <a href="@Url.Action("userApprovesFriendRequest", "LoggedIn", new { requestId = m.ID })"><input type="submit" value="Accept"/></a>
+                                        <a href="@Url.Action("userDeclinesFriendRequest", "LoggedIn", new { requestId = m.ID })"><input type="submit" value="Decline" /></a>
                                     </div>
                                 </div>
                             }
                         }
                     }
-
                 </div>
                 <h1>Group Requests</h1>
                 <div class="groupRequests">
