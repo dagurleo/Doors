@@ -83,7 +83,7 @@
         <div>
             @if ((!Model.userIsFriend(Model.friend.Id)) && (Model.friend.Id != Model.currentUser.Id))
             {
-                if (!(Model.userIsPendingFriend(Model.friend.Id, Model.currentUser.Id)))
+                if(!(Model.isUserPendingRequest(Model.friend.Id)))
                 {
                     using (Html.BeginForm("requestFriendship", "LoggedIn", FormMethod.Post))
                     {

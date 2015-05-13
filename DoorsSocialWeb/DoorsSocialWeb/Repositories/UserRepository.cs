@@ -100,6 +100,23 @@ namespace DoorsSocialWeb.Repositories
             return requests;
         }
 
+        public bool isFriendRequestPending(string userID)
+        {
+            string currentUser = HttpContext.Current.User.Identity.GetUserId();
+            var requests = (from r in db.friendRequests
+                            where r.userID == userID && r.userRequestID == currentUser
+                            select r).SingleOrDefault();
+
+            if(requests == null)
+            {
+                requests = (from r in db.friendRequests
+                            where r.userID == currentUser && r.userRequestID == userID
+                            select r).SingleOrDefault();
+            }
+
+            return (requests != null);
+        }
+
         public void approveUser(friendRequest frReq)
         {
             //TODO - búa til nýtt req með þessum strings og approved = true
@@ -157,5 +174,6 @@ namespace DoorsSocialWeb.Repositories
                         select u;
             return users;
         }
+
     }
 }

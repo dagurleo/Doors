@@ -75,5 +75,10 @@ namespace DoorsSocialWeb.Models.ViewModels
             }
             return false;
         }
+
+        public bool isUserPendingRequest(string friendID)
+        {
+            return userRepo.isFriendRequestPending(friendID);
+        }
     }
 }
