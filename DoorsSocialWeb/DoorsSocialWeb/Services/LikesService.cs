@@ -22,14 +22,14 @@ namespace DoorsSocialWeb.Services
             return likeRepo.getLikesOnComment(commentId);
         }
 
-        public void addLikeOnPost(string userId, int postId)
+        public void addLikeOnPost(int postId)
         {
-            likeRepo.addLikeToPost(userId, postId);
+            likeRepo.addLikeToPost(postId);
         }
 
-        public void removeLikeOnPost(string userId, int postId)
+        public void removeLikeOnPost(int postId)
         {
-            likeRepo.removeLikeOnPost(userId, postId);
+            likeRepo.removeLikeOnPost(postId);
         }
 
         public IEnumerable<ApplicationUser> getUsersWhoLikedPost(int postID)
