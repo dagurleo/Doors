@@ -1,18 +1,19 @@
-﻿@model DoorsSocialWeb.Models.ViewModels.AllMessagesViewModel
+﻿@model DoorsSocialWeb.Models.ViewModels.MessageViewModel
 @{
- 
+    ViewBag.Title = "Chat";
 }
-
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title></title>
+
 </head>
 <body>
-    <div>
-    
-    </div>
+    <ul>
+        @foreach(var m in Model.messagesWithUser)            
+        {
+            <li>@m.subject</li> 
+        }    
+    </ul>    
 </body>
-</html>

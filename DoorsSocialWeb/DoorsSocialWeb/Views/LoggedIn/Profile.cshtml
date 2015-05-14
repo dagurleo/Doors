@@ -24,6 +24,8 @@
         <div>
             @using (Html.BeginForm("EditProfile", "LoggedIn", FormMethod.Post))
             {
+                
+                
                 <a href="#close" title="Close" class="close">X</a>
                 <h1>EditProfile</h1>
                 <input type="hidden" name="ownerid" value="@Model.currentUser.Id" />
@@ -67,6 +69,7 @@
         </div>
     </div>
     <div class="@profileDiv">
+        <a href="@Url.Action("Conversation", "LoggedIn", new { messageRecieverId = Model.friend.Id })">Send Message</a>
         <div class="profileImage">
             <img src="@Model.friend.displayImageUrl" alt="Profile pic" />
             @if(Model.friend.Id == Model.currentUser.Id)
@@ -129,6 +132,7 @@
                 }
             }
         </div>
+        
         @if(Model.friend.Id == Model.currentUser.Id)
         {
             <a href="#editProfile"><h4>Edit my profile</h4></a>   

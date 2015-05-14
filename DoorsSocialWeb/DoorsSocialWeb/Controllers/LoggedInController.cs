@@ -28,6 +28,7 @@ namespace DoorsSocialWeb.Controllers
         public LikesService likeService = new LikesService();
         public PostService postService = new PostService();
         public CommentService commentService = new CommentService();
+        public MessageService messageService = new MessageService();
         
         //
         // GET: /LoggedIn/
@@ -335,6 +336,17 @@ namespace DoorsSocialWeb.Controllers
             requestStream.Flush();
             requestStream.Close();
             requestObj = null;
+        }
+
+        public ActionResult Conversation(string messageRecieverId)
+        {
+            var shared = new MessageViewModel();
+            shared.groups = groupService.getAccessibleGroups();
+            shared.currentUser = userService.getCurrentUser();
+            shared.friends = userService.getFriendsOfCurrentUser();
+            shared.messageReciever = userService.getUserById(messageRecieverId);
+            shared.messagesWithUser = messageService.getConversation(userService.getCurrentUser().Id, messageRecieverId);
+            return View(shared);
         }
 
         public ActionResult Logoff()
