@@ -42,8 +42,10 @@ namespace DoorsSocialWeb.Repositories
 
         public void addNewGroup(Group newGroup)
         {
+            TopicRepository topicRepo = new TopicRepository();
             db.Groups.Add(newGroup);
             db.SaveChanges();
+            topicRepo.addNewTopic(newGroup.ID, "General discussion");
         }
 
         public void addUserToGroup(string userId, int groupId)

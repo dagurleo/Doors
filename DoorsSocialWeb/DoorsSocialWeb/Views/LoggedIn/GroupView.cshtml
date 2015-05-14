@@ -69,18 +69,19 @@
     <div>
         @if ((Model.userIsApprovedMember(Model.currentUser.Id, Model.currentGroup.ID)))
         {
-            <!-- TODO allow users to post posts and see them/likethem/commentonthem--> 
-            if(Model.getTopicsWithinGroup(Model.currentGroup.ID) != null)
+            using(Html.BeginForm("approvedUsersAddNewPostInGroup", "LoggedIn", FormMethod.Post))
             {
-                foreach(var t in Model.getTopicsWithinGroup(Model.currentGroup.ID))
-                {
-                    <p>@t.topicName</p>
-                } 
-            }
-            else
-            {
-                 <!-- Only default topic here.-->
-                <p>Notopics?</p>
+                <input type="hidden" name="groupid" value="@Model.currentGroup.ID" />
+                <select>    
+                @foreach(var t in Model.getTopicsWithinGroup(Model.currentGroup.ID))
+                    {
+                        <option  value="@t.ID">@t.topicName</option>
+                    }
+                </select>
+                <div class="createPost">
+                    <textarea name="subject" placeholder="Share your thoughts with your group buddies!"></textarea>
+                <input type="submit" value="POST" />
+                </div>
             }
         }
         else

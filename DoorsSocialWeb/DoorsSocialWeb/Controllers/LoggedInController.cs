@@ -353,8 +353,19 @@ namespace DoorsSocialWeb.Controllers
             IEnumerable<Message> messages = messageService.getConversation(senderId, recieverId);
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
+        /*
+        public ActionResult approvedUsersAddNewPostInGroup()
+        {
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+        }
 
-
+        [HttpPost]
+        public ActionResult approvedUsersAddNewPostInGroup(FormCollection collection)
+        {
+            string groupIDstring = collection["groupid"];
+            string topicID = collection["t"]
+        }
+        */
 
         public ActionResult Logoff()
         {
