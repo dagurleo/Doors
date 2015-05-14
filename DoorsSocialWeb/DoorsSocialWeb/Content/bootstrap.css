@@ -7926,3 +7926,44 @@ body h4
     padding: 0 10px 10px 10px;
     font-size: 16px;
 }
+
+/* MESSAGES */
+
+.messageContainer
+{
+    height: 500px;
+}
+
+.messagePopupView
+{
+    height: 450px;
+    overflow-y: scroll;
+}
+
+.singleUserMessage
+{
+    min-height: 85px;
+}
+
+.singleUserMessage a
+{
+    color: white;
+}
+
+.singleUserMessage a:hover
+{
+    text-decoration: none;
+}
+
+.singleUserMessage img
+{
+    float: left;
+    margin-right: 20px;
+}
+
+.singleUserMessage h2
+{
+    font-family: 'Poiret One', cursive;
+    font-size: 24px;
+    color: white;
+}

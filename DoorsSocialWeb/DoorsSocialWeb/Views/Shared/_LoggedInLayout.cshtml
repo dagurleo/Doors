@@ -33,19 +33,22 @@
     <div id="messageCenter" class="modalDialog">
         <div>
             <a href="#close" title="Close" class="close">X</a>
-            <p>SMEGMA MESSAGES</p>
-            <ul>
-                @foreach (var i in Model.getUsersYouHaveChattedTo())
-                {
-                    <div class="singleUserMessage">
-                        <a href="@Url.Action("Conversation", "Profile", new { messageRecieverId = i.Id })">
-                            <h2>@i.displayName</h2>
-                            <p>@Model.getNewestMessageForConversation(Model.currentUser.Id, i.Id).subject</p>
-                        </a>
-                    </div>
-                    
-                }
-            </ul>
+            <div class="messageContainer">
+                <h1>Messages</h1>
+                <div class="messagePopupView">
+                    @foreach (var i in Model.getUsersYouHaveChattedTo())
+                    {
+                        <div class="singleUserMessage">
+                            <a href="@Url.Action("Conversation", "Profile", new { messageRecieverId = i.Id })">
+                                <img src="@i.displayImageUrl" height="85" width="85" />
+                                <h2>@i.displayName</h2>
+                                <p>@Model.getNewestMessageForConversation(Model.currentUser.Id, i.Id).subject</p>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+
         </div>
     </div>
 
