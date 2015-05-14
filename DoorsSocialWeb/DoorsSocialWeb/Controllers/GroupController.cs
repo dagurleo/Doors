@@ -42,6 +42,19 @@ namespace DoorsSocialWeb.Controllers
             return View(shared);
         }
 
+        public ActionResult Topic(int id)
+        {
+            var shared = new TopicViewModel();
+            shared.groups = groupService.getAccessibleGroups();
+            shared.currentUser = userService.getCurrentUser();
+            shared.friends = userService.getFriendsOfCurrentUser();
+            shared.currentGroup = groupService.getCurrentGroup(id);
+            shared.topics = groupService.getTopicsForGroup(shared.currentGroup.ID);
+
+            return View(shared);
+
+        }
+
         public ActionResult requestToJoinGroup()
         {
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
