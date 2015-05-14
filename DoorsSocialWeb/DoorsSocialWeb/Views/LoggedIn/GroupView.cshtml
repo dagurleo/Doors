@@ -1,5 +1,8 @@
 ﻿@model DoorsSocialWeb.Models.ViewModels.GroupViewModel
 
+@{
+    var groupMembers = Model.getGroupMembersByGroupId(Model.currentGroup.ID);
+}
 <!DOCTYPE html>
 
 <html>
@@ -8,6 +11,17 @@
     <title></title>
 </head>
 <body>
+
+    <div class="userheader">
+
+        @foreach (var m in groupMembers)
+        {
+            <a href="@Url.Action("Profile", "LoggedIn", new { id = m.Id })">
+                <img src="@m.displayImageUrl" width="50px" height="50px" />
+            </a>
+        }
+    </div>
+
     <div>
         @if (Model.currentGroup.groupName != null && Model.currentGroup.groupName != "")
         {
@@ -23,15 +37,15 @@
     <div>
         @if ((!(Model.userIsMember(Model.currentUser.Id)) && Model.currentUser.Id != Model.currentGroup.groupOwnerID) && Model.userIsPendingMember(Model.currentUser.Id) == false)
         {
-                using (Html.BeginForm("requestToJoinGroup", "LoggedIn", FormMethod.Post))
-                {
-                    <input type="hidden" name="userid" value="@Model.currentUser.Id" />
-                    <input type="hidden" name="groupid" value="@Model.currentGroup.ID" />
-                    <input type="hidden" name="groupOwner" value="@Model.currentGroup.groupOwnerID" />
-                    <input type="submit" value="Click me to request to join this group" />
-                }
+            using (Html.BeginForm("requestToJoinGroup", "LoggedIn", FormMethod.Post))
+            {
+                <input type="hidden" name="userid" value="@Model.currentUser.Id" />
+                <input type="hidden" name="groupid" value="@Model.currentGroup.ID" />
+                <input type="hidden" name="groupOwner" value="@Model.currentGroup.groupOwnerID" />
+                <input type="submit" value="Click me to request to join this group" />
+            }
         }
-        @if(Model.currentGroup.groupOwnerID == Model.currentUser.Id)
+        @if (Model.currentGroup.groupOwnerID == Model.currentUser.Id)
         {
             <!--ACCEPT USERS-->
             <!-- Búa til fall sem sækir öll request's-->
@@ -39,23 +53,23 @@
             if (Model.pendingRequests(Model.currentGroup.ID) != null)
             {
                 <!--Foreach skilar mér requestuserIds sem ég get acceptað sem ég converta í userdisplayname-->
-                foreach(var m in Model.pendingRequests(Model.currentGroup.ID))
+                foreach (var m in Model.pendingRequests(Model.currentGroup.ID))
                 {
                     if (@m.userIsApproved == false)
                     {
                         using (Html.BeginForm("ownerOfGroupAcceptsUsers", "LoggedIn", FormMethod.Post))
                         {
-                            <input type="hidden" name="userid" value="@m.userRequestId"/>
-                            <input type="hidden" name="groupid" value="@Model.currentGroup.ID"/>
+                            <input type="hidden" name="userid" value="@m.userRequestId" />
+                            <input type="hidden" name="groupid" value="@Model.currentGroup.ID" />
                             <input type="hidden" name="groupOwner" value="@Model.currentGroup.groupOwnerID" />
                             <p>@Model.getUserByID(m.userRequestId).displayName</p>
-                            <input type="submit" value="Accept this user"/>
+                            <input type="submit" value="Accept this user" />
                         }
                     }
                 }
             }
-            
-            using(Html.BeginForm("ownerOfGroupCreateNewTopic", "LoggedIn", FormMethod.Post))
+
+            using (Html.BeginForm("ownerOfGroupCreateNewTopic", "LoggedIn", FormMethod.Post))
             {
                 <input type="hidden" name="groupid" value="@Model.currentGroup.ID" />
                 <input type="hidden" name="ownerid" value="@Model.currentGroup.groupOwnerID" />
@@ -69,7 +83,7 @@
     <div>
         @if ((Model.userIsApprovedMember(Model.currentUser.Id, Model.currentGroup.ID)))
         {
-            using(Html.BeginForm("approvedUsersAddNewPostInGroup", "LoggedIn", FormMethod.Post))
+            using (Html.BeginForm("approvedUsersAddNewPostInGroup", "LoggedIn", FormMethod.Post))
             {
                 <input type="hidden" name="groupid" value="@Model.currentGroup.ID" />
                 <input type="hidden" name="userid" value="@Model.currentUser.Id" />
@@ -81,12 +95,12 @@
                 </select>
                 <div class="createPost">
                     <textarea name="subject" placeholder="Share your thoughts with your group buddies!"></textarea>
-                <input type="submit" value="POST" />
+                    <input type="submit" value="POST" />
                 </div>
             }
-            if(Model.getPostsWithinGroup(Model.currentGroup.ID) != null)
+            if (Model.getPostsWithinGroup(Model.currentGroup.ID) != null)
             {
-                foreach(var m in Model.getPostsWithinGroup(Model.currentGroup.ID))
+                foreach (var m in Model.getPostsWithinGroup(Model.currentGroup.ID))
                 {
                     <p>@Model.getUserByID(m.authorID).displayName</p>
                     <p>@m.subject</p>

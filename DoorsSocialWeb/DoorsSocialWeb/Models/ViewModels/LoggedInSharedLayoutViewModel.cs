@@ -75,5 +75,10 @@ namespace DoorsSocialWeb.Models.ViewModels
             messages = messageService.getFirstMessages(userID);
             return messages;
         }
+
+        public IEnumerable<Topic> getTopics(int groupID)
+        {
+            return groupService.getTopicsForGroup(groupID);
+        }
     }
 }
