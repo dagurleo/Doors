@@ -42,9 +42,9 @@ namespace DoorsSocialWeb.Services
         /*
          * Need info on what variables will be parsed here
          */
-        public void addNewMessage()
+        public void addNewMessage(Message message)
         {
-            //TODO: Create a new message...
+            messageRepo.addNewMessage(message);
         }
     }
 }

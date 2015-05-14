@@ -10,13 +10,26 @@
 
 </head>
 <body>
-    <ul>
-        @foreach(var m in Model.messagesWithUser)            
-        {
-            <li>
-               @Model.getAuthor(m.senderID).displayName
-               @m.subject               
-            </li>
-        }    
-    </ul>    
+    
+       <section id="messageList">
+           @foreach (var m in Model.messagesWithUser)
+           {
+               <div class="singleMesage">
+                   @Model.getAuthor(m.senderID).displayName
+                   @m.subject
+               </div>
+           }    
+       </section>
+
+        <div class="newMessage">
+            @using (Html.BeginForm("SendNewMessage", "LoggedIn", FormMethod.Post, new { id = "messageForm" }))
+            {
+                <input type="hidden" name="senderId" value="@Model.currentUser.Id" />
+                <input type="hidden" name="recieverId" value="@Model.messageReciever.Id" />
+                <textarea name="subject" placeholder="Send a new Message"></textarea> 
+                <button type="submit">Send</button>
+            }
+            
+        </div>
+    
 </body>

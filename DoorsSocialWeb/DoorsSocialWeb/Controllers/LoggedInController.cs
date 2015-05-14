@@ -366,6 +366,19 @@ namespace DoorsSocialWeb.Controllers
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
 
+        public ActionResult SendNewMessage(FormCollection collection)
+        {
+            string senderId = collection["senderId"];
+            string recieverId = collection["recieverId"];
+            string subject = collection["subject"];
+            Message message = new Message { senderID = senderId, recieverID = recieverId, subject = subject, dateCreated = DateTime.Now, };
+            messageService.addNewMessage(message);
+            IEnumerable<Message> messages = messageService.getConversation(senderId, recieverId);
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+        }
+
+
+
         public ActionResult Logoff()
         {
             FormsAuthentication.SignOut();

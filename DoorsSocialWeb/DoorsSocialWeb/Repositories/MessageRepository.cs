@@ -75,9 +75,10 @@ namespace DoorsSocialWeb.Repositories
         /*
          * Need info on what variables will be parsed here
          */
-        public void addNewMessage()
+        public void addNewMessage(Message message)
         {
-            //TODO: Create a new message...
+            db.Messages.Add(message);
+            db.SaveChanges();
         }
     }
 }
