@@ -53,21 +53,11 @@
                     @if (Model.hasCurrentUserLikedPost(m.ID) == false)
                     {
 
-                        using (Html.BeginForm("addLikeToPost", "LoggedIn", FormMethod.Post, new { id = "likeForm" }))
-                        {
-                            <input type="hidden" name="userid" value="@Model.currentUser.Id" id="userId" />
-                            <input type="hidden" name="postid" value="@m.ID" id="postId" />
-                            <input type="image" src="http://icons.iconarchive.com/icons/custom-icon-design/mono-business-2/128/thumbs-up-icon.png" width="30px" height="30px" alt="submit">
-                        }
+                       <a href="@Url.Action("addLikeToPost", "LoggedIn", new {postId = m.ID})">Like</a>
                     }
                     else
                     {
-                        using (Html.BeginForm("RemoveLikeFromPost", "LoggedIn", FormMethod.Post))
-                        {
-                            <input type="hidden" name="userid" value="@Model.currentUser.Id" />
-                            <input type="hidden" name="postid" value="@m.ID" />
-                            <input type="image" src="http://icons.iconarchive.com/icons/custom-icon-design/mono-business-2/32/thumbs-down-icon.png" width="30px" height="30px" alt="submit">
-                        }
+                       <a href="@Url.Action("RemoveLikeFromPost", "LoggedIn", new {postId = m.ID})">Unlike</a> 
                     }
                 </div>
                 @if(m.authorID == Model.currentUser.Id)
