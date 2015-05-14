@@ -60,8 +60,9 @@
                 <a href="#close" title="Close" class="close">X</a>
                 <h1>Create a group</h1>
                 <input type="hidden" name="ownerid" value="@Model.currentUser.Id" />
-                
+                <p>Group name: </p>
                 <input type="text" name="groupname" />
+                <p>Group description: </p>
                 <textarea name="groupdescription"></textarea>
                 <input type="submit" value="Create Group" />
             }
