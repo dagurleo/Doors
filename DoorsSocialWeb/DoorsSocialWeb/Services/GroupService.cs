@@ -11,6 +11,7 @@ namespace DoorsSocialWeb.Services
     public class GroupService
     {
         private GroupRepository groupRepo = new GroupRepository();
+        private TopicRepository topicRepo = new TopicRepository();
         //TODO: Implement functions to deliver groups AND/OR their topics to the group/newsfeed views
         public IEnumerable<Group> getAccessibleGroups()
         {
@@ -24,7 +25,7 @@ namespace DoorsSocialWeb.Services
 
         public void addNewTopic(int groupID, string topicName)
         {
-            groupRepo.addNewTopic(groupID, topicName);
+            topicRepo.addNewTopic(groupID, topicName);
         }
         
         public Group getCurrentGroup(int id)

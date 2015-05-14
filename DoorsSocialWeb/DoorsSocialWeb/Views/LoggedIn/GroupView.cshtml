@@ -55,7 +55,7 @@
                 }
             }
             
-            @using(Html.BeginForm("ownerOfGroupCreateNewTopic", "LoggedIn", FormMethod.Post))
+            using(Html.BeginForm("ownerOfGroupCreateNewTopic", "LoggedIn", FormMethod.Post))
             {
                 <input type="hidden" name="groupid" value="@Model.currentGroup.ID" />
                 <input type="hidden" name="ownerid" value="@Model.currentGroup.groupOwnerID" />

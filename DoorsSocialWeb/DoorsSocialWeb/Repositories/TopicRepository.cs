@@ -26,19 +26,21 @@ namespace DoorsSocialWeb.Repositories
         /*
          * Return a list of posts within that topic
          * Does this belong here or in Posts ?
-         */
-        //public IEnumerable<Post> getPostsByTopicID(int topicID)
-       // {
+        public IEnumerable<Post> getPostsByTopicID(int topicID)
+        {
             
-        //}
+        }
+        */
 
         /*
          * Add new topic
          * Need info on variables to parse here.
          */
-        public void addNewTopic()
+        public void addNewTopic(int groupID, string topicName)
         {
-            //TODO: Add newTopic
+            Topic topic = new Topic { groupID = groupID, topicName = topicName };
+            db.Topics.Add(topic);
+            db.SaveChanges();
         }
     }
 }
