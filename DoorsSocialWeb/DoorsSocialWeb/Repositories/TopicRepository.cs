@@ -23,6 +23,13 @@ namespace DoorsSocialWeb.Repositories
             return listOfTopic;
         }
 
+        public Topic getTopicByID(int topicID)
+        {
+            Topic top = (from t in db.Topics
+                        where t.ID == topicID
+                        select t).SingleOrDefault();
+            return top;
+        }
 
         public IEnumerable<Topic> getTopicsForGroup(int groupId)
         {

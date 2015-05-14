@@ -36,7 +36,7 @@ namespace DoorsSocialWeb.Repositories
         {
             var currGroup = (from g in db.Groups
                              where g.ID == id
-                             select g).Single();
+                             select g).SingleOrDefault();
             return currGroup;
         }
 

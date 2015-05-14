@@ -80,6 +80,11 @@ namespace DoorsSocialWeb.Services
             groupRepo.sendGroupRequest(requestUserId, groupId, groupOwner);
         }
 
+        public Topic getTopicById(int topicID)
+        {
+            return topicRepo.getTopicByID(topicID);
+        }
+
         public IEnumerable<Topic> getTopicsForGroup(int groupId)
         {
             return topicRepo.getTopicsForGroup(groupId);
