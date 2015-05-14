@@ -67,9 +67,25 @@
     </div>
 
     <div>
-        @if (Model.userIsApprovedMember(Model.currentUser.Id))
+        @if ((Model.userIsApprovedMember(Model.currentUser.Id, Model.currentGroup.ID)))
         {
             <!-- TODO allow users to post posts and see them/likethem/commentonthem--> 
+            if(Model.getTopicsWithinGroup(Model.currentGroup.ID) != null)
+            {
+                foreach(var t in Model.getTopicsWithinGroup(Model.currentGroup.ID))
+                {
+                    <p>@t.topicName</p>
+                } 
+            }
+            else
+            {
+                 <!-- Only default topic here.-->
+                <p>Notopics?</p>
+            }
+        }
+        else
+        {
+            <p>Not approved memeber, no posts to show.</p>
         }
     </div>
 

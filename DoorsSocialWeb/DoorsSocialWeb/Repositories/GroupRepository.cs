@@ -81,16 +81,6 @@ namespace DoorsSocialWeb.Repositories
             db.SaveChanges();
         }
 
-        public IEnumerable<Topic> getTopicsForGroup(int groupId)
-        {
-            var topics = from t in db.Topics
-                         where t.groupID == groupId
-                         orderby t.topicName ascending
-                         select t;
-
-            return topics;
-        }
-
         public Topic getTopicById(int topicId)
         {
             Topic topic = (from t in db.Topics
@@ -102,6 +92,7 @@ namespace DoorsSocialWeb.Repositories
         public void deleteTopic(int topicId)
         {
             db.Topics.Remove(getTopicById(topicId));
+            db.SaveChanges();
         }
 
         public void getUserRequests()
@@ -145,7 +136,6 @@ namespace DoorsSocialWeb.Repositories
 
         public void userApprovesGroupRequest(int requestId)
         {
-
             var request = getGroupRequestById(requestId);
             addUserToGroup(request.userRequestId, request.groupID);
             db.groupRequests.Remove(request);
@@ -166,5 +156,6 @@ namespace DoorsSocialWeb.Repositories
 
             return requests;
         }
+
     }
 }

@@ -37,17 +37,16 @@ namespace DoorsSocialWeb.Models.ViewModels
             return false;
         }
 
-        public bool userIsApprovedMember(string userID)
+        public IEnumerable<ApplicationUser> getGroupMembersByGroupId(int groupID)
         {
-            foreach(var r in pendingRequests(currentGroup.ID))
+            return userService.getMembersOfCurrentGroup(groupID);
+        }
+
+        public bool userIsApprovedMember(string userID, int groupID)
+        {
+            if (userService.getMembersOfCurrentGroup(groupID).Contains(userService.getUserById(userID)))
             {
-                if (r.userRequestId == userID)
-                {
-                    if(r.userIsApproved == true)
-                    {
-                        return true;
-                    }
-                }
+                return true;
             }
             return false;
         }
@@ -61,6 +60,10 @@ namespace DoorsSocialWeb.Models.ViewModels
         {
             return userService.getUserById(userID);
         }
-        
+
+        public IEnumerable<Topic> getTopicsWithinGroup(int groupID)
+        {
+            return groupService.getTopicsForGroup(groupID);
+        }
     }
 }

@@ -22,15 +22,17 @@ namespace DoorsSocialWeb.Repositories
             List<Topic> listOfTopic = new List<Topic>();
             return listOfTopic;
         }
-        
-        /*
-         * Return a list of posts within that topic
-         * Does this belong here or in Posts ?
-        public IEnumerable<Post> getPostsByTopicID(int topicID)
+
+
+        public IEnumerable<Topic> getTopicsForGroup(int groupId)
         {
-            
+            var topics = from t in db.Topics
+                         where t.groupID == groupId
+                         orderby t.topicName ascending
+                         select t;
+
+            return topics;
         }
-        */
 
         /*
          * Add new topic
