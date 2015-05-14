@@ -46,7 +46,6 @@ namespace DoorsSocialWeb.Repositories
             db.SaveChanges();
         }
 
-
         public void addUserToGroup(string userId, int groupId)
         {
             relGroup relationship = new relGroup { memberID = userId, groupID = groupId };
