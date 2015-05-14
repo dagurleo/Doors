@@ -163,5 +163,21 @@ namespace DoorsSocialWeb.Controllers
             IEnumerable<Message> messages = messageService.getConversation(senderId, recieverId);
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
+
+        public ActionResult wallPostFromFriend()
+        {
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+        }
+
+        [HttpPost]
+        public ActionResult wallPostFromFriend(FormCollection collection)
+        {
+            string recipientUserId = collection["recipientUserId"];
+            string userID = collection["userId"];
+            string subject = collection["subject"];
+            Post newPost = new Post { authorID = userID, dateCreated = DateTime.Now, recipientId = recipientUserId, subject = subject };
+            postService.addNewPost(newPost);
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+        }
 	}
 }
