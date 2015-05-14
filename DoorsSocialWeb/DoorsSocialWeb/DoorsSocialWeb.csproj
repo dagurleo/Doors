@@ -283,6 +283,7 @@
     <Content Include="Views\LoggedIn\Messages.cshtml" />
     <Content Include="Views\Profile\Conversation.cshtml" />
     <Content Include="Views\Group\GroupView.cshtml" />
+    <Content Include="Views\Group\Topic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

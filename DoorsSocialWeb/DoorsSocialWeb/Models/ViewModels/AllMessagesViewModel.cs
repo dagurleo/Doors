@@ -10,6 +10,8 @@ namespace DoorsSocialWeb.Models.ViewModels
     {
         public IEnumerable<ApplicationUser> messageUsers { get; set; }
         public IEnumerable<Message> firstMessages { get; set; } 
+
+
         
     }
 }

@@ -45,7 +45,17 @@ namespace DoorsSocialWeb.Repositories
             return queryConversation;
         }
 
-            
+        public Message getNewestMessageForConversation(string id1, string id2)
+        {
+            var newestMessage = (from m in db.Messages
+                                 where (m.senderID == id1 && m.recieverID == id2)
+                                 || (m.senderID == id2 && m.recieverID == id1)
+                                 orderby m.dateCreated descending
+                                 select m).SingleOrDefault();
+
+            return newestMessage;
+
+        }
 
         /*
          * Returns all new messages who the user has not seen before
