@@ -14,6 +14,7 @@ namespace DoorsSocialWeb.Models.ViewModels
         public UserService userService = new UserService();
         public LikesService likeService = new LikesService();
         public CommentService commentService = new CommentService();
+        public PostService postService = new PostService();
         public IEnumerable<Post> posts { get; set; }
         public PostViewModel post { get; set; }
         public IEnumerable<Like> getLikesForPost(int postId)
@@ -24,6 +25,12 @@ namespace DoorsSocialWeb.Models.ViewModels
         public IEnumerable<ApplicationUser> getUsersWhoLikesPost(int postId)
         {
             return likeService.getUsersWhoLikedPost(postId);
+        }
+
+        //Returns all posts for newsfeed your friends made.
+        public IEnumerable<Post> getNewsFeedPosts()
+        {
+            return postService.getPostsByFriends();
         }
 
         public bool hasCurrentUserLikedPost(int postId)
