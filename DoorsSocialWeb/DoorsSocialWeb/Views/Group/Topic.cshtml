@@ -1,7 +1,7 @@
 ﻿@model DoorsSocialWeb.Models.ViewModels.TopicViewModel
 
 @{
-    
+    var groupMembers = Model.getGroupMembersByGroupId(Model.currentGroup.ID);
 }
 
 <!DOCTYPE html>
@@ -12,13 +12,14 @@
     <title></title>
 </head>
 <body>
-    <div>
-        <ul>
-            @foreach(var i in Model.topics)
-            {
-                <li>@i.topicName</li>
-            }
-        </ul>
+    <div class="userheader">
+        @foreach (var m in groupMembers)
+        {
+            <a href="@Url.Action("Profile", "Profile", new { id = m.Id })">
+                <img src="@m.displayImageUrl" width="50px" height="50px" />
+            </a>
+        }
     </div>
+    <h1>@Model.currentTopic.topicName</h1>
 </body>
 </html>
