@@ -171,8 +171,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoggedInController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -273,13 +275,13 @@
     <Content Include="Views\LoggedIn\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_LoggedInLayout.cshtml" />
     <Content Include="Views\LoggedIn\Index.cshtml" />
-    <Content Include="Views\LoggedIn\GroupView.cshtml" />
+    <Content Include="Views\Group\GroupView.cshtml" />
     <Content Include="Views\LoggedIn\CreateGroup.cshtml" />
-    <Content Include="Views\LoggedIn\Profile.cshtml" />
+    <Content Include="Views\Profile\Profile.cshtml" />
     <Content Include="Views\LoggedIn\PostPartial.cshtml" />
     <Content Include="Views\LoggedIn\Search.cshtml" />
     <Content Include="Views\LoggedIn\Messages.cshtml" />
-    <Content Include="Views\LoggedIn\Conversation.cshtml" />
+    <Content Include="Views\Profile\Conversation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

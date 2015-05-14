@@ -3,8 +3,14 @@
 @{
     Layout = null;
     var notCount = Model.getFriendRequests(Model.currentUser.Id).Count() + Model.getGroupRequestsYouAreOwnerOf().Count();
-}
 
+    bool isGroup = Request.RawUrl.Contains("GroupView");
+    int groupID = 0;
+    if (isGroup)
+    {
+        groupID = Int32.Parse(new string(Request.RawUrl.Where(c => Char.IsDigit(c)).ToArray()));
+    }
+}
 
 @section scripts{
     <script src="~/Scripts/jquery.signalR-2.1.1.js"></script>
@@ -28,18 +34,18 @@
         <div>
             <a href="#close" title="Close" class="close">X</a>
             <p>SMEGMA MESSAGES</p>
-            @if(Model.getFirstMessages(@Model.currentUser.Id)!= null)
+            @if (Model.getFirstMessages(@Model.currentUser.Id) != null)
             {
                 foreach (var m in Model.getFirstMessages(@Model.currentUser.Id))
                 {
                     <p>@m.dateCreated</p>
-                    if(m.senderID == Model.currentUser.Id)
+                    if (m.senderID == Model.currentUser.Id)
                     {
                         <p>@Model.getAuthor(m.recieverID).displayName</p>
                         <p>You sent</p>
                         <p>@m.subject</p>
                     }
-                    else if(m.recieverID == Model.currentUser.Id)
+                    else if (m.recieverID == Model.currentUser.Id)
                     {
                         <p>@Model.getAuthor(m.senderID).displayName</p>
                         <p>You recieved</p>
@@ -86,7 +92,7 @@
                                     <img src="@Model.getAuthor(m.userRequestID).displayImageUrl" />
                                     <p>@Model.getAuthor(m.userRequestID).displayName has added you!</p>
                                     <div class="decision">
-                                        <a href="@Url.Action("userApprovesFriendRequest", "LoggedIn", new { requestId = m.ID })"><input type="submit" value="Accept" class="approveFriend"/></a>
+                                        <a href="@Url.Action("userApprovesFriendRequest", "LoggedIn", new { requestId = m.ID })"><input type="submit" value="Accept" class="approveFriend" /></a>
                                         <a href="@Url.Action("userDeclinesFriendRequest", "LoggedIn", new { requestId = m.ID })"><input type="submit" value="Decline" class="declineFriend" /></a>
                                     </div>
                                 </div>
@@ -96,23 +102,23 @@
                 </div>
                 <h1>Group Requests</h1>
                 <div class="groupRequests">
-                  @if(Model.getGroupRequestsYouAreOwnerOf() != null)
-                  {
-                      foreach(var m in Model.getGroupRequestsYouAreOwnerOf())
-                      {
-                          if(m.userIsApproved == false)
-                          {
-                             <div class="request">
-                                 <img src="@Model.getAuthor(m.userRequestId).displayImageUrl" />
-                                 <p>@Model.getAuthor(m.userRequestId).displayName request to join @Model.getGroupById(m.groupID).groupName</p>
-                                 <div class="decision">
-                                     <a href="@Url.Action("userAcceptsGroupRequest", "LoggedIn", new { requestId = m.id })"><input type="submit" value="Accept" class="approveFriend" /></a>
-                                     <a href="@Url.Action("userDeclinesGroupRequest", "LoggedIn", new { requestId = m.id })"><input type="submit" value="Decline" class="declineFriend" /></a>
-                                 </div>
-                             </div>
-                          }
-                      }
-                  }
+                    @if (Model.getGroupRequestsYouAreOwnerOf() != null)
+                    {
+                        foreach (var m in Model.getGroupRequestsYouAreOwnerOf())
+                        {
+                            if (m.userIsApproved == false)
+                            {
+                                <div class="request">
+                                    <img src="@Model.getAuthor(m.userRequestId).displayImageUrl" />
+                                    <p>@Model.getAuthor(m.userRequestId).displayName request to join @Model.getGroupById(m.groupID).groupName</p>
+                                    <div class="decision">
+                                        <a href="@Url.Action("userAcceptsGroupRequest", "LoggedIn", new { requestId = m.id })"><input type="submit" value="Accept" class="approveFriend" /></a>
+                                        <a href="@Url.Action("userDeclinesGroupRequest", "LoggedIn", new { requestId = m.id })"><input type="submit" value="Decline" class="declineFriend" /></a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
                 </div>
             </div>
         </div>
@@ -122,15 +128,15 @@
         <div class="loginLogo">
             <a href='@Url.Action("Index", "LoggedIn")'>
                 <img src="http://www.ads.menn.is/logo.png" height="35">
-            </a>           
-        </div>      
-    <div>
-        @using (Html.BeginForm("Search", "LoggedIn", FormMethod.Post, new { role = "form" }))
-        {
-            <input type="text" name="searchTerm" />
-        }
-    </div>
-    <a href="#messageCenter"><div class="messages"></div></a>
+            </a>
+        </div>
+        <div>
+            @using (Html.BeginForm("Search", "LoggedIn", FormMethod.Post, new { role = "form" }))
+            {
+                <input type="text" name="searchTerm" />
+            }
+        </div>
+        <a href="#messageCenter"><div class="messages"></div></a>
         <a href="#notificationCenter">
             <div class="notification"></div>
             @if (notCount != null && notCount != 0)
@@ -139,7 +145,7 @@
             }
         </a>
 
-    @Html.ActionLink("Sign Out", "Logoff", "LoggedIn", null, new { @class = "logout" })
+        @Html.ActionLink("Sign Out", "Logoff", "LoggedIn", null, new { @class = "logout" })
 
 
         <div class="notCount"></div>
@@ -149,30 +155,39 @@
             <h4>Groups</h4>
         </div>
         <ul class="groupList">
-        @if(Model.groups != null)
-        {
-            if(Model.groups.Count() == 0)
+            @if (Model.groups != null)
             {
-                <p>You are not a member of any group!</p>
+                if (Model.groups.Count() == 0)
+                {
+                    <p>You are not a member of any group!</p>
+                }
+                foreach (var m in Model.groups)
+                {
+                    <li>
+                        <img src="http://www.ads.menn.is/groups.png" height="15">
+                        @Html.ActionLink(m.groupName, "GroupView", "Group", new { id = m.ID }, new { @class = "aGroup" })
+                    </li>
+                    if (m.ID == groupID)
+                    {
+                        foreach (var t in Model.getTopics(groupID))
+                        {
+                            <li>
+                                @Html.ActionLink(t.topicName, "TopicView", "Group", new { id = t.ID }, new { @class = "aGroup" })
+                            </li>
+                        }
+                    }
+                }
             }
-            foreach(var m in Model.groups)
-            { 
-                <li>
-                    <img src="http://www.ads.menn.is/groups.png" height="15">
-                    @Html.ActionLink(m.groupName, "GroupView", "LoggedIn", new { id = m.ID }, new { @class = "aGroup" })
-                </li>
-            }
-        }
         </ul>
         <div class="createGroup">
             <a href="#createGroup"><h4>Create a Group</h4></a>
         </div>
-      
+
     </div>
 
     <div class="rightPanel">
         <div class="profileSnippet">
-            <a href="@Url.Action("Profile", "LoggedIn", new { id = Model.currentUser.Id })">
+            <a href="@Url.Action("Profile", "Profile", new { id = Model.currentUser.Id })">
                 @if (Model.currentUser.displayImageUrl != null)
                 {
 
@@ -201,7 +216,7 @@
             }
             @foreach (var m in Model.friends)
             {
-                <a href="@Url.Action("Profile", "LoggedIn", new { id = m.Id})">
+                <a href="@Url.Action("Profile", "Profile", new { id = m.Id})">
                     <div class="perFriend">
 
                         @if (m.displayImageUrl != null)

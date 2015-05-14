@@ -22,7 +22,7 @@
 <body>      
     <div id="editProfile" class="modalDialog">
         <div>
-            @using (Html.BeginForm("EditProfile", "LoggedIn", FormMethod.Post))
+            @using (Html.BeginForm("EditProfile", "Profile", FormMethod.Post))
             {
                 
                 
@@ -69,7 +69,7 @@
         </div>
     </div>
     <div class="@profileDiv">
-        <a href="@Url.Action("Conversation", "LoggedIn", new { messageRecieverId = Model.friend.Id })">Send Message</a>
+        <a href="@Url.Action("Conversation", "Profile", new { messageRecieverId = Model.friend.Id })">Send Message</a>
         <div class="profileImage">
             <img src="@Model.friend.displayImageUrl" alt="Profile pic" />
             @if(Model.friend.Id == Model.currentUser.Id)
@@ -109,7 +109,7 @@
             {
                 if(!(Model.isUserPendingRequest(Model.friend.Id)))
                 {
-                    using (Html.BeginForm("requestFriendship", "LoggedIn", FormMethod.Post))
+                    using (Html.BeginForm("requestFriendship", "Profile", FormMethod.Post))
                     {
                         <input type="hidden" name="userid" value="@Model.currentUser.Id" />
                         <input type="hidden" name="friendid" value="@Model.friend.Id" />
@@ -124,7 +124,7 @@
             }
             else if ((Model.userIsFriend(Model.friend.Id)) && (Model.friend.Id != Model.currentUser.Id))
             {
-                using (Html.BeginForm("removeFriend", "LoggedIn", FormMethod.Post))
+                using (Html.BeginForm("removeFriend", "Profile", FormMethod.Post))
                 {
                     <input type="hidden" name="userid" value="@Model.currentUser.Id" />
                     <input type="hidden" name="friendid" value="@Model.friend.Id" />
@@ -167,7 +167,7 @@
                                 <p style="font-weight: bold">@m.dateCreated</p>
                             </div>
                             <div class="postImage">
-                                <a href="@Url.Action("Profile", "LoggedIn", new { id = m.authorID })">
+                                <a href="@Url.Action("Profile", "Profile", new { id = m.authorID })">
                                     <img src="@Model.getAuthor(m.authorID).displayImageUrl" alt="Profile pic" />
                                 </a>
                             </div>

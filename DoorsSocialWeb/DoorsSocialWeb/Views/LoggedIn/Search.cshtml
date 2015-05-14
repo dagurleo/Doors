@@ -16,7 +16,7 @@
             @foreach (var i in Model.usersSearched)
             {
                 <li>
-                    <a href="@Url.Action("Profile", "LoggedIn", new { id = i.Id })">
+                    <a href="@Url.Action("Profile", "Profile", new { id = i.Id })">
                         <div>
                             <div>
                                 <img src="@i.displayImageUrl" alt="@i.displayName image" height="80px"/>
@@ -33,7 +33,7 @@
             <ul>
                 @foreach (var i in Model.groupsSearched)
                 {
-                    <a href="@Url.Action("GroupView", "LoggedIn", new { id = i.ID })">
+                    <a href="@Url.Action("GroupView", "Group", new { id = i.ID })">
                         <li>@i.groupName</li>
                     </a>
                 }

@@ -15,7 +15,6 @@ using DoorsSocialWeb.Repositories;
 using DoorsSocialWeb.Services;
 using DoorsSocialWeb.Models.EntityModels;
 using DoorsSocialWeb.Models.ViewModels;
-using DoorsSocialWeb.Services;
 using System.Net;
 using System.IO;
 namespace DoorsSocialWeb.Controllers
@@ -45,16 +44,7 @@ namespace DoorsSocialWeb.Controllers
             return View(shared);
         }
 
-        public ActionResult GroupView(int id)
-        {
-            var shared = new GroupViewModel();
-            shared.groups = groupService.getAccessibleGroups();
-            shared.currentUser = userService.getCurrentUser();
-            shared.friends = userService.getFriendsOfCurrentUser();
-            shared.currentGroup = groupService.getCurrentGroup(id);
-            shared.currentGroupTopics = groupService.getTopicsForGroup(shared.currentGroup.ID);
-            return View(shared);
-        }
+       
 
 
         public ActionResult CreateGroup()
@@ -76,41 +66,7 @@ namespace DoorsSocialWeb.Controllers
             return RedirectToAction("GroupView", "LoggedIn", new { id = theGroup.ID });
         }
 
-        public ActionResult EditProfile()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult EditProfile(FormCollection collection)
-        {
-            string displayName = collection["displayname"];
-            string displayAbout = collection["about"];
-            string displayEmail = collection["displayemail"];
-            string displayPhone = collection["displayphone"];
-
-            ApplicationUser userInfo = new ApplicationUser { displayAbout = displayAbout, displayName = displayName, displayPhoneNumber = displayPhone, displayEmail = displayEmail };
-            userService.editProfile(userInfo);
-
-            return RedirectToAction("Profile", "LoggedIn", new { id = userService.getCurrentUser().Id });
-        }
-
-        public ActionResult Profile(string id)
-        {
-
-            var shared = new ProfileViewModel();
-            shared.groups = groupService.getAccessibleGroups();
-            shared.currentUser = userService.getCurrentUser();
-            shared.friends = userService.getFriendsOfCurrentUser();
-            shared.friend = userService.getUserById(id);
-
-
-            var postRepo = new PostRepository();
-            shared.posts = postRepo.getAllPostByID(id);
-            //shared.allUserTextPosts = postRepo.getAllTextPostsByID(id);
-            //shared.allUserImagePosts = postRepo.getAllImagePostsByID(id);
-
-            return View(shared);
-        }
+      
 
         public ActionResult Post()
         {
@@ -181,22 +137,7 @@ namespace DoorsSocialWeb.Controllers
             commentService.removeComment(commentId);
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
-
-        public ActionResult requestFriendship()
-        {
-            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
-        }
-
-        [HttpPost]
-        public ActionResult requestFriendship(FormCollection collection)
-        {
-            string currentUserId = collection["userid"];
-            string friendUserId = collection["friendid"];
-            userService.requestFriend(currentUserId, friendUserId);
-            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
-        }
-
-        
+               
         public ActionResult userApprovesFriendRequest(int requestId)
         {
             
@@ -222,21 +163,7 @@ namespace DoorsSocialWeb.Controllers
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri + "#notificationCenter");
         }
 
-        public ActionResult removeFriend()
-        {
-            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
-        }
-
-        [HttpPost]
-        public ActionResult removeFriend(FormCollection collection)
-        {
-            string currentUserId = collection["userid"];
-            string friendUserId = collection["friendid"];
-
-            userService.removeRelations(currentUserId, friendUserId);
-            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
-        }
-
+       
         [HttpPost]
         public ActionResult Search(FormCollection collection)
         {
@@ -258,120 +185,13 @@ namespace DoorsSocialWeb.Controllers
         }
 
 
-        public ActionResult requestToJoinGroup()
-        {
-            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
-        }
+       
 
-        [HttpPost]
-        public ActionResult requestToJoinGroup(FormCollection collection)
-        {
-            string requestUserId = collection["userid"];
-            string groupId = collection["groupid"];
-            string groupOwner = collection["groupOwner"];
-            var groupIdInt = Int32.Parse(groupId);
+  
 
-            groupService.sendGroupRequest(requestUserId, groupIdInt, groupOwner);
-            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
-        }
+        
 
-        [HttpPost]
-        public ActionResult Profile(HttpPostedFileBase file)
-        {
-
-            if (file.ContentLength > 0)
-            {
-                string imageID = userService.getCurrentUser().Id;
-                UploadToFtp(file, imageID);
-
-                string URL = "http://www.ads.menn.is/doors/images/" + imageID;
-                userService.editProfilePicture(URL);
-            }
-
-            
-
-            return RedirectToAction("Profile");
-        }
-
-        void UploadToFtp(HttpPostedFileBase uploadfile, string imageID)
-        {
-            var uploadurl = "ftp://ads.menn.is/public_html/doors/images";
-            var uploadfilename = uploadfile.FileName;
-            var username = "ads.menn.is";
-            var password = "5zXvxNtyTRDvp3uE";
-            Stream streamObj = uploadfile.InputStream;
-            byte[] buffer = new byte[uploadfile.ContentLength];
-            streamObj.Read(buffer, 0, buffer.Length);
-            streamObj.Close();
-            streamObj = null;
-            string ftpurl = String.Format("{0}/{1}", uploadurl, imageID);
-            var requestObj = FtpWebRequest.Create(ftpurl) as FtpWebRequest;
-            requestObj.Method = WebRequestMethods.Ftp.UploadFile;
-            requestObj.Credentials = new NetworkCredential(username, password);
-            Stream requestStream = requestObj.GetRequestStream();
-            requestStream.Write(buffer, 0, buffer.Length);
-            requestStream.Flush();
-            requestStream.Close();
-            requestObj = null;
-        }
-
-        public ActionResult Conversation(string messageRecieverId)
-        {
-            var shared = new MessageViewModel();
-            shared.groups = groupService.getAccessibleGroups();
-            shared.currentUser = userService.getCurrentUser();
-            shared.friends = userService.getFriendsOfCurrentUser();
-            shared.messageReciever = userService.getUserById(messageRecieverId);
-            shared.messagesWithUser = messageService.getConversation(userService.getCurrentUser().Id, messageRecieverId);
-            return View(shared);
-        }
-
-        public ActionResult ownerOfGroupCreateNewTopic()
-        {
-            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
-        }
-
-        [HttpPost]
-        public ActionResult ownerOfGroupCreateNewTopic(FormCollection collection)
-        {
-            string groupIDstring = collection["groupid"];
-            string ownerID = collection["ownerid"];
-            string topicName = collection["topicName"];
-            int groupID = Int32.Parse(groupIDstring);
-            groupService.addNewTopic(groupID, topicName);
-
-            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
-        }
-
-        public ActionResult SendNewMessage(FormCollection collection)
-        {
-            string senderId = collection["senderId"];
-            string recieverId = collection["recieverId"];
-            string subject = collection["subject"];
-            Message message = new Message { senderID = senderId, recieverID = recieverId, subject = subject, dateCreated = DateTime.Now, };
-            messageService.addNewMessage(message);
-            IEnumerable<Message> messages = messageService.getConversation(senderId, recieverId);
-            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
-        }
-
-        public ActionResult approvedUsersAddNewPostInGroup()
-        {
-            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
-        }
-
-        [HttpPost]
-        public ActionResult approvedUsersAddNewPostInGroup(FormCollection collection)
-        {
-            string groupIDstring = collection["groupid"];
-            string topicIDstring = collection["topicid"];
-            string userid = collection["userid"];
-            string subject = collection["subject"];
-            int groupID = Int32.Parse(groupIDstring);
-            int topicID = Int32.Parse(topicIDstring);
-            Post post = new Post { authorID = userid, dateCreated = DateTime.Now, groupId = groupID, groupTopicID = topicID, subject = subject };
-            postService.addNewPost(post);
-            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
-        }
+        
 
 
         public ActionResult Logoff()

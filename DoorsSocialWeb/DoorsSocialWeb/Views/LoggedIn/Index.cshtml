@@ -35,7 +35,7 @@
                 <div class="postDate">
                     <p style="font-weight: bold">@m.dateCreated</p>
                 </div>
-                <a href="@Url.Action("Profile", "LoggedIn", new { id = m.authorID })">
+                <a href="@Url.Action("Profile", "Profile", new { id = m.authorID })">
                     <div class="postImage">
 
                         <img src="@Model.getAuthor(m.authorID).displayImageUrl" alt="Profile pic" />
@@ -72,7 +72,7 @@
                             <div class="commentDate">
                                 <p style="font-weight: bold">@c.dateCreated</p>
                             </div>
-                            <a href="@Url.Action("Profile", "LoggedIn", new { id = c.authorID })">
+                            <a href="@Url.Action("Profile", "Profile", new { id = c.authorID })">
                                 <div class="commentImage">
                                         <img src="@Model.getAuthor(c.authorID).displayImageUrl" alt="Profile pic" />                                        
                                 </div>

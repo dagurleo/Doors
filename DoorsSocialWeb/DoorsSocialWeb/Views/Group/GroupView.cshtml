@@ -16,7 +16,7 @@
 
         @foreach (var m in groupMembers)
         {
-            <a href="@Url.Action("Profile", "LoggedIn", new { id = m.Id })">
+            <a href="@Url.Action("Profile", "Profile", new { id = m.Id })">
                 <img src="@m.displayImageUrl" width="50px" height="50px" />
             </a>
         }
@@ -37,7 +37,7 @@
     <div>
         @if ((!(Model.userIsMember(Model.currentUser.Id)) && Model.currentUser.Id != Model.currentGroup.groupOwnerID) && Model.userIsPendingMember(Model.currentUser.Id) == false)
         {
-            using (Html.BeginForm("requestToJoinGroup", "LoggedIn", FormMethod.Post))
+            using (Html.BeginForm("requestToJoinGroup", "Group", FormMethod.Post))
             {
                 <input type="hidden" name="userid" value="@Model.currentUser.Id" />
                 <input type="hidden" name="groupid" value="@Model.currentGroup.ID" />
@@ -69,7 +69,7 @@
                 }
             }
 
-            using (Html.BeginForm("ownerOfGroupCreateNewTopic", "LoggedIn", FormMethod.Post))
+            using (Html.BeginForm("ownerOfGroupCreateNewTopic", "Group", FormMethod.Post))
             {
                 <input type="hidden" name="groupid" value="@Model.currentGroup.ID" />
                 <input type="hidden" name="ownerid" value="@Model.currentGroup.groupOwnerID" />
@@ -83,7 +83,7 @@
     <div>
         @if ((Model.userIsApprovedMember(Model.currentUser.Id, Model.currentGroup.ID)))
         {
-            using (Html.BeginForm("approvedUsersAddNewPostInGroup", "LoggedIn", FormMethod.Post))
+            using (Html.BeginForm("approvedUsersAddNewPostInGroup", "Group", FormMethod.Post))
             {
                 <input type="hidden" name="groupid" value="@Model.currentGroup.ID" />
                 <input type="hidden" name="userid" value="@Model.currentUser.Id" />
@@ -106,7 +106,7 @@
                         <div class="postDate">
                             <p style="font-weight: bold">@m.dateCreated</p>
                         </div>
-                        <a href="@Url.Action("Profile", "LoggedIn", new { id = m.authorID })">
+                        <a href="@Url.Action("Profile", "Profile", new { id = m.authorID })">
                             <div class="postImage">
 
                                 <img src="@Model.getAuthor(m.authorID).displayImageUrl" alt="Profile pic" />
@@ -129,7 +129,7 @@
                                     <div class="commentDate">
                                         <p style="font-weight: bold">@c.dateCreated</p>
                                     </div>
-                                    <a href="@Url.Action("Profile", "LoggedIn", new { id = c.authorID })">
+                                    <a href="@Url.Action("Profile", "Profile", new { id = c.authorID })">
                                         <div class="commentImage">
                                                 <img src="@Model.getAuthor(c.authorID).displayImageUrl" alt="Profile pic" />                                        
                                         </div>
