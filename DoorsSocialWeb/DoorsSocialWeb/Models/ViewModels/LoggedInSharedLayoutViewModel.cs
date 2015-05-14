@@ -80,5 +80,10 @@ namespace DoorsSocialWeb.Models.ViewModels
         {
             return groupService.getTopicsForGroup(groupID);
         }
+
+        public IEnumerable<ApplicationUser> getUsersYouHaveChattedTo()
+        {
+            return messageService.getUsersYouHaveChattedTo();
+        }
     }
 }

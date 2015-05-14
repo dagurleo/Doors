@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using DoorsSocialWeb.Repositories;
 using DoorsSocialWeb.Models.EntityModels;
+using DoorsSocialWeb.Models;
 
 namespace DoorsSocialWeb.Services
 {
@@ -45,6 +46,11 @@ namespace DoorsSocialWeb.Services
         public void addNewMessage(Message message)
         {
             messageRepo.addNewMessage(message);
+        }
+
+        public IEnumerable<ApplicationUser> getUsersYouHaveChattedTo()
+        {
+            return messageRepo.getUsersYouHaveChattedTo();
         }
     }
 }
