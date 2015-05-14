@@ -11,6 +11,7 @@ namespace DoorsSocialWeb.Models.ViewModels
         public Group currentGroup { get; set; }
         public IEnumerable<Topic> topics { get; set; }
         public IEnumerable<Post> posts { get; set; }
+        public Topic currentTopic { get; set; }
 
     }
 }
