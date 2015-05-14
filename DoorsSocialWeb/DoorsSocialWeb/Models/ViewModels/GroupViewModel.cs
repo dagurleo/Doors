@@ -12,6 +12,7 @@ namespace DoorsSocialWeb.Models.ViewModels
         public Group currentGroup { get; set; }
         public GroupService groupService = new GroupService();
         public UserService userService = new UserService();
+        public PostService postService = new PostService();
         public IEnumerable<Post> groupPosts { get; set; }
         public IEnumerable<Topic> currentGroupTopics { get; set; }
 
@@ -64,6 +65,11 @@ namespace DoorsSocialWeb.Models.ViewModels
         public IEnumerable<Topic> getTopicsWithinGroup(int groupID)
         {
             return groupService.getTopicsForGroup(groupID);
+        }
+
+        public IEnumerable<Post> getPostsWithinGroup(int groupID)
+        {
+            return postService.getAllGroupPostsByGroupID(groupID);
         }
     }
 }

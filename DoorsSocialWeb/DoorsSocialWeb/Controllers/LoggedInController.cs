@@ -353,7 +353,7 @@ namespace DoorsSocialWeb.Controllers
             IEnumerable<Message> messages = messageService.getConversation(senderId, recieverId);
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
-        /*
+
         public ActionResult approvedUsersAddNewPostInGroup()
         {
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
@@ -363,9 +363,16 @@ namespace DoorsSocialWeb.Controllers
         public ActionResult approvedUsersAddNewPostInGroup(FormCollection collection)
         {
             string groupIDstring = collection["groupid"];
-            string topicID = collection["t"]
+            string topicIDstring = collection["topicid"];
+            string userid = collection["userid"];
+            string subject = collection["subject"];
+            int groupID = Int32.Parse(groupIDstring);
+            int topicID = Int32.Parse(topicIDstring);
+            Post post = new Post { authorID = userid, dateCreated = DateTime.Now, groupId = groupID, groupTopicID = topicID, subject = subject };
+            postService.addNewPost(post);
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
-        */
+
 
         public ActionResult Logoff()
         {

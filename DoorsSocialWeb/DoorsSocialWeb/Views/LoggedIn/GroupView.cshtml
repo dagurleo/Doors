@@ -72,16 +72,29 @@
             using(Html.BeginForm("approvedUsersAddNewPostInGroup", "LoggedIn", FormMethod.Post))
             {
                 <input type="hidden" name="groupid" value="@Model.currentGroup.ID" />
-                <select>    
-                @foreach(var t in Model.getTopicsWithinGroup(Model.currentGroup.ID))
+                <input type="hidden" name="userid" value="@Model.currentUser.Id" />
+                <select name="topicid">
+                    @foreach (var t in Model.getTopicsWithinGroup(Model.currentGroup.ID))
                     {
-                        <option  value="@t.ID">@t.topicName</option>
+                        <option value="@t.ID">@t.topicName</option>
                     }
                 </select>
                 <div class="createPost">
                     <textarea name="subject" placeholder="Share your thoughts with your group buddies!"></textarea>
                 <input type="submit" value="POST" />
                 </div>
+            }
+            if(Model.getPostsWithinGroup(Model.currentGroup.ID) != null)
+            {
+                foreach(var m in Model.getPostsWithinGroup(Model.currentGroup.ID))
+                {
+                    <p>@Model.getUserByID(m.authorID).displayName</p>
+                    <p>@m.subject</p>
+                }
+            }
+            else
+            {
+                <p>NoPostsToShow</p>
             }
         }
         else
