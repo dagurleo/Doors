@@ -349,6 +349,23 @@ namespace DoorsSocialWeb.Controllers
             return View(shared);
         }
 
+        public ActionResult ownerOfGroupCreateNewTopic()
+        {
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+        }
+
+        [HttpPost]
+        public ActionResult ownerOfGroupCreateNewTopic(FormCollection collection)
+        {
+            string groupIDstring = collection["groupid"];
+            string ownerID = collection["ownerid"];
+            string topicName = collection["topicName"];
+            int groupID = Int32.Parse(groupIDstring);
+            groupService.addNewTopic(groupID, topicName);
+
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+        }
+
         public ActionResult Logoff()
         {
             FormsAuthentication.SignOut();

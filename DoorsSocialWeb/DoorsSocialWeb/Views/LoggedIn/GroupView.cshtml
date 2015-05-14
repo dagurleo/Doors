@@ -19,6 +19,7 @@
         }
     </div>
 
+
     <div>
         @if ((!(Model.userIsMember(Model.currentUser.Id)) && Model.currentUser.Id != Model.currentGroup.groupOwnerID) && Model.userIsPendingMember(Model.currentUser.Id) == false)
         {
@@ -53,13 +54,22 @@
                     }
                 }
             }
+            
+            @using(Html.BeginForm("ownerOfGroupCreateNewTopic", "LoggedIn", FormMethod.Post))
+            {
+                <input type="hidden" name="groupid" value="@Model.currentGroup.ID" />
+                <input type="hidden" name="ownerid" value="@Model.currentGroup.groupOwnerID" />
+                <p>Topic name: </p>
+                <input type="text" name="topicName" value="Topic name" />
+                <input type="submit" value="addtopic" />
+            }
         }
     </div>
 
     <div>
         @if (Model.userIsApprovedMember(Model.currentUser.Id))
         {
-            <!-- TODO allow users to post posts and see them/likethem/commentonthem-->
+            <!-- TODO allow users to post posts and see them/likethem/commentonthem--> 
         }
     </div>
 

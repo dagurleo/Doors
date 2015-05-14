@@ -21,6 +21,11 @@ namespace DoorsSocialWeb.Services
         {
             groupRepo.addNewGroup(group);
         }
+
+        public void addNewTopic(int groupID, string topicName)
+        {
+            groupRepo.addNewTopic(groupID, topicName);
+        }
         
         public Group getCurrentGroup(int id)
         {

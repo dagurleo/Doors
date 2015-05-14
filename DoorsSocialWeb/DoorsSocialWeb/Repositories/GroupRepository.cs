@@ -44,8 +44,8 @@ namespace DoorsSocialWeb.Repositories
         {
             db.Groups.Add(newGroup);
             db.SaveChanges();
-
         }
+
 
         public void addUserToGroup(string userId, int groupId)
         {
