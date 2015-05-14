@@ -161,7 +161,7 @@
                         foreach (var t in Model.getTopics(groupID))
                         {
                             <li>
-                                @Html.ActionLink(t.topicName, "TopicView", "Group", new { id = t.ID }, new { @class = "aGroup" })
+                                @Html.ActionLink(t.topicName, "Topic", "Group", new { id = t.ID }, new { @class = "aGroup" })
                             </li>
                         }
                     }

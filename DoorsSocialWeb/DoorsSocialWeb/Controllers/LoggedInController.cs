@@ -181,16 +181,6 @@ namespace DoorsSocialWeb.Controllers
             }
         }
 
-
-       
-
-  
-
-        
-
-        
-
-
         public ActionResult Logoff()
         {
             FormsAuthentication.SignOut();
