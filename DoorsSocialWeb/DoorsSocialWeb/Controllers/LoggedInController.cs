@@ -141,40 +141,17 @@ namespace DoorsSocialWeb.Controllers
         }
 
 
-        /*
-        public ActionResult addLikeToPost()
-        {
-            return RedirectToAction("Index", "LoggedIn");
-        }
-        */
-        [HttpPost]
-        public ActionResult addLikeToPost(FormCollection collection)
-        {
-            var shared = new IndexViewModel();
-            shared.groups = groupService.getAccessibleGroups();
-            shared.currentUser = userService.getCurrentUser();
-            shared.friends = userService.getFriendsOfCurrentUser();
-
-            string userId = collection["userid"];
-            string postIdString = collection["postid"];
-            int postId = Int32.Parse(postIdString);
-            likeService.addLikeOnPost(userId, postId);
-            var theLike = new Like { authorID = userId, postID = postId, commentID = 0 };
-            return Json(theLike, JsonRequestBehavior.AllowGet);
+     
+        
+        public ActionResult addLikeToPost(int postId)
+        {                       
+            likeService.addLikeOnPost(postId);
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
 
-        public ActionResult RemoveLikeFromPost()
+        public ActionResult RemoveLikeFromPost(int postId)
         {
-            return RedirectToAction("Index", "LoggedIn");
-        }
-
-        [HttpPost]
-        public ActionResult RemoveLikeFromPost(FormCollection collection)
-        {
-            string userId = collection["userid"];
-            string postIdString = collection["postid"];
-            int postId = Int32.Parse(postIdString);
-            likeService.removeLikeOnPost(userId, postId);
+            likeService.removeLikeOnPost(postId);
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
 

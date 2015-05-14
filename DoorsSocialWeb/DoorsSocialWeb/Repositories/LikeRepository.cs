@@ -10,7 +10,7 @@ namespace DoorsSocialWeb.Repositories
     public class LikeRepository
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        private UserRepository userRepo = new UserRepository();
         public IEnumerable<Like> getLikesOnPost(int postId)
         {
             var likes = from l in db.Likes
@@ -29,9 +29,9 @@ namespace DoorsSocialWeb.Repositories
             return likes;
         }
 
-        public void addLikeToPost(string userId, int postId)
-        {
-            Like newLike = new Like { authorID = userId, postID = postId, commentID = 0 };
+        public void addLikeToPost(int postId)
+        {            
+            Like newLike = new Like { authorID = userRepo.getCurrentUser().Id, postID = postId, commentID = 0 };
             db.Likes.Add(newLike);
             db.SaveChanges();
         }
@@ -46,11 +46,12 @@ namespace DoorsSocialWeb.Repositories
             return users;
         }
 
-        public void removeLikeOnPost(string userId, int postId)
+        public void removeLikeOnPost(int postId)
         {
+            var currentUserId = userRepo.getCurrentUser().Id;
             Like likeToRemove = (from l in db.Likes
                                  where l.postID == postId &&
-                                 l.authorID == userId
+                                 l.authorID == currentUserId
                                  select l).SingleOrDefault();
             if (likeToRemove != null)
             {
