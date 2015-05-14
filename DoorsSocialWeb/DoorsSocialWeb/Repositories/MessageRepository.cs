@@ -62,6 +62,7 @@ namespace DoorsSocialWeb.Repositories
                          where m.recieverID == currentUserID
                          join u in db.Users
                          on m.senderID equals u.Id
+                         orderby m.dateCreated descending
                          select u).Distinct();
                                           
             return users;

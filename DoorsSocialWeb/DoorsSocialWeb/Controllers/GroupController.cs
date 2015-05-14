@@ -48,7 +48,9 @@ namespace DoorsSocialWeb.Controllers
             shared.groups = groupService.getAccessibleGroups();
             shared.currentUser = userService.getCurrentUser();
             shared.friends = userService.getFriendsOfCurrentUser();
-            shared.currentGroup = groupService.getCurrentGroup(id);
+            shared.currentTopic = groupService.getTopicById(id);
+            shared.currentGroup = groupService.getCurrentGroup(shared.currentTopic.groupID);
+            
             shared.topics = groupService.getTopicsForGroup(shared.currentGroup.ID);
             return View(shared);
         }
