@@ -85,5 +85,10 @@ namespace DoorsSocialWeb.Models.ViewModels
         {
             return messageService.getUsersYouHaveChattedTo();
         }
+
+        public Message getNewestMessageForConversation(string id1, string id2)
+        {
+            return messageService.getNewestMessageForConversation(id1, id2);
+        }
     }
 }

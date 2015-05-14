@@ -37,7 +37,13 @@
             <ul>
                 @foreach (var i in Model.getUsersYouHaveChattedTo())
                 {
-                    <li>@i.displayName</li>
+                    <div class="singleUserMessage">
+                        <a href="@Url.Action("Conversation", "Profile", new { messageRecieverId = i.Id })">
+                            <h2>@i.displayName</h2>
+                            <p>@Model.getNewestMessageForConversation(Model.currentUser.Id, i.Id).subject</p>
+                        </a>
+                    </div>
+                    
                 }
             </ul>
         </div>

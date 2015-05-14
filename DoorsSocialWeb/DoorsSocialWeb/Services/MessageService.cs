@@ -52,5 +52,10 @@ namespace DoorsSocialWeb.Services
         {
             return messageRepo.getUsersYouHaveChattedTo();
         }
+
+        public Message getNewestMessageForConversation(string id1, string id2)
+        {
+            return messageRepo.getNewestMessageForConversation(id1, id2);
+        }
     }
 }
