@@ -2,6 +2,7 @@
 
 @{
     Layout = null;
+    var notCount = Model.getFriendRequests(Model.currentUser.Id).Count() + Model.getGroupRequestsYouAreOwnerOf().Count();
 }
 
 <!DOCTYPE html>
@@ -113,21 +114,26 @@
         <div class="loginLogo">
             <a href='@Url.Action("Index", "LoggedIn")'>
                 <img src="http://www.ads.menn.is/logo.png" height="35">
-            </a>
-           
-            </div>
-        <div>
-            @using (Html.BeginForm("Search", "LoggedIn", FormMethod.Post, new { role = "form" }))
-            {
-                <input type="text" name="searchTerm" />
-            }
-        </div>
-        <a href="#messageCenter"><div class="messages"></div></a>
-        <a href="#notificationCenter"><div class="notification"></div></a>
-            @Html.ActionLink("Sign Out","Logoff","LoggedIn",null,new { @class = "logout" })
-        </div>
-    
+            </a>           
+        </div>      
+    <div>
+        @using (Html.BeginForm("Search", "LoggedIn", FormMethod.Post, new { role = "form" }))
+        {
+            <input type="text" name="searchTerm" />
+        }
+    </div>
+    <a href="#messageCenter"><div class="messages"></div></a>
+    <a href="#notificationCenter"><div class="notification"></div></a>
+    @Html.ActionLink("Sign Out","Logoff","LoggedIn",null,new { @class = "logout" })
 
+    @if(notCount != null && notCount != 0)
+    {
+        <div class="notificationsNo"><p>@notCount</p></div>
+    }
+
+
+        <div class="notCount"></div>
+    </div>
     <div class="leftPanel">
         <div id="groupHeader">
             <h4>Groups</h4>
@@ -156,19 +162,21 @@
 
     <div class="rightPanel">
         <div class="profileSnippet">
-            @if(Model.currentUser.displayImageUrl != null)
-            {
-                
-                <a href="@Url.Action("Profile", "LoggedIn", new { id = Model.currentUser.Id })">
-                    <img src="@Model.currentUser.displayImageUrl" alt="Theodor">
-                </a>
-                
-            }
-            else
-            {
-                <img src="http://fc07.deviantart.net/fs71/f/2012/357/7/7/profile_picture_by_ospider-d5ovoc2.jpg" alt="Theodor">
+            <a href="@Url.Action("Profile", "LoggedIn", new { id = Model.currentUser.Id })">
+                @if (Model.currentUser.displayImageUrl != null)
+                {
 
-            }
+
+                    <img src="@Model.currentUser.displayImageUrl" alt="Theodor">
+
+
+                }
+                else
+                {
+                    <img src="http://fc07.deviantart.net/fs71/f/2012/357/7/7/profile_picture_by_ospider-d5ovoc2.jpg" alt="Theodor">
+
+                }
+            </a>
             <h3> @Model.currentUser.displayName </h3>
         </div>
         <div class="breaker"></div>
