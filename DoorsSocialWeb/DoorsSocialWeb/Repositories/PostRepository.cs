@@ -48,6 +48,7 @@ namespace DoorsSocialWeb.Repositories
 
         /*
          * Returns all text posts, for newsfeed filtering
+         * THIS IS WRONG
          */
         public IEnumerable<Post> getAllTextPosts()
         {
@@ -63,7 +64,9 @@ namespace DoorsSocialWeb.Repositories
         public IEnumerable<Post> getAllPostByID(string userID)
         {
             var queryAllPostsMadeByUser = (from post in db.Posts
-                                           where post.authorID == userID
+                                           where post.authorID == userID &&
+                                           post.groupId == 0
+                                           orderby post.dateCreated descending
                                            select post);
             return queryAllPostsMadeByUser;
         }
@@ -74,8 +77,9 @@ namespace DoorsSocialWeb.Repositories
         public IEnumerable<Post> getAllImagePostsByID(string userID)
         {
             var queryAllImagePostsMadeByUser = (from post in db.Posts
-                                                where post.authorID == userID
-                                                && post.postIsImage == true
+                                                where ((post.authorID == userID &&
+                                                post.postIsImage == true) &&
+                                                post.groupId == 0)
                                                 select post);
             return queryAllImagePostsMadeByUser;
         }
@@ -86,11 +90,13 @@ namespace DoorsSocialWeb.Repositories
          */
         public IEnumerable<Post> getAllTextPostsByID(string userID)
         {
-            var queryAllImagePostsMadeByUser = (from post in db.Posts
-                                                where post.authorID == userID
-                                                && post.postIsImage == false
+            var queryAllTextPostsMadeByUser = (from post in db.Posts
+                                                where ((post.authorID == userID &&
+                                                post.postIsImage == false) &&
+                                                post.groupId == 0)
+                                                orderby post.dateCreated descending
                                                 select post);
-            return queryAllImagePostsMadeByUser;
+            return queryAllTextPostsMadeByUser;
         }
 
         public ApplicationUser getUserOfPost(int postID)
@@ -108,7 +114,7 @@ namespace DoorsSocialWeb.Repositories
             var allGroupPosts = (from post in db.Posts
                                  where post.groupId != null &&
                                  post.groupId == groupID
-                                 orderby post.dateCreated ascending
+                                 orderby post.dateCreated descending
                                  select post);
             return allGroupPosts;
         }
@@ -119,7 +125,7 @@ namespace DoorsSocialWeb.Repositories
                                    where post.groupId != null &&
                                    post.groupId == groupID &&
                                    post.groupTopicID == topicID
-                                   orderby post.dateCreated ascending
+                                   orderby post.dateCreated descending
                                    select post
                                    );
             return groupTopicPosts;
