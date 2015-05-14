@@ -63,7 +63,7 @@ namespace DoorsSocialWeb.Controllers
             groupService.addNewGroup(group);
             Group theGroup = groupService.getNewestGroup();
             groupService.addUserToGroup(groupOwnerId, theGroup.ID);
-            return RedirectToAction("GroupView", "LoggedIn", new { id = theGroup.ID });
+            return RedirectToAction("GroupView", "Group", new { id = theGroup.ID });
         }
 
       

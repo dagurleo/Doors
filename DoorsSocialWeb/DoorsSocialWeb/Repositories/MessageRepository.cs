@@ -40,8 +40,12 @@ namespace DoorsSocialWeb.Repositories
                                      || (message.senderID == recieverID && message.recieverID == senderID)  
                                      orderby message.dateCreated
                                      select message);
+
+                   
             return queryConversation;
         }
+
+            
 
         /*
          * Returns all new messages who the user has not seen before
@@ -54,7 +58,7 @@ namespace DoorsSocialWeb.Repositories
                                     select message);
             return queryNewMessages;
         }
-
+        
         public IEnumerable<Message> getFirstMessages(string userID)
         {
             var queryAllMessages = (from m in db.Messages

@@ -51,7 +51,7 @@ namespace DoorsSocialWeb.Controllers
             ApplicationUser userInfo = new ApplicationUser { displayAbout = displayAbout, displayName = displayName, displayPhoneNumber = displayPhone, displayEmail = displayEmail };
             userService.editProfile(userInfo);
 
-            return RedirectToAction("Profile", "LoggedIn", new { id = userService.getCurrentUser().Id });
+            return RedirectToAction("Profile", "Profile", new { id = userService.getCurrentUser().Id });
         }
 
         public ActionResult Profile(string id)
