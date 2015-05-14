@@ -165,14 +165,14 @@
             { 
                 <li>
                     <img src="http://www.ads.menn.is/groups.png" height="15">
-                    @Html.ActionLink(m.groupName, "GroupView", "LoggedIn", new { id = m.ID }, new { @class = "aGroup" })
+                    @Html.ActionLink(m.groupName, "GroupView", "Group", new { id = m.ID }, new { @class = "aGroup" })
                 </li>
                 if(m.ID == groupID)
                 {
                     foreach(var t in Model.getTopics(groupID))
                     {
                         <li>
-                            @Html.ActionLink(t.topicName, "TopicView", "LoggedIn", new { id = t.ID }, new { @class = "aGroup" })
+                            @Html.ActionLink(t.topicName, "TopicView", "Group", new { id = t.ID }, new { @class = "aGroup" })
                         </li>
                     }
                 }
@@ -187,7 +187,7 @@
 
     <div class="rightPanel">
         <div class="profileSnippet">
-            <a href="@Url.Action("Profile", "LoggedIn", new { id = Model.currentUser.Id })">
+            <a href="@Url.Action("Profile", "Profile", new { id = Model.currentUser.Id })">
                 @if (Model.currentUser.displayImageUrl != null)
                 {
 
@@ -216,7 +216,7 @@
             }
             @foreach (var m in Model.friends)
             {
-                <a href="@Url.Action("Profile", "LoggedIn", new { id = m.Id})">
+                <a href="@Url.Action("Profile", "Profile", new { id = m.Id})">
                     <div class="perFriend">
 
                         @if (m.displayImageUrl != null)

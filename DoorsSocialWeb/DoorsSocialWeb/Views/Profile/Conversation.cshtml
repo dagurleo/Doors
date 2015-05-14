@@ -22,7 +22,7 @@
        </section>
 
         <div class="newMessage">
-            @using (Html.BeginForm("SendNewMessage", "LoggedIn", FormMethod.Post, new { id = "messageForm" }))
+            @using (Html.BeginForm("SendNewMessage", "Profile", FormMethod.Post, new { id = "messageForm" }))
             {
                 <input type="hidden" name="senderId" value="@Model.currentUser.Id" />
                 <input type="hidden" name="recieverId" value="@Model.messageReciever.Id" />
