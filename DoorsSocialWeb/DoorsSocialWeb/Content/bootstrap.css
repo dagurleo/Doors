@@ -7906,3 +7906,23 @@ body h4
     
     background-color: white;
 }
+
+
+/*   Groupview   */
+
+.groupViewHeader
+{
+    background-color: #dedede;
+}
+
+.groupViewHeader h1
+{
+    padding: 10px 10px 0 10px;
+    font-family: 'Poiret One', cursive;
+}
+
+.groupViewHeader p
+{
+    padding: 0 10px 10px 10px;
+    font-size: 16px;
+}

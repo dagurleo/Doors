@@ -44,9 +44,6 @@ namespace DoorsSocialWeb.Controllers
             return View(shared);
         }
 
-       
-
-
         public ActionResult CreateGroup()
         {
             return View();
