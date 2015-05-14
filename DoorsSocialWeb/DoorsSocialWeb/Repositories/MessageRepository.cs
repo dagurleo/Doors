@@ -45,6 +45,18 @@ namespace DoorsSocialWeb.Repositories
             return queryConversation;
         }
 
+
+        public IEnumerable<ApplicationUser> getUsersYouHaveChattedTo()
+        {
+            string currentUserID = HttpContext.Current.User.Identity.GetUserId();
+            var users = (from m in db.Messages
+                         where m.recieverID == currentUserID
+                         join u in db.Users
+                         on m.senderID equals u.Id
+                         select u).Distinct();
+                                          
+            return users;
+        }
         public Message getNewestMessageForConversation(string id1, string id2)
         {
             var newestMessage = (from m in db.Messages
@@ -53,7 +65,7 @@ namespace DoorsSocialWeb.Repositories
                                  orderby m.dateCreated descending
                                  select m).SingleOrDefault();
 
-            return newestMessage;
+            return newestMessage;   
 
         }
 
@@ -70,18 +82,10 @@ namespace DoorsSocialWeb.Repositories
         }
         
         public IEnumerable<Message> getFirstMessages(string userID)
-        {
-            var queryAllMessages = (from m in db.Messages
-                                    where m.recieverID == userID ||
-                                    m.senderID == userID
-                                    group m by m.dateCreated into mGroup
-                                    let latest = mGroup.FirstOrDefault()
-                                    select latest);
-
-            
-                               
-
+        {                                                       
             //var queryAllMessages = queryAllRecievingFirstMessages.Concat(queryAllSendingFirstMessages);
+            var queryAllMessages = from m in db.Messages
+                                   select m;
 
             return queryAllMessages;
         }
