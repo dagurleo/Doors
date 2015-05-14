@@ -7297,14 +7297,14 @@ body h4
 .notificationsNo
 {
     position: absolute;
-    right: 70px;
-    top: 29px;
+    right: 66px;
+    top: 33px;
 }
 
 .notificationsNo p
 {
-   -webkit-text-stroke-width: 3px;
-   -webkit-text-stroke-color: white;
+   -webkit-text-stroke-width: 2px;
+   -webkit-text-stroke-color: red;
     color: red;
     font-size: 16px;
     font-family: 'Poiret One', cursive;

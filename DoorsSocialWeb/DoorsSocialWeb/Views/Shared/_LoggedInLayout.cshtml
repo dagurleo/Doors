@@ -131,13 +131,15 @@
         }
     </div>
     <a href="#messageCenter"><div class="messages"></div></a>
-    <a href="#notificationCenter"><div class="notification"></div></a>
-    @Html.ActionLink("Sign Out","Logoff","LoggedIn",null,new { @class = "logout" })
+        <a href="#notificationCenter">
+            <div class="notification"></div>
+            @if (notCount != null && notCount != 0)
+            {
+                <div class="notificationsNo"><p>@notCount</p></div>
+            }
+        </a>
 
-    @if(notCount != null && notCount != 0)
-    {
-        <div class="notificationsNo"><p>@notCount</p></div>
-    }
+    @Html.ActionLink("Sign Out", "Logoff", "LoggedIn", null, new { @class = "logout" })
 
 
         <div class="notCount"></div>
