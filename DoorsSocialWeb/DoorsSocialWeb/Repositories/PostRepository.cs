@@ -155,7 +155,8 @@ namespace DoorsSocialWeb.Repositories
 
             friendsPosts = friendsPosts.Concat(myPosts);
             var allPosts = from f in friendsPosts
-                           where f.groupId == 0
+                           where f.groupId == 0 &&
+                           f.recipientId == null
                            orderby f.dateCreated descending
                            select f;
 

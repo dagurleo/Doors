@@ -190,14 +190,20 @@
                                     {
                                         <img src="@Model.getAuthor(m.recipientId).displayImageUrl" alt="Profile pic" />
                                     }
-                                    <img src="@Model.getAuthor(m.authorID).displayImageUrl" alt="Profile pic" />
+                                    else
+                                    {
+                                        <img src="@Model.getAuthor(m.authorID).displayImageUrl" alt="Profile pic" />
+                                    }
                                 </a>
                             </div>
                             @if (m.recipientId != null)
                             {
                                 <h1>@Model.getAuthor(m.recipientId).displayName</h1>
                             }
-                            <h1>@Model.getAuthor(m.authorID).displayName</h1>
+                            else
+                            {
+                                <h1>@Model.getAuthor(m.authorID).displayName</h1>
+                            }
                             <div class="postText">
                                 <p>@m.subject</p>
                             </div>

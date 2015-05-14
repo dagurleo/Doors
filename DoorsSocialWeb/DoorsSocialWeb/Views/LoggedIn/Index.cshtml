@@ -37,17 +37,9 @@
                 </div>
                 <a href="@Url.Action("Profile", "Profile", new { id = m.authorID })">
                     <div class="postImage">
-                        @if (m.recipientId != null)
-                        {
-                            <img src="@Model.getAuthor(m.recipientId).displayImageUrl" alt="Profile pic" />
-                        }
                         <img src="@Model.getAuthor(m.authorID).displayImageUrl" alt="Profile pic" />
-                    </div>
-                    @if (m.recipientId != null)
-                    {
-                        <h1>@Model.getAuthor(m.recipientId).displayName</h1>
-                    }
-                    <h1>@Model.getAuthor(m.authorID).displayName</h1>
+                        </div>
+                        <h1>@Model.getAuthor(m.authorID).displayName</h1>
                 </a>
 
                 <div class="postText">
