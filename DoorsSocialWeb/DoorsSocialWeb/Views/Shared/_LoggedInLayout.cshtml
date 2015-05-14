@@ -3,14 +3,8 @@
 @{
     Layout = null;
     var notCount = Model.getFriendRequests(Model.currentUser.Id).Count() + Model.getGroupRequestsYouAreOwnerOf().Count();
-
-    bool isGroup = Request.RawUrl.Contains("GroupView");
-    int groupID = 0;
-    if(isGroup)
-    {
-         groupID = Int32.Parse(new string(Request.RawUrl.Where(c => Char.IsDigit(c)).ToArray()));   
-    }
 }
+
 
 @section scripts{
     <script src="~/Scripts/jquery.signalR-2.1.1.js"></script>
@@ -167,15 +161,6 @@
                     <img src="http://www.ads.menn.is/groups.png" height="15">
                     @Html.ActionLink(m.groupName, "GroupView", "LoggedIn", new { id = m.ID }, new { @class = "aGroup" })
                 </li>
-                if(m.ID == groupID)
-                {
-                    foreach(var t in Model.getTopics(groupID))
-                    {
-                        <li>
-                            @Html.ActionLink(t.topicName, "TopicView", "LoggedIn", new { id = t.ID }, new { @class = "aGroup" })
-                        </li>
-                    }
-                }
             }
         }
         </ul>

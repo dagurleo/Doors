@@ -102,8 +102,62 @@
             {
                 foreach (var m in Model.getPostsWithinGroup(Model.currentGroup.ID))
                 {
-                    <p>@Model.getUserByID(m.authorID).displayName</p>
-                    <p>@m.subject</p>
+                    <div class="postContainer">
+                        <div class="postDate">
+                            <p style="font-weight: bold">@m.dateCreated</p>
+                        </div>
+                        <a href="@Url.Action("Profile", "LoggedIn", new { id = m.authorID })">
+                            <div class="postImage">
+
+                                <img src="@Model.getAuthor(m.authorID).displayImageUrl" alt="Profile pic" />
+                            </div>
+
+                            <h1>@Model.getAuthor(m.authorID).displayName</h1>
+                        </a>
+                        <div class="postText">
+                            <p>@m.subject</p>
+                        </div>
+                        @if(m.authorID == Model.currentUser.Id)
+                        {
+                            <a href="@Url.Action("DeletePost", "LoggedIn", new {postId = m.ID})">Remove Post</a>
+                        }
+                        
+                        <div class="postComments">
+                            @foreach (var c in Model.getCommentsForPost(m.ID))
+                            {
+                                <div class="commentContainer">
+                                    <div class="commentDate">
+                                        <p style="font-weight: bold">@c.dateCreated</p>
+                                    </div>
+                                    <a href="@Url.Action("Profile", "LoggedIn", new { id = c.authorID })">
+                                        <div class="commentImage">
+                                                <img src="@Model.getAuthor(c.authorID).displayImageUrl" alt="Profile pic" />                                        
+                                        </div>
+                                        <h2>@Model.getAuthor(c.authorID).displayName</h2>
+                                    </a>
+                                    <div class="postText">
+                                        <p>@c.subject</p>
+                                    </div>
+                                    @if(c.authorID == Model.currentUser.Id)
+                                    {
+                                        <a href="@Url.Action("removeCommentFromPost", "LoggedIn", new { commentId = c.ID })">Remove Comment</a>   
+                                    }
+                                </div>
+                            }
+                    
+                        </div>
+                        <div class="commentCreator">
+                            @using (Html.BeginForm("addCommentToPost", "LoggedIn", FormMethod.Post))
+                            {
+                                <input type="hidden" name="userid" value="@Model.currentUser.Id" />
+                                <input type="hidden" name="postid" value="@m.ID" />
+                                <div class="createComment">
+                                    <textarea name="subject" placeholder="Share your thoughts with your friends!"></textarea>
+                                    <input type="submit" value="COMMENT" />
+                                </div>
+                            }
+                        </div>
+                    </div>
                 }
             }
             else
