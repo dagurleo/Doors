@@ -13,7 +13,10 @@
     <ul>
         @foreach(var m in Model.messagesWithUser)            
         {
-            <li>@m.subject</li> 
+            <li>
+               @Model.getAuthor(m.senderID).displayName
+               @m.subject               
+            </li>
         }    
     </ul>    
 </body>
