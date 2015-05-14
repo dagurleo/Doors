@@ -95,9 +95,6 @@ namespace DoorsSocialWeb.Services
             return groupRepo.getGroupRequestsYouAreOwnerOf(userId);
         }
 
-        public Topic getTopicById(int topicId)
-        {
-            return groupRepo.getTopicById(topicId);
-        }
+       
     }
 }

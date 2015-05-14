@@ -14,7 +14,7 @@ namespace DoorsSocialWeb.Models.ViewModels
         public UserService userService = new UserService();
         public IEnumerable<Topic> topics { get; set; }
         public IEnumerable<Post> posts { get; set; }
-        public Topic currentTopic { get; set; }
+        
 
         public IEnumerable<ApplicationUser> getGroupMembersByGroupId(int groupID)
         {
