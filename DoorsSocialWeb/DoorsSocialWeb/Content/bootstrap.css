@@ -8123,3 +8123,13 @@ body h4
 
     margin: 30px 20px 0 0;
 }
+
+.usersFound ul
+{
+    list-style: none;
+}
+
+.groupsFound ul
+{
+    list-style: none;
+}

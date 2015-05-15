@@ -5,11 +5,16 @@
     var notCount = Model.getFriendRequests(Model.currentUser.Id).Count() + Model.getGroupRequestsYouAreOwnerOf().Count();
     var messageCount = Model.getUnreadMessageCount();
 
-    bool isGroup = Request.RawUrl.Contains("GroupView") || Request.RawUrl.Contains("Topic");
+    bool isGroup = Request.RawUrl.Contains("GroupView");
+    bool isTopic = Request.RawUrl.Contains("Topic");
     int groupID = 0;
     if (isGroup)
     {
         groupID = Int32.Parse(new string(Request.RawUrl.Where(c => Char.IsDigit(c)).ToArray()));
+    }
+    else if(isTopic)
+    {
+        
     }
 }
 
@@ -165,7 +170,7 @@
         <div class="groupList">
             @if (Model.groups.Count() == 0)
             {
-                <p>You dont have any friends.</p>
+                <p>You are not a member of any group.</p>
             }
             @foreach (var g in Model.groups)
             {
@@ -173,6 +178,16 @@
                         <img src="http://www.ads.menn.is/groups.png" height="15">
                         @Html.ActionLink(g.groupName, "GroupView", "Group", new { id = g.ID }, new { @class = "aGroup" })
                     </div>
+                    if (g.ID == groupID)
+                        {
+                            foreach (var t in Model.getTopics(groupID))
+                            {
+                                <div class="perGroup" style="background-color: #495d6f; padding-left: 10px;">
+                                    @Html.ActionLink("- " + t.topicName, "Topic", "Group", new { id = t.ID }, new { @class = "aGroup" })
+                                </div>
+                            }
+                        }
+
             }
         </div>
         <div class="createGroup">
