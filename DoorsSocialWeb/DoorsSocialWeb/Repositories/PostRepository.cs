@@ -203,6 +203,13 @@ namespace DoorsSocialWeb.Repositories
             db.SaveChanges();
         }
 
-        
+        public void addImagePost(int postID, string URL)
+        {
+            Post OldPost = (from p in db.Posts
+                            where p.ID == postID
+                            select p).SingleOrDefault();
+            OldPost.imageLink = URL;
+            db.SaveChanges();
+        }
     }
 }

@@ -87,5 +87,10 @@ namespace DoorsSocialWeb.Services
         {
             postRepo.removePost(postId);
         }
+
+        public void addImagePost(int postID, string URL)
+        {
+            postRepo.addImagePost(postID, URL);
+        }
     }
 }

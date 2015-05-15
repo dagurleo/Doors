@@ -18,6 +18,7 @@ namespace DoorsSocialWeb.Models.EntityModels
         public int imageID { get; set; }                
         public DateTime dateCreated { get; set; }        
         public int groupId { get; set; }
-        public int groupTopicID { get; set; }        
+        public int groupTopicID { get; set; }
+        public string imageLink { get; set; }
     }
 }
