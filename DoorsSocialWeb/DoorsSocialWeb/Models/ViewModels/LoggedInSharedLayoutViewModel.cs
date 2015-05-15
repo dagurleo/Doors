@@ -89,5 +89,10 @@ namespace DoorsSocialWeb.Models.ViewModels
         {
             return messageService.getNewestMessageForConversation(id1, id2);
         }
+
+        public int getUnreadMessageCount()
+        {
+            return messageService.getUnreadMessageCount();
+        }
     }
 }

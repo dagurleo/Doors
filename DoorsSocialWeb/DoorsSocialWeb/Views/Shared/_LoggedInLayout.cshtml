@@ -3,6 +3,7 @@
 @{
     Layout = null;
     var notCount = Model.getFriendRequests(Model.currentUser.Id).Count() + Model.getGroupRequestsYouAreOwnerOf().Count();
+    var messageCount = Model.getUnreadMessageCount();
 
     bool isGroup = Request.RawUrl.Contains("GroupView") || Request.RawUrl.Contains("Topic");
     int groupID = 0;
@@ -135,7 +136,14 @@
                 <input type="text" name="searchTerm" />
             }
         </div>
-        <a href="#messageCenter"><div class="messages"></div></a>
+        <a href="#messageCenter">
+            <div class="messages">
+                @if(messageCount != null && messageCount != 0)
+                {
+                    <div class="messageno"><p>@messageCount</p></div>
+                }
+            </div>
+        </a>
         <a href="#notificationCenter">
             <div class="notification"></div>
             @if (notCount != null && notCount != 0)

@@ -57,5 +57,10 @@ namespace DoorsSocialWeb.Services
         {
             return messageRepo.getNewestMessageForConversation(id1, id2);
         }
+
+        public int getUnreadMessageCount()
+        {
+            return messageRepo.getUnreadMessageCount();
+        }
     }
 }

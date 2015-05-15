@@ -107,5 +107,14 @@ namespace DoorsSocialWeb.Repositories
             db.Messages.Add(message);
             db.SaveChanges();
         }        
+
+        public int getUnreadMessageCount()
+        {
+            var unreadMessages = (from m in db.Messages
+                                  where m.messageIsRead == false
+                                  select m).Count();
+
+            return unreadMessages;
+        }
     }
 }

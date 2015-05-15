@@ -92,6 +92,14 @@ namespace DoorsSocialWeb.Controllers
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
 
+        public ActionResult deleteTopic(int topicId)
+        {
+            var currentTopic = groupService.getTopicById(topicId);
+            groupService.deleteTopic(topicId);
+            
+            return RedirectToAction("GroupView", "Group", new {id = currentTopic.groupID});
+        }
+
         public ActionResult approvedUsersAddNewPostInGroup()
         {
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
