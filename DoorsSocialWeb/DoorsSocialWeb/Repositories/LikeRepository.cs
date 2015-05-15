@@ -11,6 +11,10 @@ namespace DoorsSocialWeb.Repositories
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         private UserRepository userRepo = new UserRepository();
+
+        /*
+         * Returns all likes from the post with postID = postId
+         */
         public IEnumerable<Like> getLikesOnPost(int postId)
         {
             var likes = from l in db.Likes
@@ -20,6 +24,10 @@ namespace DoorsSocialWeb.Repositories
             return likes;
         }
 
+
+        /*
+         * Returns all likes on comment with commentID = commentId
+         */
         public IEnumerable<Like> getLikesOnComment(int commentId)
         {
             var likes = from l in db.Likes
@@ -29,6 +37,10 @@ namespace DoorsSocialWeb.Repositories
             return likes;
         }
 
+
+        /*
+         * Creates a new like on post with postID = postId
+         */
         public void addLikeToPost(int postId)
         {            
             Like newLike = new Like { authorID = userRepo.getCurrentUser().Id, postID = postId, commentID = 0 };
@@ -36,6 +48,9 @@ namespace DoorsSocialWeb.Repositories
             db.SaveChanges();
         }
 
+        /*
+         * Returns all users who have liked the likes from IEnumerable<Like> likes
+         */
         public IEnumerable<ApplicationUser> getUsersWhoLiked(IEnumerable<Like> likes)
         {
             var users = from l in likes
@@ -46,6 +61,9 @@ namespace DoorsSocialWeb.Repositories
             return users;
         }
 
+        /*
+         * Removes like from post with postID = postId
+         */
         public void removeLikeOnPost(int postId)
         {
             var currentUserId = userRepo.getCurrentUser().Id;

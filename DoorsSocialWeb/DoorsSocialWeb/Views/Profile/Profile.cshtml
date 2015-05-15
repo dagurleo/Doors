@@ -145,49 +145,28 @@
         {
             if(Model.friend.Id == Model.currentUser.Id)
             {
-                using (Html.BeginForm("Post", "LoggedIn", FormMethod.Post))
+                using (Html.BeginForm("Post", "LoggedIn", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     <input type="hidden" name="userid" value="@Model.currentUser.Id" />
-                    <input type="hidden" name="datetime" value="@Model.datetime" />
+                    <input type="file" name="file" id="file" />
                     <div class="createPost">
                         <textarea name="subject" placeholder="Share your thoughts with your friends!"></textarea>
                         <input type="submit" value="POST" />
                     </div>
                 }
-                using(Html.BeginForm("PostImage", "LoggedIn", FormMethod.Post, new { enctype="multipart/form-data"}))
-                {
-                    <input type="hidden" name="userid" value="@Model.currentUser.Id" />
-                    <label for="file">Post a new photo</label>
-                    <input type="file" name="file" id="file" />
-                    <div>
-                        <textarea name="subject" placeholder="Share your post thoughts"></textarea>
-                    </div>
-                    <input type="submit" />
-                }
             }
             
             else
             {
-                using (Html.BeginForm("wallPostFromFriend", "Profile", FormMethod.Post))
+                using (Html.BeginForm("wallPostFromFriend", "Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     <input type="hidden" name="recipientUserId" value="@Model.currentUser.Id" />
-                    <input type="hidden" name="datetime" value="@Model.datetime" />
                     <input type="hidden" name="userId" value="@Model.friend.Id" />
+                    <input type="file" name="file" id="file" />
                     <div class="createPost">
                         <textarea name="subject" placeholder="Post on your friends wall !"></textarea>
                         <input type="submit" value="POST" />
                     </div>
-                }
-                using (Html.BeginForm("wallImagePostFromFriend", "Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                {
-                    <input type="hidden" name="recipientUserId" value="@Model.currentUser.Id" />
-                    <input type="hidden" name="userId" value="@Model.friend.Id" />
-                    <label for="file">Post a new photo</label>
-                    <input type="file" name="file" id="file" />
-                    <div>
-                        <textarea name="subject" placeholder="Share your post thoughts"></textarea>
-                    </div>
-                    <input type="submit" />
                 }
             }
             

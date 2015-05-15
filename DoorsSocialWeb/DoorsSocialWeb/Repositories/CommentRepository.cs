@@ -34,7 +34,7 @@ namespace DoorsSocialWeb.Repositories
         }
 
         /* 
-         * Need info on what variables i have to parse
+         * Creates a new comment, and saves it on the database.
          */
         public void addNewComment(string userId, int postId, string subject)
         {
@@ -42,6 +42,10 @@ namespace DoorsSocialWeb.Repositories
             db.Comments.Add(comment);
             db.SaveChanges();
         }
+
+        /*
+         * Removes the comment with the commentId from the database
+         */
 
         public void removeComment(int commentId)
         {

@@ -173,47 +173,36 @@ namespace DoorsSocialWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult wallPostFromFriend(FormCollection collection)
+        public ActionResult wallPostFromFriend(HttpPostedFileBase file, FormCollection collection)
         {
             string recipientUserId = collection["recipientUserId"];
             string userID = collection["userId"];
             string subject = collection["subject"];
-            if(subject != "")
-            {
-                Post newPost = new Post { authorID = userID, dateCreated = DateTime.Now, recipientId = recipientUserId, subject = subject };
-                postService.addNewPost(newPost);
-            }
-            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
-        }
-
-        public ActionResult wallImagePostFromFriend()
-        {
-            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
-        }
-
-        [HttpPost]
-        public ActionResult wallImagePostFromFriend(HttpPostedFileBase file, FormCollection collection)
-        {
             if(file == null)
             {
+                if (subject != "")
+                {
+                    Post newPost = new Post { authorID = userID, dateCreated = DateTime.Now, recipientId = recipientUserId, subject = subject };
+                    postService.addNewPost(newPost);
+                }
                 return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
             }
-            string recipientUserId = collection["recipientUserId"];
-            string userid = collection["userid"];
-            string subject = collection["subject"];
-            if (file.ContentLength > 0)
+            else
             {
-                Post post = new Post { authorID = userid, recipientId = recipientUserId, postIsImage = true, subject = subject, dateCreated = DateTime.Now };
-                postService.addNewPost(post);
+                if (file.ContentLength > 0)
+                {
+                    Post post = new Post { authorID = userID, recipientId = recipientUserId, postIsImage = true, subject = subject, dateCreated = DateTime.Now };
+                    postService.addNewPost(post);
 
-                string imageID = post.ID.ToString();
-                UploadToFtp(file, imageID);
+                    string imageID = post.ID.ToString();
+                    UploadToFtp(file, imageID);
 
-                string URL = "http://www.ads.menn.is/doors/images/" + imageID;
+                    string URL = "http://www.ads.menn.is/doors/images/" + imageID;
 
-                postService.addImagePost(post.ID, URL);
+                    postService.addImagePost(post.ID, URL);
+                }
+                return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
             }
-            return RedirectToAction("Index", "LoggedIn");
         }
 	}
 }
