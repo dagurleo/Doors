@@ -110,9 +110,12 @@ namespace DoorsSocialWeb.Repositories
 
         public int getUnreadMessageCount()
         {
+            string currentUserId = HttpContext.Current.User.Identity.GetUserId();
             var unreadMessages = (from m in db.Messages
-                                  where m.messageIsRead == false
+                                  where m.messageIsRead == false && m.recieverID == currentUserId
                                   select m).Count();
+                                  
+                                
 
             return unreadMessages;
         }
