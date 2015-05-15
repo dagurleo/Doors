@@ -168,6 +168,7 @@ namespace DoorsSocialWeb.Repositories
         {
             var posts = (from p in db.Posts
                          where p.groupTopicID == topicID
+                         orderby p.dateCreated descending
                          select p);
             return posts;
         }
