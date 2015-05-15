@@ -21,7 +21,7 @@
         }
     </div>
     <h1>@Model.currentTopic.topicName</h1>
-    <a href="@Url.Action("deleteTopic", "Group", new { topicId = Model.currentTopic.ID })"
+    <a href="@Url.Action("deleteTopic", "Group", new { topicId = Model.currentTopic.ID })">Delete topic</a>
     <div>
         @if (Model.currentUser.Id == Model.currentGroup.groupOwnerID || Model.getGroupMembersByGroupId(Model.currentGroup.ID).Contains(Model.getAuthor(Model.currentUser.Id)))
         {
