@@ -219,17 +219,24 @@
                                 <p>@m.subject</p>
                             </div>
                             <div class="postLikes">
-                                <p>@Model.getLikesForPost(m.ID).Count()</p>
+                                @if (@Model.getUsersWhoLikesPost(m.ID).Count() == 1)
+                                {
+                                    <p id="likeCount">@Model.getUsersWhoLikesPost(m.ID).Count() person like's this</p>
+                                }
+                                else
+                                {
+                                    <p id="likeCount">@Model.getUsersWhoLikesPost(m.ID).Count() people like this</p>
+                                }
                             </div>
                     
-                            @if(Model.hasCurrentUserLikedPost(m.ID) == false)
+                            @if (Model.hasCurrentUserLikedPost(m.ID) == false)
                             {
-                                using (Html.BeginForm("addLikeToPost", "LoggedIn", FormMethod.Post))
-                                {
-                                    <input type="hidden" name="userid" value="@Model.currentUser.Id" />
-                                    <input type="hidden" name="postid" value="@m.ID" />
-                                    <input type="submit" value="Like"/>
-                                }
+
+                                <a href="@Url.Action("addLikeToPost", "LoggedIn", new {postId = m.ID})">Like</a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("RemoveLikeFromPost", "LoggedIn", new {postId = m.ID})">Unlike</a>
                             }
                         </div>
                 }

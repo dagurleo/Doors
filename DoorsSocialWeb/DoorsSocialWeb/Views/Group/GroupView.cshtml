@@ -111,7 +111,15 @@
                             <p>@m.subject</p>
                         </div>
                         <div class="postLikes">
-                            <p id="likeCount">@Model.getUsersWhoLikesPost(m.ID).Count()</p>
+                            @if (@Model.getUsersWhoLikesPost(m.ID).Count() == 1)
+                            {
+                                <p id="likeCount">@Model.getUsersWhoLikesPost(m.ID).Count() person like's this</p>
+                            }
+                            else 
+                            {
+                                <p id="likeCount">@Model.getUsersWhoLikesPost(m.ID).Count() people like this</p>
+                            }
+                            
                         </div>
                         <div class="likebutton">
                             @if (Model.hasCurrentUserLikedPost(m.ID) == false)
