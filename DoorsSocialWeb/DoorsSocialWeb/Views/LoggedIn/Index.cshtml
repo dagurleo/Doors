@@ -40,13 +40,15 @@
                 <a href="@Url.Action("Profile", "Profile", new { id = m.authorID })">
                     <div class="postImage">
                         <img src="@Model.getAuthor(m.authorID).displayImageUrl" alt="Profile pic" />
-                        </div>
-                        <h1>@Model.getAuthor(m.authorID).displayName</h1>
+                    </div>
+                    <h1>@Model.getAuthor(m.authorID).displayName</h1>
                 </a>
-                @if(m.postIsImage != null && m.postIsImage == true)
-                {
-                    <img src="@m.imageLink" alt="Image pic" />
-                }
+                                @if (m.postIsImage != null && m.postIsImage == true)
+                                {
+                                    <a href="@m.imageLink">
+                                        <img src="@m.imageLink" alt="Image pic" />
+                                    </a>
+                                }
                 <div class="postText">
                     <p>@m.subject</p>
                 </div>
@@ -57,18 +59,18 @@
                     @if (Model.hasCurrentUserLikedPost(m.ID) == false)
                     {
 
-                       <a href="@Url.Action("addLikeToPost", "LoggedIn", new {postId = m.ID})">Like</a>
+                        <a href="@Url.Action("addLikeToPost", "LoggedIn", new {postId = m.ID})">Like</a>
                     }
                     else
                     {
-                       <a href="@Url.Action("RemoveLikeFromPost", "LoggedIn", new {postId = m.ID})">Unlike</a> 
+                        <a href="@Url.Action("RemoveLikeFromPost", "LoggedIn", new {postId = m.ID})">Unlike</a>
                     }
                 </div>
-                @if(m.authorID == Model.currentUser.Id)
+                @if (m.authorID == Model.currentUser.Id)
                 {
                     <a href="@Url.Action("DeletePost", "LoggedIn", new {postId = m.ID})">Remove Post</a>
                 }
-                
+
                 <div class="postComments">
                     @foreach (var c in Model.getCommentsForPost(m.ID))
                     {
@@ -78,20 +80,20 @@
                             </div>
                             <a href="@Url.Action("Profile", "Profile", new { id = c.authorID })">
                                 <div class="commentImage">
-                                        <img src="@Model.getAuthor(c.authorID).displayImageUrl" alt="Profile pic" />                                        
+                                    <img src="@Model.getAuthor(c.authorID).displayImageUrl" alt="Profile pic" />
                                 </div>
                                 <h2>@Model.getAuthor(c.authorID).displayName</h2>
                             </a>
                             <div class="postText">
                                 <p>@c.subject</p>
                             </div>
-                            @if(c.authorID == Model.currentUser.Id)
+                            @if (c.authorID == Model.currentUser.Id)
                             {
-                                <a href="@Url.Action("removeCommentFromPost", "LoggedIn", new { commentId = c.ID })">Remove Comment</a>   
+                                <a href="@Url.Action("removeCommentFromPost", "LoggedIn", new { commentId = c.ID })">Remove Comment</a>
                             }
                         </div>
                     }
-                    
+
                 </div>
                 <div class="commentCreator">
                     @using (Html.BeginForm("addCommentToPost", "LoggedIn", FormMethod.Post))
@@ -104,7 +106,7 @@
                         </div>
                     }
                 </div>
-            </div>
+</div>
         }
     }
 </body>

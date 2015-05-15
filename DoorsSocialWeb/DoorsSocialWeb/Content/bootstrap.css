@@ -7310,6 +7310,22 @@ body h4
     font-family: 'Poiret One', cursive;
 }
 
+.messageno
+{
+    position: absolute;
+    right: 105px;
+    top: 33px;
+}
+
+.messageno p
+{
+   -webkit-text-stroke-width: 2px;
+   -webkit-text-stroke-color: red;
+    color: red;
+    font-size: 16px;
+    font-family: 'Poiret One', cursive;
+}
+
 .logout
 {
     background: url(https://yemekhane.anadolu.edu.tr/resources/images/logout.png);
@@ -7608,11 +7624,6 @@ body h4
     width: 50px;
     margin-right: 10px;
     float: right;
-}
-
-.likeButton input[type="submit"]
-{
-    
 }
 
 /*   COMMENTS   */

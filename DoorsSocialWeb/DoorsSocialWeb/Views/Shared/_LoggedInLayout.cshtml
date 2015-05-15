@@ -137,12 +137,13 @@
             }
         </div>
         <a href="#messageCenter">
-            <div class="messages">
+            <div class="messages"></div>
                 @if(messageCount != null && messageCount != 0)
                 {
-                    <div class="messageno"><p>@messageCount</p></div>
+                    <div class="messageno"><p>@messageCount</p></div>   
                 }
-            </div>
+                
+            
         </a>
         <a href="#notificationCenter">
             <div class="notification"></div>
@@ -235,7 +236,7 @@
                             <img src="http://fc07.deviantart.net/fs71/f/2012/357/7/7/profile_picture_by_ospider-d5ovoc2.jpg" height="25" width="25">
                         }
                         <p class="aFriend">@m.displayName</p>
-
+                        <a href="@Url.Action("Conversation", "Profile", new { messageRecieverId = m.Id })">M</a>
                     </div>
                 </a>
             }
