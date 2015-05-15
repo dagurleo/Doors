@@ -20,24 +20,27 @@
             </a>
         }
     </div>
+    @if(@Model.currentGroup.groupOwnerID == Model.currentUser.Id)
+    {
+        <a href="@Url.Action("deleteTopic", "Group", new { topicId = Model.currentTopic.ID })">Delete topic</a>
+    }
     <h1>@Model.currentTopic.topicName</h1>
-    <a href="@Url.Action("deleteTopic", "Group", new { topicId = Model.currentTopic.ID })">Delete topic</a>
     <div>
-        @if (Model.currentUser.Id == Model.currentGroup.groupOwnerID || Model.getGroupMembersByGroupId(Model.currentGroup.ID).Contains(Model.getAuthor(Model.currentUser.Id)))
+        @if (Model.currentUser.Id == Model.currentGroup.groupOwnerID || Model.userIsInGroup(Model.currentGroup.ID, Model.currentUser.Id) == true)
             {
-                <div>
-	                @using (Html.BeginForm("TopicPost", "Group", FormMethod.Post, new { enctype = "multipart/form-data" }))
-	                {
-		                <input type="hidden" name="groupid" value="@Model.currentGroup.ID" />
-		                <input type="hidden" name="userid" value="@Model.currentUser.Id" />
-		                <input type="hidden" name="topicid" value="@Model.currentTopic.ID" />
-		                <input type="file" name="file" id="file" />
-		                <div class="createPost">
-			                <textarea name="subject" placeholder="Share your thoughts with your group!"></textarea>
-			                <input type="submit" value="POST" />
-		                </div>
-	                }
-                </div>
+	            using (Html.BeginForm("TopicPost", "Group", FormMethod.Post, new { enctype = "multipart/form-data" }))
+	            {
+		            <input type="hidden" name="groupid" value="@Model.currentGroup.ID" />
+		            <input type="hidden" name="userid" value="@Model.currentUser.Id" />
+		            <input type="hidden" name="topicid" value="@Model.currentTopic.ID" />
+                    <div class="createPost">
+                        <textarea name="subject" placeholder="Share your thoughts with your group!"></textarea>
+                        <div class="fileUpload">
+                            <input type="file" name="file" id="file" class="upload" />
+                        </div>
+                        <input type="submit" value="POST" />
+                    </div>
+	            }
             <div>
                 @if (Model.getPostsWithinTopicID(Model.currentTopic.ID) != null)
                 {
