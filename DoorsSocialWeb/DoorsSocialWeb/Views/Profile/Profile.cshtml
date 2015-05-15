@@ -71,7 +71,9 @@
     <div class="@profileDiv">
         <a href="@Url.Action("Conversation", "Profile", new { messageRecieverId = Model.friend.Id })"></a>
         <div class="profileImage">
-            <img src="@Model.friend.displayImageUrl" alt="Profile pic" />
+            <a href="@Model.friend.displayImageUrl">
+                <img src="@Model.friend.displayImageUrl" alt="Profile pic" />
+            </a>
             @if(Model.friend.Id == Model.currentUser.Id)
             {
             <div class="changeImage">
@@ -207,9 +209,11 @@
                             {
                                 <h1>@Model.getAuthor(m.authorID).displayName</h1>
                             }
-                            @if(m.imageLink != null && m.postIsImage == true)
+                            @if (m.postIsImage != null && m.postIsImage == true)
                             {
-                                <img src="@m.imageLink" alt="Image pic" />
+                                <a href="@m.imageLink">
+                                    <img src="@m.imageLink" alt="Image pic" />
+                                </a>
                             }
                             <div class="postText">
                                 <p>@m.subject</p>

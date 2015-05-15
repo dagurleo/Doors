@@ -79,7 +79,7 @@ namespace DoorsSocialWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.UserName, registerEmail = model.registerEmail, displayName = model.displayName};
+                var user = new ApplicationUser() { UserName = model.UserName, registerEmail = model.registerEmail, displayName = model.displayName, displayImageUrl = "http://media.tumblr.com/tumblr_ky2jq44bxT1qao2n2.jpg" };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

@@ -178,5 +178,14 @@ namespace DoorsSocialWeb.Repositories
             db.SaveChanges();
         }
 
+        public int getGroupIdByTopicId(int topicId)
+        {
+            var groupId = (from t in db.Topics
+                           where t.ID == topicId
+                           select t.groupID).Single();
+
+            return groupId;
+        }
+
     }
 }

@@ -100,6 +100,11 @@ namespace DoorsSocialWeb.Services
             return topicRepo.doesTopicExistWithinGroup(groupID, topicName);
         }
 
+        public int getGroupIdByTopicId(int topicId)
+        {
+            return groupRepo.getGroupIdByTopicId(topicId);
+        }
+
         public void deleteTopic(int topicId)
         {
             groupRepo.deleteTopic(topicId);

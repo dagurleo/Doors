@@ -94,5 +94,10 @@ namespace DoorsSocialWeb.Models.ViewModels
         {
             return messageService.getUnreadMessageCount();
         }
+
+        public int getGroupIdByTopicId(int topicId)
+        {
+            return groupService.getGroupIdByTopicId(topicId);
+        }
     }
 }

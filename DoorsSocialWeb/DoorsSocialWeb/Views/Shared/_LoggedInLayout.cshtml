@@ -14,7 +14,7 @@
     }
     else if(isTopic)
     {
-        
+        groupID = Model.getGroupIdByTopicId(Int32.Parse(new string(Request.RawUrl.Where(c => Char.IsDigit(c)).ToArray())));
     }
 }
 

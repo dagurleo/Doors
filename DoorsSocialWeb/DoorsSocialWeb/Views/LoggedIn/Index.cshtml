@@ -43,12 +43,12 @@
                     </div>
                     <h1>@Model.getAuthor(m.authorID).displayName</h1>
                 </a>
-                                @if (m.postIsImage != null && m.postIsImage == true)
-                                {
-                                    <a href="@m.imageLink">
-                                        <img src="@m.imageLink" alt="Image pic" />
-                                    </a>
-                                }
+                @if (m.postIsImage != null && m.postIsImage == true)
+                {
+                    <a href="@m.imageLink">
+                        <img src="@m.imageLink" alt="Image pic" />
+                    </a>
+                }
                 <div class="postText">
                     <p>@m.subject</p>
                 </div>
