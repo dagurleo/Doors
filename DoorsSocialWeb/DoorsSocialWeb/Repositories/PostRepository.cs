@@ -195,9 +195,18 @@ namespace DoorsSocialWeb.Repositories
                            where c.postID == postId
                            select c;
 
+            var likes = from l in db.Likes
+                        where l.postID == postId
+                        select l;
+
             foreach(var co in comments)
             {
                 db.Comments.Remove(co);
+            }
+
+            foreach(var l in likes)
+            {
+                db.Likes.Remove(l);
             }
             db.Posts.Remove(post);
             db.SaveChanges();

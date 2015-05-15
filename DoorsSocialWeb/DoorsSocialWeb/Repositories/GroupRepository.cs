@@ -93,6 +93,14 @@ namespace DoorsSocialWeb.Repositories
 
         public void deleteTopic(int topicId)
         {
+            var posts = from p in db.Posts
+                        where p.groupTopicID == topicId
+                        select p;
+            var postRepo = new PostRepository();
+            foreach(var i in posts)
+            {
+                postRepo.removePost(i.ID);
+            }
             db.Topics.Remove(getTopicById(topicId));
             db.SaveChanges();
         }
