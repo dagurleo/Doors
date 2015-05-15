@@ -6,38 +6,40 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title></title>
-
+    <title>Chat with </title>]
 </head>
 <body>
+    <div id="needToScroll">
+        <div class="chat">
+            <ul>
+                @foreach (var m in Model.messagesWithUser)
+                {
+                    if (m.senderID == Model.currentUser.Id)
+                    {
+                        <li class="fromMe">
+                            <img src="@Model.getAuthor(m.senderID).displayImageUrl" height="70" width="70" style="float: right;">
+                            <div class="message">@m.subject</div>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="toMe">
+                            <img src="@Model.getAuthor(m.senderID).displayImageUrl" height="70" width="70">
+                            <div class="message" style="margin-left: 90px">@m.subject</div>
+                        </li>
+                    }
 
-    <table class="conversation">
-
-
-
-    </table>
-
-
-       <section id="messageList">
-           @foreach (var m in Model.messagesWithUser)
-           {
-               <div class="singleMesage">
-                   @Model.getAuthor(m.senderID).displayName
-                   @m.subject
-               </div>
-           }    
-       </section>
-
-        <div class="newMessage">
+                }
+            </ul>
             @using (Html.BeginForm("SendNewMessage", "Profile", FormMethod.Post, new { id = "messageForm" }))
             {
                 <input type="hidden" name="senderId" value="@Model.currentUser.Id" />
                 <input type="hidden" name="recieverId" value="@Model.messageReciever.Id" />
-                <textarea name="subject" placeholder="Send a new Message"></textarea> 
-                <button type="submit">Send</button>
+                <input type="text" name="subject" />
+                <button>SEND</button>
+                <iframe name="target" id="target"></iframe>
             }
-            
         </div>
-    
+    </div>
 </body>
 </html>

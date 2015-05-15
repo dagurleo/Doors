@@ -7967,3 +7967,118 @@ body h4
     font-size: 24px;
     color: white;
 }
+
+#needToScroll
+{
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.chat{
+  font:16px Trebuchet MS;
+  min-width:300px;
+  width: 100%;
+  margin:auto auto;
+}
+
+
+.chat ul{
+  margin:0;
+  padding:0;
+  border-bottom:2px solid #9c9c9c;
+  padding-bottom:15px;
+  margin-bottom:15px;
+}
+
+
+.chat ul li{
+  width:100%;
+  list-style-type:none;
+  margin:5px 0;
+  position:relative;
+  display:inline-block;
+
+  
+}
+
+.chat ul li img
+{
+  float:left;
+   border-radius:50px;
+  box-shadow:0 2px 15px rgba(0,0,0,0.5);
+}
+
+.chat ul li .message
+{
+  position:relative;
+  min-height:30px;
+  margin-top:35px;
+  padding:10px;
+  box-sizing:border-box;
+   
+}
+
+.fromMe img
+{
+  float:right;
+}
+
+.fromMe .message
+{
+  margin-right:90px;
+  margin-left:0;
+  background:#def1ff;
+}
+
+.toMe .message
+{
+  background:#daffb1;
+}
+
+.fromMe .message:before
+{
+  content:"";
+  width:0px;
+  height:0px;
+  position:absolute;
+  right:0;
+  top:0;
+  margin-right:-15px;
+  border-top:15px solid #def1ff;
+  border-right:15px solid transparent;
+}
+
+.toMe .message:before
+{
+  content:"";
+  width:0px;
+  height:0px;
+  position:absolute;
+  left:0;
+  top:0;
+  margin-left:-15px;
+  border-top:15px solid #daffb1;
+  border-left:15px solid transparent;
+}
+
+.chat input[type="text"]
+{
+  width:60%; 
+  margin:0; 
+  border:0;
+  padding:6px;
+  background:#e5ecff;
+  font:italic 12px Trebuchet MS;
+  box-sizing:border-box;
+  height: 40px;
+}
+.chat button
+{
+  box-sizing:border-box;
+  width:30%;padding:6px;font:12px Trebuchet MS; color:white;
+  background:#84adfc;
+  margin:0;
+  border:0;
+  float: right;
+  height: 40px;
+}
