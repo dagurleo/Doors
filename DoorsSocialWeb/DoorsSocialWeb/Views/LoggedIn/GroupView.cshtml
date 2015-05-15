@@ -11,16 +11,19 @@
     <title></title>
 </head>
 <body>
+    
 
     <div class="userheader">
 
         @foreach (var m in groupMembers)
         {
-            <a href="@Url.Action("Profile", "LoggedIn", new { id = m.Id })">
+            <a href="@Url.Action("Profile", "Profile", new { id = m.Id })">
                 <img src="@m.displayImageUrl" width="50px" height="50px" />
             </a>
         }
+        <h1><a href="@Url.Action("leaveGroup", "Group", new { groupId = Model.currentGroup.ID })">Leave Group</a></h1>
     </div>
+
 
     <div>
         @if (Model.currentGroup.groupName != null && Model.currentGroup.groupName != "")
@@ -32,8 +35,7 @@
             <h1>@Model.currentGroup.groupDescription</h1>
         }
     </div>
-
-
+    
     <div>
         @if ((!(Model.userIsMember(Model.currentUser.Id)) && Model.currentUser.Id != Model.currentGroup.groupOwnerID) && Model.userIsPendingMember(Model.currentUser.Id) == false)
         {
@@ -68,7 +70,7 @@
                     }
                 }
             }
-
+            
             using (Html.BeginForm("ownerOfGroupCreateNewTopic", "LoggedIn", FormMethod.Post))
             {
                 <input type="hidden" name="groupid" value="@Model.currentGroup.ID" />
@@ -170,6 +172,6 @@
             <p>Not approved memeber, no posts to show.</p>
         }
     </div>
-
+    
 </body>
 </html>

@@ -117,7 +117,7 @@
                 }
                 else
                 {
-                    <p>Chill the fuck out m8</p>
+                    <p>Request has been sent</p>
                 }
 
             }
@@ -148,9 +148,11 @@
                 using (Html.BeginForm("Post", "LoggedIn", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     <input type="hidden" name="userid" value="@Model.currentUser.Id" />
-                    <input type="file" name="file" id="file" />
                     <div class="createPost">
                         <textarea name="subject" placeholder="Share your thoughts with your friends!"></textarea>
+                        <div class="fileUpload">
+                            <input type="file" name="file" id="file" class="upload" />
+                        </div>
                         <input type="submit" value="POST" />
                     </div>
                 }
@@ -162,9 +164,11 @@
                 {
                     <input type="hidden" name="recipientUserId" value="@Model.currentUser.Id" />
                     <input type="hidden" name="userId" value="@Model.friend.Id" />
-                    <input type="file" name="file" id="file" />
                     <div class="createPost">
                         <textarea name="subject" placeholder="Post on your friends wall !"></textarea>
+                        <div class="fileUpload">
+                            <input type="file" name="file" id="file" class="upload" />
+                        </div>
                         <input type="submit" value="POST" />
                     </div>
                 }

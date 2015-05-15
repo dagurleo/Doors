@@ -104,5 +104,10 @@ namespace DoorsSocialWeb.Services
         {
             groupRepo.deleteTopic(topicId);
         }
+
+        public void leaveGroup(int groupId)
+        {
+            groupRepo.leaveGroup(groupId);
+        }
     }
 }
