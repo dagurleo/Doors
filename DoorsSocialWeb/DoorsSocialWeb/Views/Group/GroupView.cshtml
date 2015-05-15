@@ -98,6 +98,10 @@
 
                             <h1>@Model.getAuthor(m.authorID).displayName</h1>
                         </a>
+                        @if(m.imageLink != null && m.postIsImage == true)
+                        {
+                            <img src="@m.imageLink" alt="Group pic" />
+                        }
                         <div class="postText">
                             <p>@m.subject</p>
                         </div>

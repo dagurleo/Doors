@@ -178,6 +178,17 @@
                         <input type="submit" value="POST" />
                     </div>
                 }
+                using (Html.BeginForm("wallImagePostFromFriend", "Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <input type="hidden" name="recipientUserId" value="@Model.currentUser.Id" />
+                    <input type="hidden" name="userId" value="@Model.friend.Id" />
+                    <label for="file">Post a new photo</label>
+                    <input type="file" name="file" id="file" />
+                    <div>
+                        <textarea name="subject" placeholder="Share your post thoughts"></textarea>
+                    </div>
+                    <input type="submit" />
+                }
             }
             
             if (Model.posts.Count() == 0)
@@ -212,6 +223,10 @@
                             else
                             {
                                 <h1>@Model.getAuthor(m.authorID).displayName</h1>
+                            }
+                            @if(m.imageLink != null && m.postIsImage == true)
+                            {
+                                <img src="@m.imageLink" alt="Image pic" />
                             }
                             <div class="postText">
                                 <p>@m.subject</p>

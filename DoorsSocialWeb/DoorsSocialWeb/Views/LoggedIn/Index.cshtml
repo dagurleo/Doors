@@ -22,6 +22,16 @@
             <input type="submit" value="POST" />
         </div>
     }
+    @using(Html.BeginForm("PostImage", "LoggedIn", FormMethod.Post, new { enctype="multipart/form-data"}))
+    {
+        <input type="hidden" name="userid" value="@Model.currentUser.Id" />
+        <label for="file">Post a new photo</label>
+        <input type="file" name="file" id="file" />
+        <div>
+            <textarea name="subject" placeholder="Share your post thoughts"></textarea>
+        </div>
+        <input type="submit" />
+    }
 
     @if (Model.posts != null)
     {
@@ -41,7 +51,7 @@
                         </div>
                         <h1>@Model.getAuthor(m.authorID).displayName</h1>
                 </a>
-                @if(m.postIsImage != null)
+                @if(m.postIsImage != null && m.postIsImage == true)
                 {
                     <img src="@m.imageLink" alt="Image pic" />
                 }

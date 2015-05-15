@@ -179,5 +179,31 @@ namespace DoorsSocialWeb.Controllers
             postService.addNewPost(newPost);
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
+
+        public ActionResult wallImagePostFromFriend()
+        {
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+        }
+
+        [HttpPost]
+        public ActionResult wallImagePostFromFriend(HttpPostedFileBase file, FormCollection collection)
+        {
+            string recipientUserId = collection["recipientUserId"];
+            string userid = collection["userid"];
+            string subject = collection["subject"];
+            if (file.ContentLength > 0)
+            {
+                Post post = new Post { authorID = userid, recipientId = recipientUserId, postIsImage = true, subject = subject, dateCreated = DateTime.Now };
+                postService.addNewPost(post);
+
+                string imageID = post.ID.ToString();
+                UploadToFtp(file, imageID);
+
+                string URL = "http://www.ads.menn.is/doors/images/" + imageID;
+
+                postService.addImagePost(post.ID, URL);
+            }
+            return RedirectToAction("Index", "LoggedIn");
+        }
 	}
 }

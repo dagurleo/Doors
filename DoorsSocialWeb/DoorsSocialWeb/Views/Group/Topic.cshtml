@@ -27,13 +27,27 @@
             <div>
                 @using (Html.BeginForm("TopicPost", "Group", FormMethod.Post))
                 {
-                <input type="hidden" name="groupid" value="@Model.currentGroup.ID" />
-                <input type="hidden" name="userid" value="@Model.currentUser.Id" />
-                <input type="hidden" name="topicid" value="@Model.currentTopic.ID" />
-                <div class="createPost">
-                    <textarea name="subject" placeholder="Share your thoughts with your group!"></textarea>
-                    <input type="submit" value="POST" />
-                </div>
+                    <input type="hidden" name="groupid" value="@Model.currentGroup.ID" />
+                    <input type="hidden" name="userid" value="@Model.currentUser.Id" />
+                    <input type="hidden" name="topicid" value="@Model.currentTopic.ID" />
+                    <div class="createPost">
+                        <textarea name="subject" placeholder="Share your thoughts with your group!"></textarea>
+                        <input type="submit" value="POST" />
+                    </div>
+                }
+            </div>
+            <div>
+                @using (Html.BeginForm("TopicPostImage", "Group", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <input type="hidden" name="groupid" value="@Model.currentGroup.ID" />
+                    <input type="hidden" name="userid" value="@Model.currentUser.Id" />
+                    <input type="hidden" name="topicid" value="@Model.currentTopic.ID" />
+                    <label for="file">Post a new photo</label>
+                    <input type="file" name="file" id="file" />
+                    <div>
+                        <textarea name="subject" placeholder="Share your post thoughts"></textarea>
+                    </div>
+                    <input type="submit" />
                 }
             </div>
             <div>
@@ -53,6 +67,10 @@
 
                             <h1>@Model.getAuthor(p.authorID).displayName</h1>
                         </a>
+                        @if (p.imageLink != null && p.postIsImage == true)
+                        {
+                            <img src="@p.imageLink" alt="Group pic" />
+                        }
                         <div class="postText">
                             <p>@p.subject</p>
                         </div>

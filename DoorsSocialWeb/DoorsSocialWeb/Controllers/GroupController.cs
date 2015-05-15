@@ -126,5 +126,56 @@ namespace DoorsSocialWeb.Controllers
             postService.addNewPost(post);
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
+
+        public ActionResult TopicPostImage()
+        {
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+        }
+
+        [HttpPost]
+        public ActionResult TopicPostImage(HttpPostedFileBase file, FormCollection collection)
+        {
+            string groupidString = collection["groupid"];
+            string userid = collection["userid"];
+            string topicString = collection["topicid"];
+            string subject = collection["subject"];
+            int groupID = Int32.Parse(groupidString);
+            int topicID = Int32.Parse(topicString);
+            if (file.ContentLength > 0)
+            {
+                Post post = new Post { authorID = userid, groupId = groupID, groupTopicID = topicID, subject = subject, dateCreated = DateTime.Now, postIsImage = true};
+                postService.addNewPost(post);
+
+                string imageID = post.ID.ToString();
+                UploadToFtp(file, imageID);
+
+                string URL = "http://www.ads.menn.is/doors/images/" + imageID;
+
+                postService.addImagePost(post.ID, URL);
+            }
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+        }
+
+        void UploadToFtp(HttpPostedFileBase uploadfile, string imageID)
+        {
+            var uploadurl = "ftp://ads.menn.is/public_html/doors/images";
+            var uploadfilename = uploadfile.FileName;
+            var username = "ads.menn.is";
+            var password = "5zXvxNtyTRDvp3uE";
+            Stream streamObj = uploadfile.InputStream;
+            byte[] buffer = new byte[uploadfile.ContentLength];
+            streamObj.Read(buffer, 0, buffer.Length);
+            streamObj.Close();
+            streamObj = null;
+            string ftpurl = String.Format("{0}/{1}", uploadurl, imageID);
+            var requestObj = FtpWebRequest.Create(ftpurl) as FtpWebRequest;
+            requestObj.Method = WebRequestMethods.Ftp.UploadFile;
+            requestObj.Credentials = new NetworkCredential(username, password);
+            Stream requestStream = requestObj.GetRequestStream();
+            requestStream.Write(buffer, 0, buffer.Length);
+            requestStream.Flush();
+            requestStream.Close();
+            requestObj = null;
+        }
     }
 }
