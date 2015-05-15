@@ -4,7 +4,7 @@
     Layout = null;
     var notCount = Model.getFriendRequests(Model.currentUser.Id).Count() + Model.getGroupRequestsYouAreOwnerOf().Count();
 
-    bool isGroup = Request.RawUrl.Contains("GroupView");
+    bool isGroup = Request.RawUrl.Contains("GroupView") || Request.RawUrl.Contains("Topic");
     int groupID = 0;
     if (isGroup)
     {
@@ -84,7 +84,9 @@
                             if (m.userIsApproved == false)
                             {
                                 <div class="request">
-                                    <img src="@Model.getAuthor(m.userRequestID).displayImageUrl" />
+                                    <a href="@Url.Action("Profile", "Profile", new { id = m.userRequestID })">
+                                        <img src="@Model.getAuthor(m.userRequestID).displayImageUrl" />
+                                    </a>
                                     <p>@Model.getAuthor(m.userRequestID).displayName has added you!</p>
                                     <div class="decision">
                                         <a href="@Url.Action("userApprovesFriendRequest", "LoggedIn", new { requestId = m.ID })"><input type="submit" value="Accept" class="approveFriend" /></a>
@@ -104,13 +106,15 @@
                             if (m.userIsApproved == false)
                             {
                                 <div class="request">
-                                    <img src="@Model.getAuthor(m.userRequestId).displayImageUrl" />
-                                    <p>@Model.getAuthor(m.userRequestId).displayName request to join @Model.getGroupById(m.groupID).groupName</p>
-                                    <div class="decision">
-                                        <a href="@Url.Action("userAcceptsGroupRequest", "LoggedIn", new { requestId = m.id })"><input type="submit" value="Accept" class="approveFriend" /></a>
-                                        <a href="@Url.Action("userDeclinesGroupRequest", "LoggedIn", new { requestId = m.id })"><input type="submit" value="Decline" class="declineFriend" /></a>
-                                    </div>
-                                </div>
+                                    <a href="@Url.Action("Profile", "Profile", new { id = m.userRequestId })">
+                                        <img src="@Model.getAuthor(m.userRequestId).displayImageUrl" />
+                                        </a>
+                                        <p>@Model.getAuthor(m.userRequestId).displayName request to join @Model.getGroupById(m.groupID).groupName</p>
+                                        <div class="decision">
+                                            <a href="@Url.Action("userAcceptsGroupRequest", "LoggedIn", new { requestId = m.id })"><input type="submit" value="Accept" class="approveFriend" /></a>
+                                            <a href="@Url.Action("userDeclinesGroupRequest", "LoggedIn", new { requestId = m.id })"><input type="submit" value="Decline" class="declineFriend" /></a>
+                                        </div>
+</div>
                             }
                         }
                     }
@@ -166,8 +170,8 @@
                     {
                         foreach (var t in Model.getTopics(groupID))
                         {
-                            <li>
-                                @Html.ActionLink(t.topicName, "Topic", "Group", new { id = t.ID }, new { @class = "aGroup" })
+                            <li style="background-color: #495d6f; padding-left: 10px;">
+                                @Html.ActionLink("- " + t.topicName, "Topic", "Group", new { id = t.ID }, new { @class = "aGroup" })
                             </li>
                         }
                     }

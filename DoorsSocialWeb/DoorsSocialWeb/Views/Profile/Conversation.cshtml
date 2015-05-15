@@ -6,10 +6,9 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Chat with </title>]
+    <title>Chat with </title>
 </head>
 <body>
-    <div id="needToScroll">
         <div class="chat">
             <ul>
                 @foreach (var m in Model.messagesWithUser)
@@ -37,9 +36,7 @@
                 <input type="hidden" name="recieverId" value="@Model.messageReciever.Id" />
                 <input type="text" name="subject" />
                 <button>SEND</button>
-                <iframe name="target" id="target"></iframe>
             }
         </div>
-    </div>
 </body>
 </html>
