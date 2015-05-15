@@ -48,5 +48,16 @@ namespace DoorsSocialWeb.Models.ViewModels
             return false;
         }
 
+        public bool userIsInGroup(int groupID, string userID)
+        {
+            foreach(var u in getGroupMembersByGroupId(groupID))
+            {
+                if(u.Id == userID)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
