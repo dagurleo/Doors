@@ -107,5 +107,24 @@ namespace DoorsSocialWeb.Controllers
             postService.addNewPost(post);
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
+
+        public ActionResult TopicPost()
+        {
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+        }
+
+        [HttpPost]
+        public ActionResult TopicPost(FormCollection collection)
+        {            
+            string groupidString = collection["groupid"];
+            string userid = collection["userid"];
+            string topicString = collection["topicid"];
+            string subject = collection["subject"];
+            int groupID = Int32.Parse(groupidString);
+            int topicID = Int32.Parse(topicString);
+            Post post = new Post { authorID = userid, groupId = groupID, groupTopicID = topicID, subject = subject, dateCreated = DateTime.Now };
+            postService.addNewPost(post);
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+        }
     }
 }

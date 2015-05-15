@@ -101,6 +101,20 @@
                         <div class="postText">
                             <p>@m.subject</p>
                         </div>
+                        <div class="postLikes">
+                            <p id="likeCount">@Model.getUsersWhoLikesPost(m.ID).Count()</p>
+                        </div>
+                        <div class="likebutton">
+                            @if (Model.hasCurrentUserLikedPost(m.ID) == false)
+                            {
+
+                                <a href="@Url.Action("addLikeToPost", "LoggedIn", new {postId = m.ID})">Like</a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("RemoveLikeFromPost", "LoggedIn", new {postId = m.ID})">Unlike</a>
+                            }
+                        </div>
                         @if(m.authorID == Model.currentUser.Id)
                         {
                             <a href="@Url.Action("DeletePost", "LoggedIn", new {postId = m.ID})">Remove Post</a>

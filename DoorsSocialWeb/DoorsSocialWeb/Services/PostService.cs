@@ -72,6 +72,11 @@ namespace DoorsSocialWeb.Services
         {
             return postRepo.getPostsFromFriends();
         }
+
+        public IEnumerable<Post> getPostsWithinTopicByTopicId(int topicID)
+        {
+            return postRepo.getPostsWithinTopicByTopicId(topicID);
+        }
        
         public void addNewPost(Post post)
         {

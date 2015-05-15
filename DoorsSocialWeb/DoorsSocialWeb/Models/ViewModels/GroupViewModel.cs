@@ -14,6 +14,7 @@ namespace DoorsSocialWeb.Models.ViewModels
         public CommentService commentService = new CommentService();
         public UserService userService = new UserService();
         public PostService postService = new PostService();
+        public LikesService likeService = new LikesService();
         public IEnumerable<Post> groupPosts { get; set; }
         public IEnumerable<Topic> currentGroupTopics { get; set; }
 
@@ -77,6 +78,20 @@ namespace DoorsSocialWeb.Models.ViewModels
         {
             var comments = commentService.getCommentsByPostID(postID);
             return comments;
+        }
+
+        public IEnumerable<ApplicationUser> getUsersWhoLikesPost(int postID)
+        {
+            return likeService.getUsersWhoLikedPost(postID);
+        }
+
+        public bool hasCurrentUserLikedPost(int postID)
+        {
+            if (getUsersWhoLikesPost(postID).Contains(getAuthor(currentUser.Id)))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

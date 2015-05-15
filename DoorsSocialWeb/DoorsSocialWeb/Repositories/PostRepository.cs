@@ -164,9 +164,15 @@ namespace DoorsSocialWeb.Repositories
                              
         }
 
-        /*
-         * Create a new post
-         */
+        public IEnumerable<Post> getPostsWithinTopicByTopicId(int topicID)
+        {
+            var posts = (from p in db.Posts
+                         where p.groupTopicID == topicID
+                         select p);
+            return posts;
+        }
+
+
         public void addNewPost(Post post)
         {
             db.Posts.Add(post);

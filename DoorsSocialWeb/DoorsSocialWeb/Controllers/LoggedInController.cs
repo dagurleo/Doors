@@ -110,7 +110,7 @@ namespace DoorsSocialWeb.Controllers
 
         public ActionResult addCommentToPost()
         {
-            return RedirectToAction("Index", "LoggedIn");
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
 
         [HttpPost]
@@ -126,7 +126,7 @@ namespace DoorsSocialWeb.Controllers
                 var commentService = new CommentService();
                 commentService.addNewComment(userID, postId, subject);
             }
-            return RedirectToAction("Index", "LoggedIn");
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
 
         public ActionResult removeCommentFromPost(int commentId)
