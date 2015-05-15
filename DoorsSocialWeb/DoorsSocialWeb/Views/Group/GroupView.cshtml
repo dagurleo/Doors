@@ -19,6 +19,7 @@
                 <img src="@m.displayImageUrl" width="50px" height="50px" />
             </a>
         }
+        
     </div>
 
     <div class="groupViewHeader">
@@ -26,14 +27,16 @@
         {
             <h1>@Model.currentGroup.groupName</h1>
         }
-        @if (Model.currentGroup.groupDescription != null && Model.currentGroup.groupName != "")
+        @if(Model.userIsMember(Model.currentUser.Id))
         {
-            <p>@Model.currentGroup.groupDescription</p>
+            <p><a href="@Url.Action("leaveGroup", "Group", new { groupId = Model.currentGroup.ID })">Leave Group</a></p>
         }
+        <p>@Model.currentGroup.groupDescription</p>
+        
     </div>
 
     <div>
-        @if ((!(Model.userIsMember(Model.currentUser.Id)) && Model.currentUser.Id != Model.currentGroup.groupOwnerID) && Model.userIsPendingMember(Model.currentUser.Id) == false)
+        @if ((!(Model.userIsMember(Model.currentUser.Id))) && Model.userIsPendingMember(Model.currentUser.Id) == false)
         {
             using (Html.BeginForm("requestToJoinGroup", "Group", FormMethod.Post))
             {
@@ -43,7 +46,7 @@
                 <input type="submit" value="Click me to request to join this group" />
             }
         }
-        @if (Model.currentGroup.groupOwnerID == Model.currentUser.Id)
+        @if (Model.currentGroup.groupOwnerID == Model.currentUser.Id && Model.userIsMember(Model.currentUser.Id))
         {
             <!--ACCEPT USERS-->
             <!-- Búa til fall sem sækir öll request's-->
