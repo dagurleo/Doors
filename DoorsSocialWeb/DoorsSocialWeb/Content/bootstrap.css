@@ -8119,3 +8119,13 @@ body h4
   float: right;
   height: 40px;
 }
+
+.chatBubble
+{
+    position:initial;
+    float: right;
+    height: 15px;
+    width: 15px;
+
+    margin: 30px 20px 0 0;
+}
