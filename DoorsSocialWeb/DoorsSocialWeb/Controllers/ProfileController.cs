@@ -103,7 +103,10 @@ namespace DoorsSocialWeb.Controllers
         [HttpPost]
         public ActionResult Profile(HttpPostedFileBase file)
         {
-
+            if(file == null)
+            {
+                return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+            }
             if (file.ContentLength > 0)
             {
                 string imageID = userService.getCurrentUser().Id;
@@ -112,9 +115,6 @@ namespace DoorsSocialWeb.Controllers
                 string URL = "http://www.ads.menn.is/doors/images/" + imageID;
                 userService.editProfilePicture(URL);
             }
-
-
-
             return RedirectToAction("Profile");
         }
 
@@ -158,9 +158,12 @@ namespace DoorsSocialWeb.Controllers
             string senderId = collection["senderId"];
             string recieverId = collection["recieverId"];
             string subject = collection["subject"];
-            Message message = new Message { senderID = senderId, recieverID = recieverId, subject = subject, dateCreated = DateTime.Now, };
-            messageService.addNewMessage(message);
-            IEnumerable<Message> messages = messageService.getConversation(senderId, recieverId);
+            if(subject != "")
+            {
+                Message message = new Message { senderID = senderId, recieverID = recieverId, subject = subject, dateCreated = DateTime.Now, };
+                messageService.addNewMessage(message);
+                IEnumerable<Message> messages = messageService.getConversation(senderId, recieverId);
+            }
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
 
@@ -175,8 +178,11 @@ namespace DoorsSocialWeb.Controllers
             string recipientUserId = collection["recipientUserId"];
             string userID = collection["userId"];
             string subject = collection["subject"];
-            Post newPost = new Post { authorID = userID, dateCreated = DateTime.Now, recipientId = recipientUserId, subject = subject };
-            postService.addNewPost(newPost);
+            if(subject != "")
+            {
+                Post newPost = new Post { authorID = userID, dateCreated = DateTime.Now, recipientId = recipientUserId, subject = subject };
+                postService.addNewPost(newPost);
+            }
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
 
@@ -188,6 +194,10 @@ namespace DoorsSocialWeb.Controllers
         [HttpPost]
         public ActionResult wallImagePostFromFriend(HttpPostedFileBase file, FormCollection collection)
         {
+            if(file == null)
+            {
+                return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+            }
             string recipientUserId = collection["recipientUserId"];
             string userid = collection["userid"];
             string subject = collection["subject"];

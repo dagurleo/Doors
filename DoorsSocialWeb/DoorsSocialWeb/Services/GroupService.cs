@@ -95,6 +95,9 @@ namespace DoorsSocialWeb.Services
             return groupRepo.getGroupRequestsYouAreOwnerOf(userId);
         }
 
-       
+        public bool doesTopicExistWithinGroup(int groupID, string topicName)
+        {
+            return topicRepo.doesTopicExistWithinGroup(groupID, topicName);
+        }
     }
 }

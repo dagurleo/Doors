@@ -55,12 +55,16 @@ namespace DoorsSocialWeb.Controllers
             string groupName = collection["groupname"];
             string groupDescription = collection["groupdescription"];
 
-            Group group = new Group { groupOwnerID = groupOwnerId, groupName = groupName, groupDescription = groupDescription };
+            if(groupName != "")
+            {
+                Group group = new Group { groupOwnerID = groupOwnerId, groupName = groupName, groupDescription = groupDescription };
 
-            groupService.addNewGroup(group);
-            Group theGroup = groupService.getNewestGroup();
-            groupService.addUserToGroup(groupOwnerId, theGroup.ID);
-            return RedirectToAction("GroupView", "Group", new { id = theGroup.ID });
+                groupService.addNewGroup(group);
+                Group theGroup = groupService.getNewestGroup();
+                groupService.addUserToGroup(groupOwnerId, theGroup.ID);
+                return RedirectToAction("GroupView", "Group", new { id = theGroup.ID });
+            }
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
 
       
@@ -94,6 +98,10 @@ namespace DoorsSocialWeb.Controllers
         [HttpPost]
         public ActionResult PostImage(HttpPostedFileBase file, FormCollection collection)
         {
+            if(file == null)
+            {
+                return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+            }
             string userid = collection["userid"];
             string subject = collection["subject"];
             if(file.ContentLength > 0)

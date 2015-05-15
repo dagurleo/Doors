@@ -41,6 +41,20 @@ namespace DoorsSocialWeb.Repositories
             return topics;
         }
 
+        public bool doesTopicExistWithinGroup(int groupID, string topicName)
+        {
+            var topics = getTopicsForGroup(groupID);
+            
+            foreach(var t in topics)
+            {
+                if(t.topicName == topicName)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         /*
          * Add new topic
          * Need info on variables to parse here.

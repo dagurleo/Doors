@@ -84,8 +84,11 @@ namespace DoorsSocialWeb.Controllers
             string ownerID = collection["ownerid"];
             string topicName = collection["topicName"];
             int groupID = Int32.Parse(groupIDstring);
-            groupService.addNewTopic(groupID, topicName);
+            if(topicName != "" && !(groupService.doesTopicExistWithinGroup(groupID, topicName)))
+            {
+                groupService.addNewTopic(groupID, topicName);
 
+            }
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
 
@@ -120,10 +123,13 @@ namespace DoorsSocialWeb.Controllers
             string userid = collection["userid"];
             string topicString = collection["topicid"];
             string subject = collection["subject"];
-            int groupID = Int32.Parse(groupidString);
-            int topicID = Int32.Parse(topicString);
-            Post post = new Post { authorID = userid, groupId = groupID, groupTopicID = topicID, subject = subject, dateCreated = DateTime.Now };
-            postService.addNewPost(post);
+            if(subject != "")
+            {
+                int groupID = Int32.Parse(groupidString);
+                int topicID = Int32.Parse(topicString);
+                Post post = new Post { authorID = userid, groupId = groupID, groupTopicID = topicID, subject = subject, dateCreated = DateTime.Now };
+                postService.addNewPost(post);
+            }
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
 
@@ -135,6 +141,10 @@ namespace DoorsSocialWeb.Controllers
         [HttpPost]
         public ActionResult TopicPostImage(HttpPostedFileBase file, FormCollection collection)
         {
+            if(file == null)
+            {
+                return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+            }
             string groupidString = collection["groupid"];
             string userid = collection["userid"];
             string topicString = collection["topicid"];
