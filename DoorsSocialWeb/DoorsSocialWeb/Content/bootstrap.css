@@ -475,7 +475,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Poiret One', cursive;
   font-weight: 500;
   line-height: 1.1;
 }
@@ -7366,13 +7366,14 @@ body h4
 {
 	color: white;
 	list-style: none;
-	overflow-y: scroll;
-
-	margin: 0;
+    overflow-y:scroll;
+    overflow-x:hidden;
+	
+    height: calc(100vh - 300px);
 	padding: 0;
 }
 
-.groupList li
+.perGroup
 {
 	margin-bottom: 2px;
 	height: 45px;
@@ -7382,34 +7383,27 @@ body h4
 	text-indent: 15px;
 }
 
-.groupList li:hover
+.perGroup:hover
 {
-	background: #3d4f5d;
-}
-
-.groupList li img
-{
-    position: relative;
-    top: 9px;
+    background: #3d4f5d;
 }
 
 .aGroup
 {
-    position:absolute;
+    position:relative;
     display: inline-block;
-    
+
     padding-top: 11px;
-    width: 170px;
-    padding-bottom: 13px;
+    margin-left: 5px;
 
     overflow: hidden;
     color: white;
 }
 
-.aGroup:hover
+.groupList img
 {
-    color: white;
-    text-decoration: none;
+    position: relative;
+    margin-bottom: 10px;
 }
 
 .sharedContainer

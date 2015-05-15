@@ -162,31 +162,19 @@
         <div id="groupHeader">
             <h4>Groups</h4>
         </div>
-        <ul class="groupList">
-            @if (Model.groups != null)
+        <div class="groupList">
+            @if (Model.groups.Count() == 0)
             {
-                if (Model.groups.Count() == 0)
-                {
-                    <p>You are not a member of any group!</p>
-                }
-                foreach (var m in Model.groups)
-                {
-                    <li>
-                        <img src="http://www.ads.menn.is/groups.png" height="15">
-                        @Html.ActionLink(m.groupName, "GroupView", "Group", new { id = m.ID }, new { @class = "aGroup" })
-                    </li>
-                    if (m.ID == groupID)
-                    {
-                        foreach (var t in Model.getTopics(groupID))
-                        {
-                            <li style="background-color: #495d6f; padding-left: 10px;">
-                                @Html.ActionLink("- " + t.topicName, "Topic", "Group", new { id = t.ID }, new { @class = "aGroup" })
-                            </li>
-                        }
-                    }
-                }
+                <p>You dont have any friends.</p>
             }
-        </ul>
+            @foreach (var g in Model.groups)
+            {
+                    <div class="perGroup">
+                        <img src="http://www.ads.menn.is/groups.png" height="15">
+                        @Html.ActionLink(g.groupName, "GroupView", "Group", new { id = g.ID }, new { @class = "aGroup" })
+                    </div>
+            }
+        </div>
         <div class="createGroup">
             <a href="#createGroup"><h4>Create a Group</h4></a>
         </div>
