@@ -167,5 +167,16 @@ namespace DoorsSocialWeb.Repositories
             return requests;
         }
 
+        public void leaveGroup(int groupId)
+        {
+            string currentUserId = HttpContext.Current.User.Identity.GetUserId();
+            var relation = (from r in db.relGroups
+                            where r.groupID == groupId && r.memberID == currentUserId
+                            select r).Single();
+
+            db.relGroups.Remove(relation);
+            db.SaveChanges();
+        }
+
     }
 }

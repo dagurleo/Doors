@@ -183,5 +183,11 @@ namespace DoorsSocialWeb.Controllers
             requestStream.Close();
             requestObj = null;
         }
+
+        public ActionResult leaveGroup(int groupId)
+        {
+            groupService.leaveGroup(groupId);
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+        }
     }
 }
