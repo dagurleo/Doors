@@ -59,7 +59,7 @@ namespace DoorsSocialWeb.Repositories
         {
             string currentUserID = HttpContext.Current.User.Identity.GetUserId();
             var users = (from m in db.Messages
-                         where m.recieverID == currentUserID || m.senderID == currentUserID
+                         where m.recieverID == currentUserID && m.senderID != currentUserID
                          join u in db.Users
                          on m.senderID equals u.Id
                          orderby m.dateCreated descending

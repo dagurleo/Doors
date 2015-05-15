@@ -36,15 +36,18 @@
             <div class="messageContainer">
                 <h1>Messages</h1>
                 <div class="messagePopupView">
-                    @foreach (var i in Model.getUsersYouHaveChattedTo())
+                    @if(Model.getUsersYouHaveChattedTo().Count() != 0)
                     {
-                        <div class="singleUserMessage">
-                            <a href="@Url.Action("Conversation", "Profile", new { messageRecieverId = i.Id })">
-                                <img src="@i.displayImageUrl" height="85" width="85" />
-                                <h2>@i.displayName</h2>
-                                <p>@Model.getNewestMessageForConversation(Model.currentUser.Id, i.Id).subject</p>
-                            </a>
-                        </div>
+                        foreach (var i in Model.getUsersYouHaveChattedTo())
+                        {
+                            <div class="singleUserMessage">
+                                <a href="@Url.Action("Conversation", "Profile", new { messageRecieverId = i.Id })">
+                                    <img src="@i.displayImageUrl" height="85" width="85" />
+                                    <h2>@i.displayName</h2>
+                                    <p>@Model.getNewestMessageForConversation(Model.currentUser.Id, i.Id).subject</p>
+                                </a>
+                            </div>
+                        }
                     }
                 </div>
             </div>
