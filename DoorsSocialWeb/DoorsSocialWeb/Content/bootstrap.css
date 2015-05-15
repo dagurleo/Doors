@@ -7328,7 +7328,7 @@ body h4
 
 .logout
 {
-    background: url(https://yemekhane.anadolu.edu.tr/resources/images/logout.png);
+    background: url(http://http://ads.menn.is/logout.png);
     background-size: 30px;
     background-repeat: no-repeat;
     position: absolute;
@@ -7773,6 +7773,11 @@ body h4
     overflow: hidden;
 }
 
+.fileUpload:hover
+{
+    background-image: url("http://www.ads.menn.is/messageHover.jpg");
+}
+
 .fileUpload input.upload 
 {
         position: relative;
@@ -7795,6 +7800,11 @@ body h4
 
     color: white;
     
+}
+
+.createPost input[type=submit]:hover
+{
+       background: #33414e; 
 }
 
 .createComment
