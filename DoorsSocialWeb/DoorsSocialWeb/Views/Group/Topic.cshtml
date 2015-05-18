@@ -68,13 +68,13 @@
                             <p>@p.subject</p>
                         </div>
                         <div class="postLikes">
-                            @if (@Model.getUsersWhoLikesPost(m.ID).Count() == 1)
+                            @if (@Model.getUsersWhoLikesPost(p.ID).Count() == 1)
                             {
-                                <p id="likeCount">@Model.getUsersWhoLikesPost(m.ID).Count() person like's this</p>
+                                <p id="likeCount">@Model.getUsersWhoLikesPost(p.ID).Count() person like's this</p>
                             }
                             else
                             {
-                                <p id="likeCount">@Model.getUsersWhoLikesPost(m.ID).Count() people like this</p>
+                                <p id="likeCount">@Model.getUsersWhoLikesPost(p.ID).Count() people like this</p>
                             }
                         </div>
                         <div class="likebutton">
