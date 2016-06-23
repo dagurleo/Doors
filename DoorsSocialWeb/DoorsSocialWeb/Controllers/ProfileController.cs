@@ -123,7 +123,7 @@ namespace DoorsSocialWeb.Controllers
             var uploadurl = "ftp://ads.menn.is/public_html/doors/images";
             var uploadfilename = uploadfile.FileName;
             var username = "ads.menn.is";
-            var password = "5zXvxNtyTRDvp3uE";
+            var password = "her kemur password";
             Stream streamObj = uploadfile.InputStream;
             byte[] buffer = new byte[uploadfile.ContentLength];
             streamObj.Read(buffer, 0, buffer.Length);
